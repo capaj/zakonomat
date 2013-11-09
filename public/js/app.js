@@ -3,7 +3,8 @@ window.app = angular.module('zakonomat',
         'ngRoute',
         'ngTouch',
         'angularMoment',
-        'angularLocalStorage'
+        'angularLocalStorage',
+        'analytics'
         // included, but by default not loaded, if you need it, just add it to script manifest
         // 'angular-gestures'
     ]

@@ -45,7 +45,7 @@ var devFiles = {
 		bc + 'array-sugar/array-sugar.js',
 		bc + '**/moment.js', bc + '**/jquery.min.js'
 	],
-    2: [bc + '**/angular.js'],
+    2: [bc + '**/angular.js', 'public/js/bootstrap/modal.js'],
     3: [
 		bc + '**/ng-tools-0.0.3.js',
 		bc + '**/angular-touch.js',

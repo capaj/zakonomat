@@ -4,6 +4,7 @@
     //application routing
     exports.routes = [
         { route:'/', resolve: {templateUrl: tP + 'root.html'}},
+        { route:'/404', resolve: {templateUrl: tP + '404.html'}},
         { route:'/navrhy', resolve: {templateUrl:tP + 'suggestions.html', reloadOnSearch: false}}
 
     ];
