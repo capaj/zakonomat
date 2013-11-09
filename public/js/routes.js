@@ -1,9 +1,10 @@
 (function(exports){
+    var tP = '/templates/views/';
 
     //application routing
     exports.routes = [
-        { route:'/', resolve: {templateUrl:'/templates/root.html'}},
-        { route:'/route', resolve: {templateUrl:'/templates/root.html', reloadOnSearch: false}}
+        { route:'/', resolve: {templateUrl: tP + 'root.html'}},
+        { route:'/navrhy', resolve: {templateUrl:tP + 'suggestions.html', reloadOnSearch: false}}
 
     ];
 

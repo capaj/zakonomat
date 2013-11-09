@@ -31,16 +31,16 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" ng-click="menuHide = !menuHide">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Zákonomat</a>
+                <a class="navbar-brand active" href="/">Zákonomat</a>
             </div>
-            <div class="collapse navbar-collapse">
+            <div class="navbar-collapse" ng-hide="menuHide">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a>Návrhy</a></li>
+                    <li><a>Návrhy</a></li>
                     <li><a href="/about">O projektu</a></li>
                     <li><a href="/contact">Kontakt</a></li>
                 </ul>
@@ -54,13 +54,15 @@
     </div>
     <ng-view>
     </ng-view><!-- /.container -->
-
+    <footer class="container">
+        <p>© Zákonomat 2013</p>
+    </footer>
     <script src="/lib/script.js/dist/script.min.js"></script>
     <script src="/built/main-dev-0.0.1.js"></script>
     <script>
         navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
         $script.ready('scriptManifestReady', function(){
-            angular.bootstrap(document, ['app']);
+            angular.bootstrap(document, ['zakonomat']);
         });
     </script>
     <script src="http://localhost:35729/livereload.js"></script>
