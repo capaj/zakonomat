@@ -1,0 +1,29 @@
+{
+  "name": "zakonomat.cz",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "1.2.0",
+    "angular-animate": "1.2.0",
+    "angular-route": "1.2.0",
+    "angular-sanitize": "1.2.0",
+    "angular-bootstrap": "~0.6.0",
+    "angular-moment": "latest",
+    "angularLocalStorage-nc": "latest",
+    "moment": "latest",
+    "array-sugar": "~0.1",
+    "json3": "~3.2.4",
+    "es5-shim": "~2.0.8",
+    "ng-tools": "~0.0.3",
+    "script.js": "latest",
+    "jquery": "~2.0",
+    "angular-touch": "1.2.0",
+    "angular-gestures": "~0.1.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.0",
+    "angular-scenario": "1.2.0"
+  },
+  "resolutions": {
+    "angular": "1.2.0"
+  }
+}
