@@ -8,19 +8,27 @@ ng-view{
   blockquote{
     padding-bottom: 0px;
   }
-
-  .btn-primary{
-    font-size: 40px;
-
+  @media (min-width: 460px) {
+    .btn-primary{
+      font-size: 40px;
       padding-top: 18px;
+    }
+  }
 
+}
+@media (min-width: 550px) {
+  .jumbo-logo{
+    height: 90px;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 550px) {
+  .jumbo-logo{
+    width: 100%;
+    margin-bottom: 10px;
   }
 }
 
-.jumbo-logo{
-  height: 90px;
-  margin-bottom: 20px;
-}
 
 #zakonomat-logo{
   float: left;
