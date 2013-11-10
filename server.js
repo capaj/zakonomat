@@ -15,7 +15,9 @@ var express = require('express');
 var pathChecker = require('./server/pathChecker.js');
 var app = module.exports = express();
 var fs = require('fs');
-var createModels = require('./server/models');
+var MRinit = require('moonridge');
+
+var createModels = require('./models');
 
 
 app.configure(function(){
@@ -52,6 +54,8 @@ mongoose.connect(envSettings.mongoConn, function (err) {
     } else {
         console.log("DB connected succesfully");
     }
+
+
 });
 
 var server = app.listen(app.get('port'), function () {
@@ -78,3 +82,6 @@ var server = app.listen(app.get('port'), function () {
     });
     console.info("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
+
+var MR = MRinit(mongoose, server, app);
+createModels(MR);
