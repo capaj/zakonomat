@@ -1,5 +1,5 @@
 app.factory('facebook', function ($window, $q) {
-    var IS_PRODUCTION = false;
+    var IS_PRODUCTION = true;
     // Load the SDK Asynchronously
     (function (d) {
         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
@@ -55,5 +55,8 @@ app.factory('facebook', function ($window, $q) {
     } else {
         setTimeout(function () { dfd.resolve("TESTING_TOKEN_1"); }, 100);    // we are running it locally, so we use this fake token
     }
-    return {tokenPromise: dfd.promise};
+    var logout = function () {
+        FB.logout();
+    };
+    return {tokenPromise: dfd.promise, logout: logout};
 });

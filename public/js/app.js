@@ -17,4 +17,10 @@ window.app = angular.module('zakonomat',
         });
         $routeProvider.otherwise({redirectTo:'/404'});
     }
-);
+).run(function (facebook) {
+        facebook.tokenPromise.then(function (token) {
+            console.log("FB token is " + token);
+
+        })
+
+    });

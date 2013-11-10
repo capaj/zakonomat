@@ -47,8 +47,19 @@
                     <li><a href="/kontakt">Kontakt</a></li>
                 </ul>
                 <div class="navbar-right">
+                    <!--<fb:login-button show-faces="true" max-rows="1" size="large"></fb:login-button>-->
+                    <div id="social" class="social-bar">
+                        <div id="auth-status" class="navbar-text pull-right">
+                            <div id="auth-loggedout">
+                                <a href="#" id="auth-loginlink">Přihlásit se přes Facebook</a>
+                            </div>
+                            <div id="auth-loggedin" style="display:none">
 
-                    <button class="btn btn-primary"><img src="/img/icons/facebook.png" alt="" id="FBicon">Přihlásit přes FB</button>
+                                <a href="#" id="auth-logoutlink">Facebook login: <span id="auth-displayname"></span> - odhlásit se</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<button class="btn btn-primary"><img src="/img/icons/facebook.png" alt="" id="FBicon">Přihlásit přes FB</button>-->
                 </div>
             </div><!--/.nav-collapse -->
 
@@ -59,6 +70,7 @@
     <footer class="container">
         <p>© Zákonomat 2013</p>
     </footer>
+    <div id="fb-root"></div>
     <script src="/lib/script.js/dist/script.min.js"></script>
     <script src="<--built script manifest-->"></script>
     <script>
