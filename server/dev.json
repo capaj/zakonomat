@@ -1,8 +1,5 @@
 {
-    "db": "mongodb://localhost/mean-dev",
-    "app": {
-        "name": "MEAN - A Modern Stack - Development"
-    },
+    "mongoConn": "mongodb://localhost/zakonomat",
     "facebook": {
         "clientID": "APP_ID",
         "clientSecret": "APP_SECRET",

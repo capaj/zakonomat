@@ -22,6 +22,8 @@
     "dependencies": {
         "array-sugar": "latest",
         "express": "latest",
+        "moonridge": "latest",
+        "mongoose": "latest",
         "async": "latest",
         "prerender-node": "latest",
         "mean-logger": "latest",
