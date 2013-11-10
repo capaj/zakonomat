@@ -1,1 +1,43 @@
-<div ng-controller="novelsCtrl"></div>
+<div mr-controller="novelsCtrl" mr-url="http://localhost:8088" model-name="vote">
+    <div class="well" ng-repeat="novel in novels">
+        <h4 ng-bind="novel.title"></h4>
+
+        <buttton ng-click="vote(novel, true)"></buttton>
+        <buttton ng-click="vote(novel, false)"></buttton>
+    </div>
+    <p>
+        Po dosažení 10 000 hlasů občanů se návrh zákona snažíme společně s tzv. [Ambasadory] prosadit ve sněmovně a zajistit, aby prošel. Na podobném principu funguje i [Rekonstrukce státu]. Inspirovali jsme se [i v jiných zemích], kde obdobné webové portály sklízí úspěch. Jak to [funguje podrobněji]?
+
+    </p>
+    <p>
+        Projekt je nyní v [Testovacím provozu]. Probíhá hlasování o sedmi různorodých zákonech. Každý z nich představuje postoj určité komunity. Který mluví za vás?
+
+    </p>
+    <div class="well">
+        <ol>
+            <li>
+                Smlouvy na internetu
+            </li>
+            <li>
+                Zachování limitů těžby uhlí
+            </li>
+            <li>
+                Posílení práv homosexuálů
+            </li>
+            <li>
+                Uzákonění eutanázie
+            </li>
+            <li>
+                Zrušení DPH při darování jídla
+            </li>
+            <li>
+                Daňové asignace
+            </li>
+            <li>
+                Zrušení poplatků za prázdná média
+            </li>
+        </ol>
+    </div>
+
+
+</div>

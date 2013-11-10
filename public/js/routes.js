@@ -5,6 +5,8 @@
     exports.routes = [
         { route:'/', resolve: {templateUrl: tP + 'root.html'}},
         { route:'/404', resolve: {templateUrl: tP + '404.html'}},
+        { route:'/kontakt', resolve: {templateUrl: tP + 'contact.html'}},
+        { route:'/jaktofunguje', resolve: {templateUrl: tP + 'how_it_works.html'}},
         { route:'/login', resolve: {templateUrl: '/templates/login.html'}},
         { route:'/navrhy', resolve: {templateUrl:tP + 'novels.html', reloadOnSearch: false}},
         { route:'/navrh', resolve: {templateUrl:tP + 'navrh.html', reloadOnSearch: false}}

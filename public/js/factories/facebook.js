@@ -1,4 +1,4 @@
-app.factory('facebook', function ($window, $q) {
+app.factory('facebook', function ($window, $q, RPCBackend) {
     var IS_PRODUCTION = true;
     // Load the SDK Asynchronously
     (function (d) {

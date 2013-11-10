@@ -4,7 +4,8 @@ window.app = angular.module('zakonomat',
         'ngTouch',
         'angularMoment',
         'angularLocalStorage',
-        'analytics'
+        'analytics',
+        'RPC'
         // included, but by default not loaded, if you need it, just add it to script manifest
         // 'angular-gestures'
     ]
@@ -17,10 +18,7 @@ window.app = angular.module('zakonomat',
         });
         $routeProvider.otherwise({redirectTo:'/404'});
     }
-).run(function (facebook) {
-        facebook.tokenPromise.then(function (token) {
-            console.log("FB token is " + token);
+).run(function () {
 
-        })
 
     });

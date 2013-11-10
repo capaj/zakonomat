@@ -30,7 +30,7 @@
     <![endif]-->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <img src="/img/zakonomat_logo.png" alt="" id="zakonomat-logo">
+            <img src="/img/zakonomat-web-maly-bily.png" alt="" id="zakonomat-logo">
 
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" ng-click="menuHide = !menuHide">
@@ -38,12 +38,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand active" href="/">Zákonomat</a>
             </div>
             <div class="navbar-collapse" ng-hide="menuHide">
                 <ul class="nav navbar-nav">
                     <li><a href="/navrhy">Návrhy</a></li>
-                    <li><a href="/onas">O projektu</a></li>
+                    <li><a href="/jaktofunguje">Jak to funguje</a></li>
                     <li><a href="/kontakt">Kontakt</a></li>
                 </ul>
                 <div class="navbar-right">
@@ -65,18 +64,22 @@
 
         </div>
     </div>
-    <ng-view>
+    <ng-view class="container">
     </ng-view><!-- /.container -->
     <footer class="container">
         <p>© Zákonomat 2013</p>
     </footer>
     <div id="fb-root"></div>
     <script src="/lib/script.js/dist/script.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/built/main-dev-0.0.1.js"></script>
     <script>
         navigator.standalone = navigator.standalone || (screen.height-document.documentElement.clientHeight<40);
+        RPCbackendURL = 'http://localhost:8088/';
         $script.ready('scriptManifestReady', function(){
-            angular.bootstrap(document, ['zakonomat']);
+            $script(RPCbackendURL + 'rpc/rpc-client-angular.js', function () {
+                angular.bootstrap(document, ['zakonomat']);
+            });
         });
     </script>
     <script src="http://localhost:35729/livereload.js"></script>
