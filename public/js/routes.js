@@ -9,7 +9,8 @@
         { route:'/jaktofunguje', resolve: {templateUrl: tP + 'how_it_works.html'}},
         { route:'/login', resolve: {templateUrl: '/templates/login.html'}},
         { route:'/navrhy', resolve: {templateUrl:tP + 'novels.html', reloadOnSearch: false}},
-        { route:'/navrh', resolve: {templateUrl:tP + 'navrh.html', reloadOnSearch: false}}
+        { route:'/hlasy', resolve: {templateUrl:tP + 'votes.html', reloadOnSearch: false}},
+        { route:'/navrh:navrhId', resolve: {templateUrl:tP + 'novel.html', reloadOnSearch: false}}
 
     ];
 

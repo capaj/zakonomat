@@ -2,10 +2,10 @@ var Schema = require('mongoose').Schema;
 
 module.exports = function (MR) {
 
-    var user = MR('user', {
+    return MR('user', {
         FB_acc: { type: Schema.Types.ObjectId, ref: 'FBaccount' },
         creation_date: { type: Date, default: Date.now },
-        born: Date,
+        born_date: Date,
 		/**
 		 * all can read any other model
 		 * CRUD letters here have the same meaning as in CRUD
@@ -20,6 +20,7 @@ module.exports = function (MR) {
         privilige_level: { type: Number, default: 1, min:0, max: 5},
         vote_count: Number,
         negative_vote_count: Number,
-        positive_vote_count: Number
+        positive_vote_count: Number,
+        votes: [{ type: Schema.Types.ObjectId, ref: 'Vote' }]
     });
 };
