@@ -17,7 +17,7 @@ var app = module.exports = express();
 var fs = require('fs');
 var MRinit = require('moonridge');
 
-var createModels = require('./models');
+var registerModels = require('./models');
 
 
 app.configure(function(){
@@ -84,5 +84,5 @@ var server = app.listen(app.get('port'), function () {
 });
 
 var MR = MRinit(mongoose, server, app);
-createModels(MR);
+registerModels(MR);
 
