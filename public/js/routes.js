@@ -8,8 +8,10 @@
         { route:'/kontakt', resolve: {templateUrl: tP + 'contact.html'}},
         { route:'/jaktofunguje', resolve: {templateUrl: tP + 'how_it_works.html'}},
         { route:'/login', resolve: {templateUrl: '/templates/login.html'}},
+        { route:'/profil', resolve: {templateUrl: tP + 'profil.html', reloadOnSearch: false}},
         { route:'/navrhy', resolve: {templateUrl:tP + 'novels.html', reloadOnSearch: false}},
         { route:'/hlasy', resolve: {templateUrl:tP + 'votes.html', reloadOnSearch: false}},
+        { route:'/navrh:navrhId', resolve: {templateUrl:tP + 'novel.html', reloadOnSearch: false}},
         { route:'/navrh:navrhId', resolve: {templateUrl:tP + 'novel.html', reloadOnSearch: false}}
 
     ];
