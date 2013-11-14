@@ -4,7 +4,8 @@ module.exports = function (MR) {
 
     return MR('comment', {
         replyTo: { type: Schema.Types.ObjectId, required: true },
-        author: { type: Schema.Types.ObjectId, ref: 'user' },
+        owner: { type: Schema.Types.ObjectId, ref: 'user' },
+        author: {name: String, fb_nick: String}, //owners full name
         creation_date: { type: Date, default: Date.now },
         text: String,
         vote_count: Number,
