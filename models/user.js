@@ -2,10 +2,11 @@ var Schema = require('mongoose').Schema;
 
 module.exports = function (MR) {
 
-    return MR('user', {
+    return MR.userModel('user', {
         FB_acc: { type: Schema.Types.ObjectId, ref: 'FBaccount' },
         creation_date: { type: Date, default: Date.now },
         born_date: Date,
+        access_token: String,
 		/**
 		 * all can read any other model
 		 * CRUD letters here have the same meaning as in CRUD

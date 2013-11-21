@@ -13,7 +13,7 @@ app.factory('SingleEvent', function () {
         this.fire = function () {
             var i = listeners.length;
             while(i--){
-                listeners[i]()
+                listeners[i].apply(this, arguments);
             }
         };
         this.unregister = function (index) {

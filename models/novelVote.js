@@ -2,7 +2,7 @@ var Schema = require('mongoose').Schema;
 
 module.exports = function (MR) {
 
-    return MR('novelVote', {
+    return MR.model('novelVote', {
         subject: { type: Schema.Types.ObjectId, ref: 'novel', required: true },
         creation_date: { type: Date, default: Date.now },
         value: Boolean,

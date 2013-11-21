@@ -17,9 +17,11 @@ var express = require('express');
 var pathChecker = require('./server/pathChecker.js');
 var app = module.exports = express();
 var fs = require('fs');
-var MRinit = require('moonridge');
+var moonridge = require('moonridge');
 
-var registerModels = require('./models');
+var MR = moonridge.init(mongoose);
+
+var models = require('./models')(MR);
 
 
 app.configure(function(){
@@ -57,12 +59,35 @@ mongoose.connect(envSettings.mongoConn, function (err) {
         console.log("DB connected succesfully");
     }
 
-
 });
 
 var server = app.listen(app.get('port'), function () {
 
-    app.get('*', function(req, res){
+	var io = require('socket.io').listen(server);
+	io.configure(function (){
+		io.set('authorization', function (handshake, CB) {
+			var socket = this;
+			var aToken = handshake.query.aToken;
+			console.log("user wants to authorize: " + aToken );
+			models.user.model.findOne({access_token: aToken}).exec().then(function (user) {
+				if (user) {
+					socket.user = user;
+					console.log("Authenticated user: " + user.name);
+					CB(null, true);
+				} else {
+					//TODO call facebook and get users identity, store token in the users document, invalidate after 2 hours
+				}
+
+			}, function (err) {
+				console.log("auth error " + err);
+				CB(null, false);
+			})
+		});
+	});
+
+	moonridge.createServer(io, app);
+
+	app.get('*', function(req, res){
         var pathName = req._parsedUrl.pathname;
         var filePath = './public' + pathName;
         fs.exists(filePath, function (exists)
@@ -85,6 +110,5 @@ var server = app.listen(app.get('port'), function () {
     console.info("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
 
-var MR = MRinit(mongoose, server, app);
-registerModels(MR);
+
 

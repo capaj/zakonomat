@@ -18,7 +18,12 @@ window.app = angular.module('zakonomat',
         });
         $routeProvider.otherwise({redirectTo:'/404'});
     }
-).run(function () {
+).run(function ($MR, facebook, $q) {
+		var dfd = $q.defer();
+		facebook.onLogin.register(function () {
 
+			dfd.resolve({url: 'http://localhost:8080', hs: { query: "aToken=" + facebook.aToken } } );
+		});
+		$MR('local', dfd.promise);
 
-    });
+	});

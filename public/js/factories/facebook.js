@@ -10,7 +10,6 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
     }(document));
 
     // Init the SDK upon load
-    var aToken;
     if (IS_PRODUCTION) {
 
         var onLogin = new SingleEvent();
@@ -29,15 +28,16 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
             FB.Event.subscribe('auth.statusChange', function (response) {
                 if (response.authResponse) {
                     // user has auth'd your app and is logged into Facebook
-                    aToken = response.authResponse.accessToken;
+
+					facebook.aToken = response.authResponse.accessToken;
                     onLogin.fire();
 
                     //$("#auth-loggedout").
                     document.getElementById('auth-loggedout').style.display = 'none';
                     document.getElementById('auth-loggedin').style.display = 'block';
                 } else {
-                    onLogout.fire();
-
+                    onLogout.fire(facebook.aToken);
+					delete facebook.aToken;
                     // user has not auth'd your app, or is not logged into Facebook
                     document.getElementById('auth-loggedout').style.display = 'block';
                     document.getElementById('auth-loggedin').style.display = 'none';
@@ -58,19 +58,20 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
         setTimeout(function () { dfd.resolve("TESTING_TOKEN_1"); }, 100);    // we are running it locally, so we use this fake token
     }
 
+	//just FB api wrapped in promise
     var api = function () {
         var dfd = $q.defer();
-        var callback = arguments[1];
-        FB.api(arguments[0], function (res) {
-            if (res.error) {
-                dfd.reject(res);
-            } else {
-                dfd.resolve(res);
-            }
-            $rootScope.$apply();
-        });
+		Array.prototype.push.call(arguments, function (res) {
+			if (res.error) {
+				dfd.reject(res);
+			} else {
+				dfd.resolve(res);
+			}
+			$rootScope.$apply();
+		});
+        FB.api.apply(this, arguments);
         return dfd.promise;
     };
-
-    return {onLogin: onLogin, onLogout: onLogout, api: api};
+	var facebook = {onLogin: onLogin, onLogout: onLogout, api: api};
+    return facebook;
 });

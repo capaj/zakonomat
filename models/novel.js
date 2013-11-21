@@ -1,7 +1,7 @@
 var Schema = require('mongoose').Schema;
 
 module.exports = function (MR) {
-    return MR('novel', {
+    return MR.model('novel', {
         owner: { type: Schema.Types.ObjectId, ref: 'user' },
         content: String,    //HTML
         title: String,

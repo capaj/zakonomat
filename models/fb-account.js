@@ -2,7 +2,7 @@ var request = require('request'),
     when = require('when');
 
 module.exports = function (MR) {
-    var FBacc = MR('FBaccount',
+    var FBacc = MR.model('FBaccount',
         {
             id: String,
             first_name: String,
