@@ -5,7 +5,8 @@ window.app = angular.module('zakonomat',
         'angularMoment',
         'angularLocalStorage',
         'analytics',
-        'RPC'
+        'RPC',
+		'Moonridge'
         // included, but by default not loaded, if you need it, just add it to script manifest
         // 'angular-gestures'
     ]

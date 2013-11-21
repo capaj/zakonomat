@@ -31,7 +31,7 @@ var productionFiles = {
 	],
     2: [bc + '**/angular.min.js'],
     3: [
-        bc + '**/ng-tools-0.0.3.min.js',
+		bc + '**/ng-tools-0.0.3.min.js',
         bc + '**/angular-touch.min.js',
         bc + '**/angular-moment.min.js',
         bc + '**/angularLocalStorage.min.js',

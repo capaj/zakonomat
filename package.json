@@ -23,6 +23,7 @@
         "array-sugar": "latest",
         "express": "latest",
         "moonridge": "latest",
+        "socket.io": "0.9.16",
         "socket.io-rpc": "latest",
         "mongoose": "latest",
         "request": "latest",

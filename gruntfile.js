@@ -106,10 +106,6 @@ module.exports = function(grunt) {
                     {
                         from: '<--built css-->',
                         to: '<%= pkg.name %>-<%= pkg.version %>.css'
-                    },
-                    {
-                        from: '<--built script manifest-->',
-                        to: mainFileName
                     }
                 ])
             }
