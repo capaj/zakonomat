@@ -2,15 +2,15 @@ var Schema = require('mongoose').Schema;
 
 module.exports = function (MR) {
 
-    return MR('vote', {
-        subject: { type: Schema.Types.ObjectId, required: true },
+    return MR('novelVote', {
+        subject: { type: Schema.Types.ObjectId, ref: 'novel', required: true },
         creation_date: { type: Date, default: Date.now },
         value: Boolean,
-        owner: { type: Schema.Types.ObjectId, ref: 'user' }
+        owner: { type: Schema.Types.ObjectId, ref: 'user', required: true }
     }, {
-        C: 1,
+        C: 10,
         R: 0,
-        U: 5,
-        D: 5
+        U: 50,
+        D: 50
     });
 };

@@ -1,4 +1,6 @@
-
+var http = require('http');
+http.globalAgent.maxSockets = 100;
+http.Agent.maxSockets = 100;
 /**
  * Module dependencies.
  */

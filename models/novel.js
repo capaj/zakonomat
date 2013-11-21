@@ -11,6 +11,6 @@ module.exports = function (MR) {
         ended: Date,
         negative_vote_count: Number,
         positive_vote_count: Number,
-        votes: [{ type: Schema.Types.ObjectId, ref: 'vote' }]
+        votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }]
     });
 };
