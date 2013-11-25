@@ -13,7 +13,7 @@ module.exports = function (userModel) {
                     //TODO call facebook and get users identity, store token in the users document, invalidate after 2 hours
 
                     userModel.fetchAcc(aToken).then(function (FBdata) {
-                        userModel.findOne().where('fb.id').equals(aToken).exec()
+                        userModel.findOne().where('fb.id').equals(FBdata.id).exec()
                             .then(function (user) {
                                 if (user) {
                                     user.access_token = aToken;

@@ -1,8 +1,10 @@
 var Schema = require('mongoose').Schema;
+var request = require('request');
+var when = require('when');
 
 module.exports = function (MR) {
 
-    var userModel = MR.userModel('user', {
+    var userMRM = MR.userModel({
         fb: {
             id: {type: String, required: true},
             first_name: String,
@@ -40,20 +42,26 @@ module.exports = function (MR) {
         negative_vote_count: { type: Number, default: 0, min:0},
         positive_vote_count: { type: Number, default: 0, min:0},
         novel_votes: [{ type: Schema.Types.ObjectId, ref: 'Vote' }]
-    });
+    }, {
+		statics: {
+			fetchAcc: function (token) {
+				var deferred = when.defer();
+				request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,first_name,last_name,birthday,gender,link,installed,verified,picture,currency', function (error, response, body) {
+					if (!error && response.statusCode == 200) {
+						var fbAccDetails = JSON.parse(body);
+						deferred.resolve(fbAccDetails);
+					} else {
+						deferred.reject();
+					}
+				});
+				return deferred.promise;
+			}
+		}
+	});
 
-    userModel.schema.statics.fetchAcc = function (token) {
-        var deferred = when.defer();
-        request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,first_name,last_name,birthday,gender,link,installed,verified,picture,currency', function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                var fbAccDetails = JSON.parse(body);
-                deferred.resolve(fbAccDetails);
-            } else {
-                deferred.reject();
-            }
-        });
-        return deferred.promise;
-    };
+	userMRM.model.on('create', function (user) {
+		console.log("created user: " + user);
+	});
 
-    return userModel;
+    return userMRM;
 };

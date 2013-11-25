@@ -6,7 +6,7 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window) {
         var dfd = $q.defer();
         facebook.onLogin.register(function (token) {
 
-            dfd.resolve({url: 'http://localhost:8080', hs: { query: "aToken=" + token } } );
+            dfd.resolve({url: 'http://localhost:8088', hs: { query: "aToken=" + token } } );
 
         });
 

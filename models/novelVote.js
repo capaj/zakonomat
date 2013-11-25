@@ -14,50 +14,78 @@ module.exports = function (MR, userMRM, novelMRM) {
         D: 50
     });
 
-    var incrementVoteCounts = function (doc) {
-        doc.votes_count += 1;
-        if (vote.value) {
-            doc.positive_vote_count += 1;
-        } else {
-            doc.negative_vote_count += 1;
-        }
-        doc.save();
-    };
+	/**
+	 *
+	 * @param {Mongoose.Document} doc
+	 * @param {Mongoose.Document} vote
+	 */
+	var incrementVoteCounts = function (doc, vote) {
+		doc.votes_count += 1;
+		if (vote.value === true) {
+			doc.positive_vote_count += 1;
+		}
+		if(vote.value === false) {
+			doc.negative_vote_count += 1;
+		}
+		doc.save();
+	};
 
     novelVoteMR.model.on('create', function (vote) {
-        novelVoteMR.model.findOne({subject: vote._id, owner:vote.owner}).exec()
+        novelVoteMR.model.findOne({subject: vote.subject, owner:vote.owner}).exec()
             .then(function (existingVote) {
                 if (existingVote) {
                     // if vote already exists, then the previous must be removed
                     existingVote.remove();
                     // this should not happen with official client, since the client app should guard this
                 }
+				var incrementFor = function (doc) {
+					incrementVoteCounts(doc, vote);
+				};
                 userMRM.model.findOne({_id: vote.owner._id}).exec()
-                    .then(incrementVoteCounts);
+                    .then(incrementFor);
                 novelMRM.model.findOne({_id: vote.subject._id}).exec()
-                    .then(incrementVoteCounts);
+                    .then(incrementFor);
             })
     });
 
-    var decrementVoteCounts = function (doc) {
+	/**
+	 *
+	 * @param {Mongoose.Document} doc
+	 * @param {Mongoose.Document} vote
+	 */
+	var decrementVoteCounts = function (doc, vote) {
         doc.votes_count -= 1;
-        if (vote.value) {
+        if (vote.value === true) {
             doc.positive_vote_count -= 1;
-        } else {
+        }
+		if(vote.value === false) {
             doc.negative_vote_count -= 1;
         }
         doc.save();
     };
+
     novelVoteMR.model.on('remove', function (vote) {
-        userMRM.model.findOne({_id: vote.owner._id}).exec()
-            .then(decrementVoteCounts);
+        var decrementFor = function (doc) {
+			decrementVoteCounts(doc, vote);
+		};
+		userMRM.model.findOne({_id: vote.owner._id}).exec()
+            .then(decrementFor);
         novelMRM.model.findOne({_id: vote.subject._id}).exec()
-            .then(decrementVoteCounts);
+            .then(decrementFor);
     });
 
-    novelVoteMR.model.on('preupdate', function (vote, previousVersion) {
+    novelVoteMR.model.on('preupdate', function (doc, evName, previous){
+
+		decrementVoteCounts(doc, doc);	// novelVote doc
+		userMRM.model.findOne({_id: vote.owner._id}).exec()
+			.then(function (obj) {
+
+			});	//user docs
+
+		incrementVoteCounts(doc);
 
     });
 
-    return  novelVoteModel;
+
+    return novelVoteMR;
 };

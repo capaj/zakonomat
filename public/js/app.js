@@ -19,7 +19,7 @@ window.app = angular.module('zakonomat',
         });
         $routeProvider.otherwise({redirectTo:'/404'});
     }
-).run(function ($MR, facebook, $q, $location, $storage) {
+).run(function ($MR, facebook, $q, $location, storage) {
 
 
 	});
