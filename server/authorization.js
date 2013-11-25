@@ -13,22 +13,23 @@ module.exports = function (userModel) {
                     //TODO call facebook and get users identity, store token in the users document, invalidate after 2 hours
 
                     userModel.fetchAcc(aToken).then(function (FBdata) {
-                        userModel.findOne().where('fb.id').equals(FBdata.id).exec()
+                        userModel.findOne({'fb.id':FBdata.id}).exec()
                             .then(function (user) {
                                 if (user) {
                                     user.access_token = aToken;
                                     user.save();
                                     CB(null, true);
                                 } else {
-                                    userModel.create(
-                                        {
+                                    userModel.create({
                                             fb: FBdata,
                                             access_token: aToken,
                                             privilige_level: 1
-                                        }
-                                    ).then(function () {
-                                            CB()
-                                        });
+									}).then(function (user) {
+										console.log("Created a user: " + user);
+											CB(null, true);
+									}, function (err) {
+										CB(err, false);	//failed
+									});
                                 }
                             });
                     }, function (err) {
