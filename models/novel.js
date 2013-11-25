@@ -9,8 +9,9 @@ module.exports = function (MR) {
         started: Date,
         accepted: Boolean,
         ended: Date,
-        negative_vote_count: Number,
-        positive_vote_count: Number,
+        votes_count: { type: Number, default: 0, min:0},
+        negative_vote_count: { type: Number, default: 0, min:0},
+        positive_vote_count: { type: Number, default: 0, min:0},
         votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }]
     });
 };

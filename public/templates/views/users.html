@@ -1,0 +1,18 @@
+<div mr-controller="usersCtrl" mr-backend="local" mr-model="user">
+    <div>
+        <p ng-repeat="user in LQ.docs">
+            <div class="well">
+                <img ng-src="{{ user.fb.picture.data.url }}">
+                <h5 ng-bind="user.fb.first_name + user.fb.last_name"></h5>
+                Datum nar.: <span ng-bind="user.fb.birthday"></span>
+                Registrace: <span ng-bind="user.creation_date"></span>
+                Hlasy celkem: <span ng-bind="user.votes_count"></span>
+                Pozitivní hlasy: <span ng-bind="user.positive_votes_count"></span>
+                Negativní hlasy: <span ng-bind="user.nagetive_votes_count"></span>
+                {{ user }}
+
+            </div>
+        </p>
+    </div>
+
+</div>

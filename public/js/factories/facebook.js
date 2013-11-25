@@ -26,36 +26,26 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
 
             // listen for and handle auth.statusChange events
             FB.Event.subscribe('auth.statusChange', function (response) {
-                if (response.authResponse) {
-                    // user has auth'd your app and is logged into Facebook
+                if (response.status === 'connected') {
+                    facebook.aToken = response.authResponse.accessToken;
+                    onLogin.fire(facebook.aToken);
+                } else if (response.status === 'not_authorized') {
 
-					facebook.aToken = response.authResponse.accessToken;
-                    onLogin.fire();
-
-                    //$("#auth-loggedout").
-                    document.getElementById('auth-loggedout').style.display = 'none';
-                    document.getElementById('auth-loggedin').style.display = 'block';
+                    FB.login();
                 } else {
-                    onLogout.fire(facebook.aToken);
-					delete facebook.aToken;
-                    // user has not auth'd your app, or is not logged into Facebook
-                    document.getElementById('auth-loggedout').style.display = 'block';
-                    document.getElementById('auth-loggedin').style.display = 'none';
+
+                    FB.login();
                 }
+
                 $rootScope.$apply();
 
             });
 
-            // respond to clicks on the login and logout links
-            document.getElementById('auth-loginlink').addEventListener('click', function () {
-                FB.login();
-            });
-            document.getElementById('auth-logoutlink').addEventListener('click', function () {
-                FB.logout();
-            });
+            FB.login();
+
         }
     } else {
-        setTimeout(function () { dfd.resolve("TESTING_TOKEN_1"); }, 100);    // we are running it locally, so we use this fake token
+        setTimeout(function () { onLogin.fire('TESTING_FB_TOKEN'); }, 100);    // we are running it locally, so we use this fake token
     }
 
 	//just FB api wrapped in promise
@@ -72,6 +62,14 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
         FB.api.apply(this, arguments);
         return dfd.promise;
     };
-	var facebook = {onLogin: onLogin, onLogout: onLogout, api: api};
+
+    var logout = function () {
+        FB.logout(function (response) {
+            onLogout.fire(facebook.aToken);
+            delete facebook.aToken;
+        });
+    };
+
+	var facebook = {onLogin: onLogin, onLogout: onLogout, api: api, logout: logout};
     return facebook;
 });

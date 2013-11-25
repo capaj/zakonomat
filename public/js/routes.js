@@ -13,13 +13,12 @@
         { route:'/podporujinas', resolve: {templateUrl: tV + 'supporting_us.html'}},
         { route:'/financovani', resolve: {templateUrl: tV + 'financing.html'}},
         { route:'/board', resolve: {templateUrl: tV + 'expert_board.html'}},
-        { route:'/login', resolve: {templateUrl: '/templates/login.html'}},
-        { route:'/registrace', resolve: {templateUrl: '/templates/register.html'}},
+        { route:'/registrace', resolve: {templateUrl: tS + 'register.html'}},
         { route:'/profil', resolve: {templateUrl: tV + 'profil.html', reloadOnSearch: false}},
         { route:'/navrhy', resolve: {templateUrl:tV + 'novels.html', reloadOnSearch: false}},
 		{ route:'/navrh:novelId', resolve: {templateUrl:tV + 'novel.html', reloadOnSearch: false}},
-        { route:'/uzivatele', resolve: {templateUrl:tV + 'novels.html', reloadOnSearch: false}},
-		{ route:'/uzivatel:userId', resolve: {templateUrl:tV + 'novel.html', reloadOnSearch: false}},
+        { route:'/uzivatele', resolve: {templateUrl:tV + 'users.html', reloadOnSearch: false}},
+		{ route:'/uzivatel:userId', resolve: {templateUrl:tV + 'user.html', reloadOnSearch: false}},
 		{ route:'/hlasy', resolve: {templateUrl:tV + 'votes.html', reloadOnSearch: false}},
         { route:'/hlas:novelVoteId', resolve: {templateUrl:tV + 'vote.html', reloadOnSearch: false}}
 

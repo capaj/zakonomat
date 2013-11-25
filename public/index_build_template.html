@@ -41,7 +41,7 @@
                     <img src="/img/zakonomat-web-maly-bily.png" alt="" id="zakonomat-logo">
                 </a>
             </div>
-            <div class="navbar-collapse collapse" style="height: 1px;">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/navrhy">Návrhy</a></li>
                     <li><a href="/hlasy">Hlasy</a></li>
@@ -51,16 +51,16 @@
 
                 <div class="navbar-right">
                     <!--<fb:login-button show-faces="true" max-rows="1" size="large"></fb:login-button>-->
-                    <img ng-show="fbAcc.picture.data.url" ng-src="{{ fbAcc.picture.data.url }}" alt="{{ fbAcc.name }}" class="fb-picture">
+                    <img ng-show="userService/fbAcc.picture.data.url" ng-src="{{ userService.fbAcc.picture.data.url }}"
+                         alt="{{ fbAcc.name }}" class="fb-picture">
 
                     <div id="social" class="social-bar">
                         <div id="auth-status" class="navbar-text pull-right">
-                            <div id="auth-loggedout">
-                                <a href="#" id="auth-loginlink">Přihlásit se přes Facebook</a>
+                            <div ng-hide="userService.fbAcc">
+                                Anonymní uživatel
                             </div>
-                            <div id="auth-loggedin" style="display:none">
-
-                                <a href="#" id="auth-logoutlink">Přihlášen: <span id="auth-displayname"></span></a>
+                            <div ng-show="userService.fbAcc">
+                                <a href="/profil">{{ userService.fbAcc.name }}</a>
                             </div>
                         </div>
                     </div>

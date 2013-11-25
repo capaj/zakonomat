@@ -1,9 +1,12 @@
 module.exports = function loadModels(MR) {
+    //MRM stand for Monnridge model
+    var userMRM = require('./user')(MR);
+
+    var novelMRM = require('./novel')(MR);
     return {
-		user: require('./user')(MR),
-		novel: require('./novel')(MR),
-		novelVote: require('./novelVote')(MR),
-		comment: require('./comment')(MR),
-		fbAccount: require('./fb-account')(MR)
+		user: userMRM,
+		novel: novelMRM,
+		novelVote: require('./novelVote')(MR, userMRM, novelMRM),
+		comment: require('./comment')(MR)
 	};
 };

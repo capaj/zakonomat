@@ -21,7 +21,7 @@ var moonridge = require('moonridge');
 
 var MR = moonridge.init(mongoose);
 
-var models = require('./models')(MR);
+var domain = require('./models')(MR);
 
 
 app.configure(function(){
@@ -65,25 +65,8 @@ var server = app.listen(app.get('port'), function () {
 
 	var io = require('socket.io').listen(server);
 	io.configure(function (){
-		io.set('authorization', function (handshake, CB) {
-			var socket = this;
-			var aToken = handshake.query.aToken;
-			console.log("user wants to authorize: " + aToken );
-			models.user.model.findOne({access_token: aToken}).exec().then(function (user) {
-				if (user) {
-					socket.user = user;
-					console.log("Authenticated user: " + user.name);
-					CB(null, true);
-				} else {
-					//TODO call facebook and get users identity, store token in the users document, invalidate after 2 hours
-				}
-
-			}, function (err) {
-				console.log("auth error " + err);
-				CB(null, false);
-			})
-		});
-	});
+		io.set('authorization', require('./server/authorization')(domain.user.model));
+    });
 
 	moonridge.createServer(io, app);
 
