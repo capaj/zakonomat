@@ -10,7 +10,7 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window) {
 
         });
 
-        return $MR('local', dfd.promise);
+        return $MR('znmt', dfd.promise);
 
     });
 

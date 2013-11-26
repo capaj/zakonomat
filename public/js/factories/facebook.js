@@ -41,7 +41,9 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
 
             });
 
-            FB.login();
+            FB.login(function (res) {
+                //TODO save token to local
+            });
 
         }
     } else {

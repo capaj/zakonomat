@@ -10,7 +10,7 @@ module.exports = function (MR) {
             first_name: String,
             last_name: String,
             gender: String,
-            link: String,
+            username: {type: String, required: true},   //FB username for constructing FB links and for fetching the user via routeparams on userDetail
             verified: String,
             birthday: String,
             picture: {
@@ -41,12 +41,12 @@ module.exports = function (MR) {
         votes_count: { type: Number, default: 0, min:0},
         negative_vote_count: { type: Number, default: 0, min:0},
         positive_vote_count: { type: Number, default: 0, min:0},
-        novel_votes: [{ type: Schema.Types.ObjectId, ref: 'Vote' }]
+        novel_votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }]
     }, {
 		statics: {
 			fetchAcc: function (token) {
 				var deferred = when.defer();
-				request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,first_name,last_name,birthday,gender,link,installed,verified,picture,currency', function (error, response, body) {
+				request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,first_name,last_name,username,birthday,gender,installed,verified,picture,currency', function (error, response, body) {
 					if (!error && response.statusCode == 200) {
 						var fbAccDetails = JSON.parse(body);
 						deferred.resolve(fbAccDetails);

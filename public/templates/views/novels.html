@@ -1,6 +1,5 @@
-<div mr-controller="novelsCtrl" mr-backend="local" mr-model="novel">
-    <div>
-        <p ng-repeat="novel in LQ.docs">
+<div mr-controller="novelsCtrl" mr-backend="znmt" mr-model="novel">
+    <div ng-repeat="novel in LQ.docs">
         <div class="well">
             <h3 ng-bind="novel.title"></h3>
             <p>hlasy:</p>
@@ -9,7 +8,8 @@
             <buttton ng-click="vote(novel, true)"></buttton>
             <buttton ng-click="vote(novel, false)"></buttton>
         </div>
-        </p>
     </div>
-
+    <a href="/novyNavrh">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+    </a>
 </div>
