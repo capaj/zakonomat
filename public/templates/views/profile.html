@@ -1,5 +1,5 @@
 <div mr-controller="profileCtrl" mr-backend="znmt" mr-models="user,novelVote">
-    <img ng-src="{{ user.fb.picture.data.url }}">
+    <img ng-src="{{ profile().fb.picture.data.url }}">
     <h2>uživatel {{ getFullName() }}</h2>
     Datum nar.: <span ng-bind="profile().fb.birthday"></span>
     Registrace: <span ng-bind="profile().creation_date"></span>
