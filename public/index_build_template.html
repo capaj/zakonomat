@@ -56,9 +56,9 @@
 
                     <div id="social" class="social-bar">
                         <div id="auth-status" class="navbar-text pull-right">
-                            <div ng-hide="userService.fbAcc">
-                                Anonymní uživatel
-                            </div>
+                            <button ng-hide="userService.fbAcc" ng-click="fbLogin()" class="btn btn-primary">
+                                Přihlásit přes FB
+                            </button>
                             <div ng-show="userService.fbAcc">
                                 <a href="/profil">{{ userService.fbAcc.name }}</a>
                             </div>

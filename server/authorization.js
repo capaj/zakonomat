@@ -4,7 +4,7 @@ module.exports = function (userModel) {
         var aToken = handshake.query.aToken;
         var authSucces = function (user) {
             socket.user = user;
-            console.log("Authenticated user: " + user.username);
+            console.log("Authenticated user: " + user.fb.username);
             CB(null, true);
         };
         if (aToken) {
@@ -24,7 +24,10 @@ module.exports = function (userModel) {
                                     user.save();
                                     authSucces(user);
                                 } else {
-                                    userModel.create({
+									if (FBdata.verified === false) {
+										CB(new Error('Unverified account is trying to authorize'), false);
+									}
+									userModel.create({
                                             fb: FBdata,
                                             access_token: aToken,
                                             privilige_level: 1

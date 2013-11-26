@@ -17,6 +17,6 @@ app.controller('profileCtrl', function ($scope, userService) {
     });
 
 
-
+	$scope.logout = userService.logout;
 
 });

@@ -7,19 +7,20 @@ module.exports = function (MR) {
     var userMRM = MR.userModel({
         fb: {
             id: {type: String, required: true},
-            first_name: String,
-            last_name: String,
-            gender: String,
+            first_name: {type: String, required: true},
+            last_name: {type: String, required: true},
+            gender: {type: String, required: true},
             username: {type: String, required: true},   //FB username for constructing FB links and for fetching the user via routeparams on userDetail
-            verified: String,
+            verified: {type: String, required: true},
             birthday: String,
             picture: {
                 data:{
                     url: String,
                     is_silhouette: String
                 }
-            }
-
+            },
+			location: {id: String, name: String},
+			hometown: {id: String, name: String}
         },
         creation_date: { type: Date, default: Date.now },
         access_token: { type: String, permissions:{R:0, W:50}},   //FB access token
@@ -38,7 +39,7 @@ module.exports = function (MR) {
             type: Number, default: 1, min:0, max: 50,
             permissions:{R: 0, W: 50}
         },
-        votes_count: { type: Number, default: 0, min:0},
+        vote_count: { type: Number, default: 0, min:0},
         negative_vote_count: { type: Number, default: 0, min:0},
         positive_vote_count: { type: Number, default: 0, min:0},
         novel_votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }]
@@ -46,7 +47,7 @@ module.exports = function (MR) {
 		statics: {
 			fetchAcc: function (token) {
 				var deferred = when.defer();
-				request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,first_name,last_name,username,birthday,gender,installed,verified,picture,currency', function (error, response, body) {
+				request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,first_name,last_name,username,birthday,gender,installed,verified,picture,currency,location,hometown', function (error, response, body) {
 					if (!error && response.statusCode == 200) {
 						var fbAccDetails = JSON.parse(body);
 						deferred.resolve(fbAccDetails);

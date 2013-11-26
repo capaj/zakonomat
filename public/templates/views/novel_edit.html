@@ -1,5 +1,10 @@
 <div mr-controller="novelEditCtrl" mr-backend="znmt" mr-models="novel">
     <h2>Váš návrh</h2>
-    <input type="text" ng-model="title" placeholder="Titulek" class="form-control">
-    <button ng-click="create()" class="btn btn-primary">Přidat návrh</button>
+
+    <form>
+        <input type="text" ng-model="novel.title" placeholder="Titulek" class="form-control">
+        <input type="url" name="input" ng-model="novel.current_law_link" placeholder="link na aktuální znění" class="form-control">
+        <button ng-click="create()" class="btn btn-primary">Přidat návrh</button>
+    </form>
+
 </div>

@@ -7,6 +7,7 @@ module.exports = function (MR) {
         title: {type: String, required: true, unique: true},
         pull_req: {type: String, unique: true},    //github pull request associated
         paragraph_text: {type: String, unique: true},    //paragrafove zneni zakona
+        current_law_link: {type: String},    //link to zakonyprolidi.cz
         approved: Boolean,
         approved_date: Date,
         ended_date: Date,

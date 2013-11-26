@@ -11,8 +11,9 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
 
     // Init the SDK upon load
     if (IS_PRODUCTION) {
+		var loginDfd = $q.defer();
 
-        var onLogin = new SingleEvent();
+		var onLogin = new SingleEvent();
         var onLogout = new SingleEvent();
 
         $window.fbAsyncInit = function () {
@@ -25,25 +26,25 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
             });
 
             // listen for and handle auth.statusChange events
-            FB.Event.subscribe('auth.statusChange', function (response) {
-                if (response.status === 'connected') {
-                    facebook.aToken = response.authResponse.accessToken;
+            FB.Event.subscribe('auth.statusChange', function (res) {
+                if (res.status === 'connected') {
+                    facebook.aToken = res.authResponse.accessToken;
                     onLogin.fire(facebook.aToken);
-                } else if (response.status === 'not_authorized') {
+					loginDfd.resolve(res);
 
-                    FB.login();
+				} else if (res.status === 'not_authorized') {
+
+//                    FB.login();
                 } else {
 
-                    FB.login();
+//                    FB.login();
                 }
 
                 $rootScope.$apply();
 
             });
 
-            FB.login(function (res) {
-                //TODO save token to local
-            });
+
 
         }
     } else {
@@ -64,14 +65,34 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
         FB.api.apply(this, arguments);
         return dfd.promise;
     };
+//	var promisify = function (fn) {
+//		return function () {
+//			var dfd = $q.defer();
+//			fn(function (res) {
+//				dfd.resolve(res);
+//			});
+//			return dfd.promise;
+//		}
+//	};
 
     var logout = function () {
-        FB.logout(function (response) {
+		var dfd = $q.defer();
+
+		FB.logout(function (res) {
             onLogout.fire(facebook.aToken);
             delete facebook.aToken;
-        });
-    };
+			$rootScope.$apply();
 
-	var facebook = {onLogin: onLogin, onLogout: onLogout, api: api, logout: logout};
+		});
+		return dfd.promise;
+
+	};
+
+	var login = function () {
+		FB.login();
+		return loginDfd.promise;
+	};
+
+	var facebook = {onLogin: onLogin, onLogout: onLogout, api: api, login: login, logout: logout};
     return facebook;
 });

@@ -28,6 +28,13 @@ app.service('userService',
 
         };
 
+		this.logout = function () {
+			facebook.logout().then(function () {
+				delete self.fbAcc;
+				$location.url('/');
+			});
+		};
+
         return this;
 
     });
