@@ -1,15 +1,21 @@
-<div mr-controller="novelsCtrl" mr-backend="znmt" mr-model="novel">
+<div mr-controller="novelsCtrl" mr-backend="znmt" mr-models="novel,novelVote">
     <div ng-repeat="novel in LQ.docs">
         <div class="well">
             <h3 ng-bind="novel.title"></h3>
-            <p>hlasy:</p>
-            <span class="negative_vote_count" ng-bind="novel.negative_vote_count"></span>
-            <span class="positive_vote_count" ng-bind="novel.positive_vote_count"></span>
-            <buttton ng-click="vote(novel, true)"></buttton>
-            <buttton ng-click="vote(novel, false)"></buttton>
+            <a ng-href="{{ novel.current_law_link }}">Nynější znění zákona</a>
+            <h4>hlasy</h4>
+            Pro: <span class="negative_vote_count" ng-bind="novel.positive_vote_count"></span>
+            <div class="btn-group btn-group-lg">
+                <buttton ng-click="voteOnNovel(novel, true)" class="btn btn-extralg btn-primary"><i class="glyphicon glyphicon-thumbs-up glyph-big"></i></buttton>
+                <buttton ng-click="voteOnNovel(novel, false)" class="btn btn-extralg btn-danger"><i class="glyphicon glyphicon-thumbs-down glyph-big"></i></buttton>
+
+            </div>
+            Proti: <span class="positive_vote_count" ng-bind="novel.negative_vote_count"></span>
+
+
         </div>
     </div>
-    <a href="/novyNavrh">
-        <span class="glyphicon glyphicon-plus-sign"></span>
+    <a href="/novyNavrh" class="new-novel-link">
+        <i class="glyphicon glyphicon-plus-sign glyph-big"></i><span> přidat návrh změny zákona</span>
     </a>
 </div>

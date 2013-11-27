@@ -8,10 +8,32 @@ module.exports = function (MR, userMRM, novelMRM) {
         value: Boolean,
         owner: { type: Schema.Types.ObjectId, ref: 'user', required: true }
     }, {
-        C: 10,
-        R: 0,
-        U: 50,
-        D: 50
+        permissions: {
+            C: 10,
+            R: 0,
+            U: 50,
+            D: 50
+        },
+        pres:{
+            onPrecreate: function (next, vote) {
+                novelVoteMR.model.findOne({subject: vote.subject, owner:vote.owner}).exec()
+                    .then(function (existingVote) {
+                        if (existingVote) {
+                            // if vote already exists, then the previous must be removed
+                            existingVote.remove(function (err) {
+                                next();
+                            });
+                            // this should not happen with official client, since the client app should guard this
+                        } else {
+                            next();
+
+                        }
+
+                    });
+            }
+        }
+
+
     });
 
 	/**
@@ -20,7 +42,7 @@ module.exports = function (MR, userMRM, novelMRM) {
 	 * @param {Mongoose.Document} vote
 	 */
 	var incrementVoteCounts = function (doc, vote) {
-		doc.votes_count += 1;
+		doc.vote_count += 1;
 		if (vote.value === true) {
 			doc.positive_vote_count += 1;
 		}
@@ -31,21 +53,17 @@ module.exports = function (MR, userMRM, novelMRM) {
 	};
 
     novelVoteMR.model.on('create', function (vote) {
-        novelVoteMR.model.findOne({subject: vote.subject, owner:vote.owner}).exec()
-            .then(function (existingVote) {
-                if (existingVote) {
-                    // if vote already exists, then the previous must be removed
-                    existingVote.remove();
-                    // this should not happen with official client, since the client app should guard this
-                }
-				var incrementFor = function (doc) {
-					incrementVoteCounts(doc, vote);
-				};
-                userMRM.model.findOne({_id: vote.owner._id}).exec()
-                    .then(incrementFor);
-                novelMRM.model.findOne({_id: vote.subject._id}).exec()
-                    .then(incrementFor);
-            })
+        var incrementFor = function (doc) {
+            if (doc) {
+                incrementVoteCounts(doc, vote);
+            } else {
+                throw new Error('Unable to find owner/subject documents');  //these should always be found
+            }
+        };
+        userMRM.model.findOne({_id: vote.owner}).exec()
+            .then(incrementFor);
+        novelMRM.model.findOne({_id: vote.subject}).exec()
+            .then(incrementFor);
     });
 
 	/**
@@ -54,7 +72,7 @@ module.exports = function (MR, userMRM, novelMRM) {
 	 * @param {Mongoose.Document} vote
 	 */
 	var decrementVoteCounts = function (doc, vote) {
-        doc.votes_count -= 1;
+        doc.vote_count -= 1;
         if (vote.value === true) {
             doc.positive_vote_count -= 1;
         }
@@ -66,18 +84,23 @@ module.exports = function (MR, userMRM, novelMRM) {
 
     novelVoteMR.model.on('remove', function (vote) {
         var decrementFor = function (doc) {
-			decrementVoteCounts(doc, vote);
+            if (doc) {
+                decrementVoteCounts(doc, vote);
+            } else {
+                throw new Error('Unable to find owner/subject documents');  //these should always be found
+            }
+
 		};
-		userMRM.model.findOne({_id: vote.owner._id}).exec()
+		userMRM.model.findOne({_id: vote.owner}).exec()
             .then(decrementFor);
-        novelMRM.model.findOne({_id: vote.subject._id}).exec()
+        novelMRM.model.findOne({_id: vote.subject}).exec()
             .then(decrementFor);
     });
 
     novelVoteMR.model.on('preupdate', function (doc, evName, previous){
 
 		decrementVoteCounts(doc, doc);	// novelVote doc
-		userMRM.model.findOne({_id: vote.owner._id}).exec()
+		userMRM.model.findOne({_id: vote.owner}).exec()
 			.then(function (obj) {
 
 			});	//user docs

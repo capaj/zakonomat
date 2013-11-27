@@ -2,14 +2,18 @@
     <button class="btn btn-danger pull-right" ng-click="logout()">Odhlásit se</button>
     <img ng-src="{{ profile().fb.picture.data.url }}">
     <h2>uživatel {{ getFullName() }}</h2>
-    Datum nar.: <span ng-bind="profile().fb.birthday"></span>
-    Registrace: <span ng-bind="profile().creation_date"></span>
-    Hlasoval celkem: <span ng-bind="profile().vote_count"></span>
-    Hlasů pro: <span ng-bind="profile().positive_vote_count"></span>
-    Hlasů proti: <span ng-bind="profile().negative_vote_count"></span>
+    <p class="user-details">
+        Email: <span ng-bind="profile().fb.email"></span> <br/>
+        Datum nar.: <span ng-bind="profile().fb.birthday"></span> <br/>
+        Registrace: <span ng-bind="profile().creation_date"></span> <br/>
+        Hlasoval celkem: <span ng-bind="profile().vote_count"></span> <br/>
+        Hlasů pro: <span ng-bind="profile().positive_vote_count"></span> <br/>
+        Hlasů proti: <span ng-bind="profile().negative_vote_count"></span>
+
+    </p>
 
     <br/>
-    <span>jeho hlasy: </span>
+    <h4>jeho hlasy: </h4>
     <div class="well" ng-repeat="vote in vsLQ.docs">
 
     </div>

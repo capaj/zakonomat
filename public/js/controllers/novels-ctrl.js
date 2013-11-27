@@ -1,6 +1,6 @@
 app.controller('novelsCtrl', function ($scope, $location) {
-    var liveQuery = $scope.MR.liveQuery;
-    $scope.LQ = liveQuery({});
+    var nliveQuery = $scope.MR.novel.liveQuery;
+    $scope.LQ = nliveQuery({});
     $scope.LQ.promise.then(function (LQ) {
         console.log(LQ);
     });
@@ -11,7 +11,7 @@ app.controller('novelsCtrl', function ($scope, $location) {
     };
 
     $scope.voteOnNovel = function (novel, how) {
-        $scope.MR.create({subject: novel._id, value: how});
+        $scope.MR.novelVote.create({subject: novel._id, value: how});
     };
 
 

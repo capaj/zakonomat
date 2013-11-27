@@ -11,7 +11,6 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
 
     // Init the SDK upon load
     if (IS_PRODUCTION) {
-		var loginDfd = $q.defer();
 
 		var onLogin = new SingleEvent();
         var onLogout = new SingleEvent();
@@ -30,7 +29,6 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
                 if (res.status === 'connected') {
                     facebook.aToken = res.authResponse.accessToken;
                     onLogin.fire(facebook.aToken);
-					loginDfd.resolve(res);
 
 				} else if (res.status === 'not_authorized') {
 
@@ -81,15 +79,21 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
 		FB.logout(function (res) {
             onLogout.fire(facebook.aToken);
             delete facebook.aToken;
-			$rootScope.$apply();
+            dfd.resolve(res);
 
+            $rootScope.$apply();
 		});
 		return dfd.promise;
 
 	};
 
 	var login = function () {
-		FB.login();
+        var loginDfd = $q.defer();
+
+        FB.login(function (res) {
+            loginDfd.resolve(res);
+
+        }, {scope: 'email,user_birthday'});
 		return loginDfd.promise;
 	};
 

@@ -30,7 +30,7 @@ module.exports = function (userModel) {
 									userModel.create({
                                             fb: FBdata,
                                             access_token: aToken,
-                                            privilige_level: 1
+                                            privilige_level: 10
 									}).then(function (user) {
 										console.log("Created a user: " + user);
 										authSucces(user);

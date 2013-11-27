@@ -1,5 +1,8 @@
 
-<div mr-controller="votesCtrl" mr-backend="znmt" mr-models="novelVote">
+<div mr-controller="votesCtrl" mr-backend="znmt" mr-model="novelVote">
     <h2>Hlasy</h2>
-    <span>hlas pro</span>
+    <div class="well" ng-repeat="vote in LQ.docs">
+        <h2>Hlas uživatele {{ vote.owner. }}</h2>
+        <span>hlas pro {{ vote.subject }}</span>
+    </div>
 </div>
