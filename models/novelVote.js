@@ -61,9 +61,16 @@ module.exports = function (MR, userMRM, novelMRM) {
             }
         };
         userMRM.model.findOne({_id: vote.owner}).exec()
-            .then(incrementFor);
+            .then(function (user) {
+                user.novel_votes.push(vote._id);
+                incrementFor(user);
+            });
         novelMRM.model.findOne({_id: vote.subject}).exec()
-            .then(incrementFor);
+            .then(function (novel) {
+                novel.votes.push(vote._id);
+                incrementFor(novel);
+
+            });
     });
 
 	/**
