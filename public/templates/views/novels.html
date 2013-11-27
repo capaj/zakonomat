@@ -4,15 +4,16 @@
             <h3 ng-bind="novel.title"></h3>
             <a ng-href="{{ novel.current_law_link }}">Nynější znění zákona</a>
             <h4>hlasy</h4>
-            Pro: <span class="negative_vote_count" ng-bind="novel.positive_vote_count"></span>
+
+            Pro: <span class="positive_vote_count" ng-bind="novel.positive_vote_count"></span>
             <div class="btn-group btn-group-lg">
                 <buttton ng-click="voteOnNovel(novel, true)" class="btn btn-extralg btn-primary"><i class="glyphicon glyphicon-thumbs-up glyph-big"></i></buttton>
                 <buttton ng-click="voteOnNovel(novel, false)" class="btn btn-extralg btn-danger"><i class="glyphicon glyphicon-thumbs-down glyph-big"></i></buttton>
 
             </div>
-            Proti: <span class="positive_vote_count" ng-bind="novel.negative_vote_count"></span>
+            Proti: <span class="negative_vote_count" ng-bind="novel.negative_vote_count"></span>
 
-
+            Celkem: <span ng-bind="novel.vote_count"></span>
         </div>
     </div>
     <a href="/novyNavrh" class="new-novel-link">

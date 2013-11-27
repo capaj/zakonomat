@@ -17,7 +17,7 @@
         "test": "node node_modules/grunt-cli/bin/grunt test",
         "postinstall": "bower install"
     },
-    "env": "production",
+    "env": "dev",
     "port": 8076,
     "dependencies": {
         "array-sugar": "latest",
