@@ -1,6 +1,6 @@
 {
   "name": "zakonomat.cz",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "dependencies": {
     "angular": "1.2.2",
     "angular-animate": "1.2.2",
