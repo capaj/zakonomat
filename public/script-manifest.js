@@ -4,6 +4,7 @@ var moduleFile = 'public/js/app.js';
 var appFiles = [
     'public/js/routes.js',
     //animations
+    'public/js/bootstrap/tooltip.js',
     'public/js/bootstrap/*.js',
     //animations
     'public/js/animations/*.js',
