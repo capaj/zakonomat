@@ -40,9 +40,10 @@ module.exports = function (MR) {
             type: Number, default: 1, min:0, max: 50,
             permissions:{R: 0, W: 50}
         },
-        vote_count: { type: Number, default: 0, min:0},
-        negative_vote_count: { type: Number, default: 0, min:0},
-        positive_vote_count: { type: Number, default: 0, min:0},
+        vote_count: {   //of user's votes
+            positive: { type: Number, default: 0, min:0},
+            negative: { type: Number, default: 0, min:0}
+        },
         novel_votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }]
     }, {
 		statics: {

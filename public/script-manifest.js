@@ -56,6 +56,7 @@ var devFiles = {
         bc + '**/angularLocalStorage.js',
         bc + '**/angular-animate.js',
         bc + '**/angular-route.js',
+        'public/js/bootstrap/tooltip.js',
         moduleFile
     ],
     4:  appFiles //all the concatenated files loaded asynchronously

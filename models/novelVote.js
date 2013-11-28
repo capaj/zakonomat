@@ -44,10 +44,10 @@ module.exports = function (MR, userMRM, novelMRM) {
 	var incrementVoteCounts = function (doc, vote) {
 		doc.vote_count += 1;
 		if (vote.value === true) {
-			doc.positive_vote_count += 1;
+			doc.vote_count.positive += 1;
 		}
 		if(vote.value === false) {
-			doc.negative_vote_count += 1;
+			doc.vote_count.negative  += 1;
 		}
 		doc.save();
 	};
@@ -81,10 +81,10 @@ module.exports = function (MR, userMRM, novelMRM) {
 	var decrementVoteCounts = function (doc, vote) {
         doc.vote_count -= 1;
         if (vote.value === true) {
-            doc.positive_vote_count -= 1;
+            doc.vote_count.positive -= 1;
         }
 		if(vote.value === false) {
-            doc.negative_vote_count -= 1;
+            doc.vote_count.negative  -= 1;
         }
         doc.save();
     };

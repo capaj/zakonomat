@@ -6,18 +6,18 @@
         <div class="novel-voting">
             <h4>hlasy</h4>
 
-            Pro: <span class="positive_vote_count" ng-bind="novel.positive_vote_count"></span>
+            Pro: <span class="positive_vote_count" ng-bind="novel.vote_count.positive"></span>
             <div class="btn-group btn-group-lg">
                 <buttton ng-click="voteOnNovel(novel, true)" class="btn btn-extralg btn-primary"><i class="glyphicon glyphicon-thumbs-up glyph-big"></i></buttton>
                 <buttton ng-click="voteOnNovel(novel, false)" class="btn btn-extralg btn-danger"><i class="glyphicon glyphicon-thumbs-down glyph-big"></i></buttton>
 
             </div>
-            Proti: <span class="negative_vote_count" ng-bind="novel.negative_vote_count"></span>
+            Proti: <span class="negative_vote_count" ng-bind="novel.vote_count.negative"></span>
         </div>
 
 
 
-        Celkem: <span ng-bind="novel.vote_count"></span>
+        Celkem: <span ng-bind="novel.votes.length"></span>
 
     </div>
     <a href="/novyNavrh" class="new-novel-link">

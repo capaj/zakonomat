@@ -11,9 +11,10 @@ module.exports = function (MR) {
         approved: Boolean,
         approved_date: Date,
         ended_date: Date,
-        vote_count: { type: Number, default: 0, min:0}, //overall vote count for this novel
-        negative_vote_count: { type: Number, default: 0, min:0},
-        positive_vote_count: { type: Number, default: 0, min:0},
+        vote_count: {   //of this novel's votes
+            positive: { type: Number, default: 0, min:0},
+            negative: { type: Number, default: 0, min:0}
+        },
         votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }]
     });
 };
