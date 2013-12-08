@@ -6,9 +6,9 @@
         Email: <span ng-bind="profile().fb.email"></span> <br/>
         Datum nar.: <span ng-bind="profile().fb.birthday"></span> <br/>
         Registrace: <span ng-bind="profile().creation_date"></span> <br/>
-        Hlasoval celkem: <span ng-bind="profile().novel_votes.length"></span> <br/>
-        Hlasů pro: <span ng-bind="profile().vote_count.positive"></span> <br/>
-        Hlasů proti: <span ng-bind="profile().vote_count.negative"></span>
+        Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span> <br/>
+        Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span> <br/>
+        Hlasů proti: <span ng-bind="negativeVoteCountLQ.count"></span>
 
     </p>
 

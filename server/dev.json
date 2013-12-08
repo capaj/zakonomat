@@ -2,8 +2,7 @@
     "mongoConn": "mongodb://localhost/zakonomat",
     "facebook": {
         "clientID": "APP_ID",
-        "clientSecret": "APP_SECRET",
-        "callbackURL": "http://localhost:3000/auth/facebook/callback"
+        "clientSecret": "APP_SECRET"
     },
     "twitter": {
         "clientID": "CONSUMER_KEY",
