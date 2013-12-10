@@ -2,8 +2,8 @@
 <div mr-controller="votesCtrl" mr-backend="znmt" mr-model="novelVote">
     <h2>Hlasy</h2>
     <div class="well" ng-repeat="vote in LQ.docs" ng-class="{positive: vote.value == true, negative: vote.value == false}">
-        <h2>Hlas uživatele {{ vote.owner }}</h2>
-        <span ng-show="vote.value == true">pro {{ vote.subject.title }}</span>
-        <span ng-hide="vote.value == false">proti {{ vote.subject.title }}</span>
+        <h2>Hlas uživatele <a href="/uzivatel/?username={{ vote.owner.fb.username }}">{{ vote.owner.fb.username }}</a></h2>
+        <span ng-show="vote.value">pro {{ vote.subject.title }}</span>
+        <span ng-hide="vote.value">proti {{ vote.subject.title }}</span>
     </div>
 </div>
