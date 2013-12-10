@@ -1,4 +1,5 @@
 var Schema = require('mongoose').Schema;
+var voteCountPartial = require('./vote-count');
 
 module.exports = function (MR) {
     return MR.model('novel', {
@@ -11,10 +12,7 @@ module.exports = function (MR) {
         approved: Boolean,
         approved_date: Date,
         ended_date: Date,
-		vote_count: {   //of this novel's votes
-			positive: { type: Number, default: 0, min:0},
-			negative: { type: Number, default: 0, min:0}
-		},
+		vote_count: voteCountPartial,
         votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }]
     });
 };
