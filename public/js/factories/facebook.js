@@ -21,7 +21,9 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
                 //channelUrl : '//'+window.location.hostname+'/channel', // Path to your Channel File
                 status: true, // check login status
                 cookie: true, // enable cookies to allow the server to access the session
-                xfbml: true  // parse XFBML
+                xfbml: true,  // parse XFBML,
+				oauth: true,
+				frictionlessRequests: true
             });
 
             // listen for and handle auth.statusChange events
@@ -93,8 +95,9 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
         FB.login(function (res) {
             loginDfd.resolve(res);
 
-        }, {scope: 'email,user_birthday'});
-		return loginDfd.promise;
+        }, {scope: 'publish_actions,publish_stream,email,user_birthday'});
+
+	return loginDfd.promise;
 	};
 
 	var facebook = {onLogin: onLogin, onLogout: onLogout, api: api, login: login, logout: logout};

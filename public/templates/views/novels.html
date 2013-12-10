@@ -2,6 +2,7 @@
     <div ng-repeat="novel in LQ.docs" class="listed-vote">
 
         <h3 ng-bind="novel.title"></h3>
+        <div ng-bind-html="novel.content"></div>
         <a ng-href="{{ novel.current_law_link }}">Nynější znění zákona</a>
         <div class="novel-voting">
             <h4>hlasy</h4>

@@ -61,6 +61,10 @@ mongoose.connect(envSettings.mongoConn, function (err) {
 
 });
 
+mongoose.connection.on('error', function (err) {
+	console.error(err);
+});
+
 var server = app.listen(app.get('port'), function () {
 
 	var io = require('socket.io').listen(server);

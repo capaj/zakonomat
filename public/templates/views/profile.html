@@ -14,7 +14,7 @@
 
     <br/>
     <h4>jeho hlasy: </h4>
-    <div class="well" ng-repeat="vote in vsLQ.docs">
-
+    <div class="well" ng-repeat="vote in votesLQ.docs">
+        <span>hlas pro {{ vote().subject.title }}</span>
     </div>
 </div>

@@ -5,6 +5,7 @@ window.app = angular.module('zakonomat',
         'angularMoment',
         'angularLocalStorage',
         'analytics',
+		'ngSanitize',
         'RPC',
         'textAngular',
 		'Moonridge'

@@ -1,7 +1,7 @@
 app.controller('userDetailCtrl', function ($scope, $location) {
     var liveQuery = $scope.MR.liveQuery;
-    if ($routeParams.userId) {
-        $scope.LQ = liveQuery({where: 'fb.username', equals: $location.search().name});
+    if ($location.search()) {
+        $scope.LQ = liveQuery().where('fb.username').equals($location.search().name).exec();
     }
     $scope.LQ.promise.then(function (LQ) {
         console.log(LQ);

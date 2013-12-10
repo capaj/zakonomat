@@ -4,8 +4,12 @@
     <form>
         <input type="text" ng-model="novel.title" placeholder="Titulek" class="form-control">
         <input type="url" name="input" ng-model="novel.current_law_link" placeholder="link na aktuální znění" class="form-control">
-        <text-angular ng-model="novel.content"/>
-        <button ng-click="create()" class="btn btn-primary">Přidat návrh</button>
+        <div>
+            <text-angular ng-model="novel.content"/>
+        </div>
+        <div class="form-control">
+            <button ng-click="create()" class="btn btn-primary">Přidat návrh</button>
+        </div>
     </form>
 
 </div>
