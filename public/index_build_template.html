@@ -86,8 +86,7 @@
 //        RPCbackendURL = 'http://dem2.cz/';
         $script.ready('scriptManifestReady', function(){
             $script([
-                RPCbackendURL + 'rpc/rpc-client-angular.js',
-                RPCbackendURL + 'moonridge-angular-client-rpcbundle.js'
+                RPCbackendURL + '<--moonridgelib js-->'    //moonridge-angular-client-rpcbundle.js
             ], function () {
                 angular.bootstrap(document, ['zakonomat']);
             });

@@ -96,7 +96,11 @@ module.exports = function(grunt) {
                     {
                         from: '<script src="http://localhost:35729/livereload.js"></script>',
                         to: ''
-                    }
+                    },
+					{
+						from: '<--moonridgelib js-->',
+						to: 'moonridge-angular-client-rpcbundle.min.js'
+					}
                 ])
             },
             dev: {
@@ -106,7 +110,11 @@ module.exports = function(grunt) {
                     {
                         from: '<--built css-->',
                         to: '<%= pkg.name %>-<%= pkg.version %>.css'
-                    }
+                    },
+					{
+						from: '<--moonridgelib js-->',
+						to: 'moonridge-angular-client-rpcbundle.js'
+					}
                 ])
             }
         },

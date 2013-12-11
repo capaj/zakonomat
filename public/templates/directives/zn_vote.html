@@ -1,0 +1,17 @@
+<div class="well well-sm" ng-class="{positive: vote.value == true, negative: vote.value == false}">
+
+    <h4 ng-show="vote">
+        <a href="/uzivatel/?username={{ vote.owner.fb.username }}"><img ng-src="{{ vote.owner.fb.picture.data.url }}"></a>
+        <a href="/hlas/?_id={{ vote._id }}">
+            <i class="glyphicon glyphicon-thumbs-up" ng-show="vote.value"></i>
+            <i class="glyphicon glyphicon-thumbs-down" ng-hide="vote.value"></i>
+            Hlas
+        </a>
+        uživatele <a href="/uzivatel/?username={{ vote.owner.fb.username }}">{{ vote.owner.fb.username }}</a>
+        <span ng-show="vote.value">pro </span>
+        <span ng-hide="vote.value">proti </span>
+        <a href="navrh/?_id={{ vote.subject._id }}">{{ vote.subject.title }}</a>
+        <span class="pull-right" am-time-ago="vote.creation_date"></span>
+    </h4>
+
+</div>

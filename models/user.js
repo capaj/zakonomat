@@ -24,7 +24,7 @@ module.exports = function (MR) {
 			hometown: {id: String, name: String}
         },
         creation_date: { type: Date, default: Date.now },
-        access_token: { type: String, permissions:{R:0, W:50}},   //FB access token
+        access_token: { type: String, permissions:{R:50, W:50}},   //FB access token
 		/**
 		 * all can read any other model
 		 * CRUD letters here have the same meaning as in CRUD
@@ -40,7 +40,10 @@ module.exports = function (MR) {
             type: Number, default: 1, min:0, max: 50,
             permissions:{R: 0, W: 50}
         },
-        novel_votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }]
+        novel_votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }],
+		settings: {
+			fb_publish: {type:Boolean, default:true}
+		}
     }, {
 		statics: {
 			fetchAcc: function (token) {

@@ -1,20 +1,32 @@
 <div mr-controller="profileCtrl" mr-backend="znmt" mr-models="user,novelVote">
-    <button class="btn btn-danger pull-right" ng-click="logout()">Odhlásit se</button>
-    <img ng-src="{{ profile().fb.picture.data.url }}">
-    <h2>uživatel {{ getFullName() }}</h2>
-    <p class="user-details">
-        Email: <span ng-bind="profile().fb.email"></span> <br/>
-        Datum nar.: <span ng-bind="profile().fb.birthday"></span> <br/>
-        Registrace: <span ng-bind="profile().creation_date"></span> <br/>
-        Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span> <br/>
-        Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span> <br/>
-        Hlasů proti: <span ng-bind="negativeVoteCountLQ.count"></span>
+    <button class="btn btn-danger pull-right" ng-click="logout()">Odhlásit se z facebooku</button>
 
-    </p>
+    <div class="well well-lg">
+        <img ng-src="{{ profile().fb.picture.data.url }}" class="fb-picture pull-left">
+        <h2>uživatel {{ getFullName() }}</h2>
+        <p class="user-details">
+            Email: <span ng-bind="profile().fb.email"></span> <br/>
+            Datum nar.: <span ng-bind="profile().fb.birthday"></span> <br/>
+            Registrace: <span ng-bind="profile().creation_date"></span> <br/>
+            Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span> <br/>
+            Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span> <br/>
+            Hlasů proti: <span ng-bind="negativeVoteCountLQ.count"></span>
 
-    <br/>
-    <h4>jeho hlasy: </h4>
-    <div class="well" ng-repeat="vote in votesLQ.docs">
-        <span>hlas pro {{ vote().subject.title }}</span>
+        </p>
+        <div class="well">
+            <h5>Nastavení</h5>
+            <span title="odškrtnutím docílíte, že aplikace nebude vůbec publikovat na vaši zeď">Publikovat aktivitu na facebooku </span>
+            <input type="checkbox" ng-checked="profile().settings.fb_publish">
+        </div>
+
+
+        <br/>
     </div>
+    <div class="well well-lg">
+        <h4>jeho hlasy: </h4>
+        <div class="well" ng-repeat="vote in votesLQ.docs">
+            <span>hlas pro {{ vote.subject.title }}</span>
+        </div>
+    </div>
+
 </div>

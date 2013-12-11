@@ -15,7 +15,7 @@ window.app = angular.module('zakonomat',
 ).config(
     function($locationProvider, $routeProvider) {
         $locationProvider.html5Mode(true);  //Setting HTML5 Location Mode
-
+		moment.lang('cs');
         routesModule.routes.forEach(function(routeDef){
             $routeProvider.when(routeDef.route, routeDef.resolve);
         });
