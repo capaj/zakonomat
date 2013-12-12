@@ -1,22 +1,29 @@
-<div  class="listed-vote">
-
-    <h3 ng-bind="novel.title"></h3>
-    <div ng-bind-html="novel.content"></div>
-    <a ng-href="{{ novel.current_law_link }}">Nynější znění zákona</a>
-    <div class="novel-voting">
-        <h4>hlasy</h4>
-
-        Pro: <span class="positive_vote_count" ng-bind="novel.vote_count.positive"></span>
-        <div class="btn-group btn-group-lg">
-            <buttton ng-click="voteOnNovel(novel, true)" class="btn btn-extralg btn-primary"><i class="glyphicon glyphicon-thumbs-up glyph-big"></i></buttton>
-            <buttton ng-click="voteOnNovel(novel, false)" class="btn btn-extralg btn-danger"><i class="glyphicon glyphicon-thumbs-down glyph-big"></i></buttton>
-
-        </div>
-        Proti: <span class="negative_vote_count" ng-bind="novel.vote_count.negative"></span>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3><span ng-bind="novel.title"></span></h3>
     </div>
+    <div class="panel-body">
+        <div ng-bind-html="novel.content"></div>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item"><a ng-href="{{ novel.current_law_link }}">Nynější znění zákona</a><br/></li>
+        <li class="list-group-item">
 
+        </li>
+    </ul>
 
+    <div class="panel-footer">Celkem hlasů: <span ng-bind="novel.votes.length"></span>
+        <div class="novel-voting">
+            Pro: <span class="positive_vote_count" ng-bind="novel.vote_count.positive"></span>
 
-    Celkem: <span ng-bind="novel.votes.length"></span>
+            <div class="btn-group btn-group-lg">
+                <buttton ng-click="voteOnNovel(novel, true)" class="btn btn-primary"><i
+                        class="glyphicon glyphicon-thumbs-up"></i></buttton>
+                <buttton ng-click="voteOnNovel(novel, false)" class="btn btn-danger"><i
+                        class="glyphicon glyphicon-thumbs-down"></i></buttton>
 
+            </div>
+            Proti: <span class="negative_vote_count" ng-bind="novel.vote_count.negative"></span>
+        </div>
+    </div>
 </div>

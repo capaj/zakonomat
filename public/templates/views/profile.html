@@ -23,10 +23,8 @@
         <br/>
     </div>
     <div class="well well-lg">
-        <h4>jeho hlasy: </h4>
-        <div class="well" ng-repeat="vote in votesLQ.docs">
-            <span>hlas pro {{ vote.subject.title }}</span>
-        </div>
+        <h4>Vaše hlasy: </h4>
+        <zn-vote ng-repeat="vote in votesLQ.docs" vote="vote"></zn-vote>
     </div>
 
 </div>

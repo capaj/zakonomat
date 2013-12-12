@@ -6,18 +6,20 @@ app.controller('profileCtrl', function ($scope, userService, $log) {
         $scope.uLQ = userLQ().where('fb.id').equals(me.id).exec();
         $scope.uLQ.promise.then(function (LQ) {
 
-            $scope.profile = function () {
+            $scope.profile = function() {
                 return LQ.docs[0];
             };
-            $scope.voteCountLQ = voteLQ().find({owner: $scope.profile()._id}).count().exec();
-            $scope.positiveVoteCountLQ = voteLQ().find({owner: $scope.profile()._id, value: true}).count().exec();
-            $scope.negativeVoteCountLQ = voteLQ().find({owner: $scope.profile()._id, value: false}).count().exec();
+			var getProfile = $scope.profile;
+            $scope.voteCountLQ = voteLQ().find({owner: getProfile()._id}).count().exec();
+            $scope.positiveVoteCountLQ = voteLQ().find({owner: getProfile()._id, value: true}).count().exec();
+            $scope.negativeVoteCountLQ = voteLQ().find({owner: getProfile()._id, value: false}).count().exec();
 
             $scope.getFullName = function () {
-                return $scope.profile().fb.first_name + ' ' + $scope.profile().fb.last_name;
+                return getProfile().fb.first_name + ' ' + getProfile().fb.last_name;
             };
-            $scope.votesLQ = voteLQ().where('owner').equals($scope.profile()._id).exec();
-        });
+            $scope.votesLQ = voteLQ().where('owner').equals(getProfile()._id).populate('subject', 'title').exec();
+
+		});
 
 
 

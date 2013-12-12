@@ -1,6 +1,10 @@
 <div mr-controller="novelsCtrl" mr-backend="znmt" mr-models="novel,novelVote">
+    <div class="page-header">
+        <h1>Návrhy na změny zákonů<small class="pull-right">celkem: {{ ncLQ.count }}</small></h1>
+    </div>
     <zn-novel ng-repeat="novel in LQ.docs" novel="novel"></zn-novel>
     <a href="/novyNavrh" class="new-novel-link">
         <i class="glyphicon glyphicon-plus-sign glyph-big"></i><span> přidat návrh změny zákona</span>
     </a>
+
 </div>

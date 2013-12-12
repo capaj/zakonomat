@@ -1,4 +1,4 @@
-<div mr-controller="userDetailCtrl" mr-backend="znmt" mr-models="user">
+<div mr-controller="userDetailCtrl" mr-backend="znmt" mr-models="user,novelVote">
 
     <button class="btn btn-danger pull-right" ng-click="deleteCurrentQuery()">hledat jiného</button>
 
@@ -18,9 +18,7 @@
 
         <br/>
         <h4>jeho hlasy: </h4>
-        <div class="well" ng-repeat="vote in votesLQ.docs">
-            <span>hlas pro {{ vote().subject.title }}</span>
-        </div>
+        <zn-vote ng-repeat="vote in votesLQ.docs" vote="vote"></zn-vote>
     </div>
 
 </div>
