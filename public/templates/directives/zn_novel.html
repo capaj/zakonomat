@@ -1,25 +1,31 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3><span ng-bind="novel.title"></span></h3>
+        <div class="novel-heading">
+            <h3><span ng-bind="novel.title"></span></h3>
+        </div>
+        <div class="author">
+            <a href="/uzivatel?username={{ novel.owner.fb.username }}" class="author-link">
+                <h5>Autor: {{ novel.owner.fb.username }}</h5>
+            </a><br/>
+        </div>
+
     </div>
     <div class="panel-body">
         <div ng-bind-html="novel.content"></div>
     </div>
     <ul class="list-group">
         <li class="list-group-item"><a ng-href="{{ novel.current_law_link }}">Nynější znění zákona</a><br/></li>
-        <li class="list-group-item">
-
-        </li>
     </ul>
 
     <div class="panel-footer">
         <div class="novel-votes-statistic">
-            Celkem hlasů: <span ng-bind="votesSum()"></span><br/>
+            Celkem hlasů: <span ng-bind="novel.vote_count.sum"></span><br/>
             Pozitivních: <span ng-bind="novel.vote_count.positive"></span><br/>
             Negativních: <span ng-bind="novel.vote_count.negative"></span>
         </div>
 
         <div class="novel-vote-cast" ng-hide="currentVoteLQ.doc">
+
             Pro <span class="positive_vote_count" ng-bind="novel.vote_count.positive"></span>
 
             <div class="btn-group btn-group-lg">

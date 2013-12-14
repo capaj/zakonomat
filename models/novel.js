@@ -12,6 +12,7 @@ module.exports = function (MR) {
         approved: Boolean,
         approved_date: Date,
         ended_date: Date,
-		vote_count: voteCountPartial
+		vote_count: voteCountPartial	// we could have this only as liveQuery on the client, but if we would, it
+		// would be hard to sort the collection by these properties
     });
 };

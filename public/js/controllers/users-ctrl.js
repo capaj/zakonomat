@@ -6,6 +6,4 @@ app.controller('usersCtrl', function ($scope, $routeParams) {
         console.log(LQ);
     });
 
-
-
 });

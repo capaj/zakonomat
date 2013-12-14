@@ -14,6 +14,10 @@ angular.module('zakonomat').directive('znUser', function (MRBackend) {
 //				}
 //			});
 
+			scope.formatDate = function (dt) {
+				return moment(dt).format('LL');
+			}
+
 		}
 	}
 });

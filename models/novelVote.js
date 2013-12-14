@@ -38,17 +38,17 @@ module.exports = function (MR, userMRM, novelMRM) {
 
 	/**
 	 *
-	 * @param {Mongoose.Document} doc
+	 * @param {Mongoose.Document} doc is any model which keeps counts on votes
 	 * @param {Mongoose.Document} vote
 	 */
 	var incrementVoteCounts = function (doc, vote) {
-		doc.vote_count += 1;
+		doc.vote_count.sum += 1;
 		if (vote.value === true) {
 			doc.vote_count.positive += 1;
-		}
-		if(vote.value === false) {
+		} else {
 			doc.vote_count.negative  += 1;
 		}
+
 		doc.save();
 	};
 
@@ -61,24 +61,19 @@ module.exports = function (MR, userMRM, novelMRM) {
 			}
 		};
 		novelMRM.model.findOne({_id: vote.subject}).exec()
-			.then(function (novel) {
-				novel.votes.push(vote._id);
-				incrementFor(novel);
-
-			});
+			.then(incrementFor).end();
 	});
 
 	/**
 	 *
-	 * @param {Mongoose.Document} doc
+	 * @param {Mongoose.Document} doc is any model which keeps counts on votes
 	 * @param {Mongoose.Document} vote
 	 */
 	var decrementVoteCounts = function (doc, vote) {
-		doc.vote_count -= 1;
+		doc.vote_count.sum -= 1;
 		if (vote.value === true) {
 			doc.vote_count.positive -= 1;
-		}
-		if(vote.value === false) {
+		} else {
 			doc.vote_count.negative  -= 1;
 		}
 		doc.save();
@@ -94,7 +89,7 @@ module.exports = function (MR, userMRM, novelMRM) {
 
 		};
 		novelMRM.model.findOne({_id: vote.subject}).exec()
-			.then(decrementFor);
+			.then(decrementFor).end();
 	});
 
 //	novelVoteMR.model.on('preupdate', function (doc, evName, previous){

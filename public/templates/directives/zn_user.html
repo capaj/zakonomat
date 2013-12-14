@@ -7,7 +7,7 @@
     <p class="user-details">
         Email: <span ng-bind="user.fb.email"></span> <br/>
         Datum nar.: <span ng-bind="user.fb.birthday"></span> <br/>
-        Registrace: <span ng-bind="user.creation_date"></span> <br/>
+        Registrace: <span ng-bind="formatDate(scope.user.creation_date)"></span> <br/>
         TODO make counts work and display them here
         <!--Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span> <br/>-->
         <!--Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span> <br/>-->
