@@ -97,17 +97,17 @@ module.exports = function (MR, userMRM, novelMRM) {
 			.then(decrementFor);
 	});
 
-	novelVoteMR.model.on('preupdate', function (doc, evName, previous){
-
-		decrementVoteCounts(doc, doc);	// novelVote doc
-		userMRM.model.findOne({_id: vote.owner}).exec()
-			.then(function (obj) {
-
-			});	//user docs
-
-		incrementVoteCounts(doc);
-
-	});
+//	novelVoteMR.model.on('preupdate', function (doc, evName, previous){
+//
+//		decrementVoteCounts(doc, doc);	// novelVote doc
+//		userMRM.model.findOne({_id: vote.owner}).exec()
+//			.then(function (obj) {
+//
+//			});	//user docs
+//
+//		incrementVoteCounts(doc);
+//
+//	});
 
 
 

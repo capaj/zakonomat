@@ -13,6 +13,8 @@
         <span ng-show="vote.value">pro </span>
         <span ng-hide="vote.value">proti </span>
         <a href="navrh/?_id={{ vote.subject._id }}">{{ vote.subject.title }}</a>
+
+        <i class="fa fa-times-circle pull-right" ng-click="remove()" ng-show="ready"></i>
         <span class="pull-right" am-time-ago="vote.creation_date"></span>
     </h4>
 

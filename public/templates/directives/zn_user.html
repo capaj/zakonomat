@@ -1,0 +1,17 @@
+<div class="user-container well well-sm">
+    <a href="/uzivatel?username={{ user.fb.username }}">
+        <img ng-src="{{ user.fb.picture.data.url }}" ng-show="user.fb">
+        <h2>uživatel {{ user.fb.first_name + ' ' + user.fb.last_name }}</h2>
+    </a>
+
+    <p class="user-details">
+        Email: <span ng-bind="user.fb.email"></span> <br/>
+        Datum nar.: <span ng-bind="user.fb.birthday"></span> <br/>
+        Registrace: <span ng-bind="user.creation_date"></span> <br/>
+        TODO make counts work and display them here
+        <!--Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span> <br/>-->
+        <!--Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span> <br/>-->
+        <!--Hlasů proti: <span ng-bind="negativeVoteCountLQ.count"></span>-->
+
+    </p>
+</div>

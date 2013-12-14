@@ -12,18 +12,27 @@
         </li>
     </ul>
 
-    <div class="panel-footer">Celkem hlasů: <span ng-bind="novel.votes.length"></span>
-        <div class="novel-voting">
-            Pro: <span class="positive_vote_count" ng-bind="novel.vote_count.positive"></span>
+    <div class="panel-footer">
+        <div class="novel-votes-statistic">
+            Celkem hlasů: <span ng-bind="votesSum()"></span><br/>
+            Pozitivních: <span ng-bind="novel.vote_count.positive"></span><br/>
+            Negativních: <span ng-bind="novel.vote_count.negative"></span>
+        </div>
+
+        <div class="novel-vote-cast" ng-hide="currentVoteLQ.doc">
+            Pro <span class="positive_vote_count" ng-bind="novel.vote_count.positive"></span>
 
             <div class="btn-group btn-group-lg">
-                <buttton ng-click="voteOnNovel(novel, true)" class="btn btn-primary"><i
+                <buttton ng-click="voteOnNovel(novel, true)" class="btn btn-yay"><i
                         class="glyphicon glyphicon-thumbs-up"></i></buttton>
-                <buttton ng-click="voteOnNovel(novel, false)" class="btn btn-danger"><i
+                <buttton ng-click="voteOnNovel(novel, false)" class="btn btn-nay"><i
                         class="glyphicon glyphicon-thumbs-down"></i></buttton>
 
             </div>
-            Proti: <span class="negative_vote_count" ng-bind="novel.vote_count.negative"></span>
+            Proti <span class="negative_vote_count" ng-bind="novel.vote_count.negative"></span>
+        </div>
+        <div class="novel-vote-casted" ng-show="currentVoteLQ.doc">
+            <zn-vote vote="currentVoteLQ.doc"></zn-vote>
         </div>
     </div>
 </div>

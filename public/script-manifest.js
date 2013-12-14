@@ -33,7 +33,7 @@ var productionFiles = {
     2: [bc + '**/angular.min.js'],
     3: [
 		bc + '**/ng-tools-0.0.3.min.js',
-        bc + '**/angular-sanitize.min.js',
+        'public/js/angular/angular-sanitize.min.js',
         bc + '**/angular-touch.min.js',
         bc + '**/textAngular.min.js',
 		bc + '**/lang/cs.js',
@@ -54,7 +54,7 @@ var devFiles = {
     2: [bc + '**/angular.js'],
     3: [
 		bc + '**/ng-tools-0.0.3.js',
-        bc + '**/angular-sanitize.js',
+		'public/js/angular/angular-sanitize.js',
         bc + '**/textAngular.js',
 		bc + '**/angular-touch.js',
 		bc + '**/lang/cs.js',

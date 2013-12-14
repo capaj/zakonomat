@@ -10,6 +10,10 @@
         <div class="form-control">
             <button ng-click="create()" class="btn btn-primary">Přidat návrh</button>
         </div>
+        <div class="alert alert-danger alert-dismissable" ng-show="lastError">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <span ng-bind="lastError"></span>
+        </div>
     </form>
 
 </div>
