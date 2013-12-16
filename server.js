@@ -19,6 +19,19 @@ var app = module.exports = express();
 var fs = require('fs');
 var moonridge = require('moonridge');
 
+mongoose.connect(envSettings.mongoConn, function (err) {
+    // if we failed to connect, abort
+    if (err) {
+        throw err;
+    } else {
+        console.log("DB connected succesfully");
+    }
+
+});
+
+mongoose.connection.on('error', function (err) {
+    console.error(err);
+});
 var MR = moonridge.init(mongoose);
 
 var domain = require('./models')(MR);
@@ -51,25 +64,26 @@ app.configure(function(){
     }
 });
 
-mongoose.connect(envSettings.mongoConn, function (err) {
-    // if we failed to connect, abort
-    if (err) {
-        throw err;
-    } else {
-        console.log("DB connected succesfully");
-    }
-
-});
-
-mongoose.connection.on('error', function (err) {
-	console.error(err);
-});
-
 var server = app.listen(app.get('port'), function () {
 
 	var io = require('socket.io').listen(server);
 	io.configure(function (){
 		io.set('authorization', require('./server/authorization')(domain.user.model));
+
+        if (env === 'production') {
+            io.enable('browser client minification');  // send minified client
+            io.enable('browser client etag');          // apply etag caching logic based on version number
+            io.enable('browser client gzip');          // gzip the file
+//            io.set('log level', 1);                    // reduce logging    // TODO set to 1 for real production
+
+            io.set('transports', [
+                'websocket'
+                ,'flashsocket'
+                , 'htmlfile'
+                , 'xhr-polling'
+                , 'jsonp-polling'
+            ]);
+        }
     });
 
 	moonridge.createServer(io, app);
