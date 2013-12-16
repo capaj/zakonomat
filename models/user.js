@@ -1,6 +1,8 @@
 var Schema = require('mongoose').Schema;
 var request = require('request');
 var when = require('when');
+var voteCountPartial = require('./vote-count');
+
 
 module.exports = function (MR) {
 

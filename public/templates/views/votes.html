@@ -1,7 +1,7 @@
-<div mr-controller="votesCtrl" mr-backend="znmt" mr-model="novelVote">
+<div mr-controller="votesCtrl" mr-backend="znmt" mr-models="novelVote,novel">
 
     <div class="page-header">
-        <h2>Hlasy<small class="pull-right">celkem: {{ votesLQ.count }}</small></h2>
+        <h2>Hlasy <span ng-show="subjectLQ">pro {{ subjectLQ.doc.title }}</span><small class="pull-right">celkem: {{ votesLQ.count }}</small></h2>
     </div>
     <zn-vote ng-repeat="vote in LQ.docs" vote="vote"></zn-vote>
 </div>

@@ -1,7 +1,7 @@
 //expects this kind of query:
 //  liveQuery().populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
 
-angular.module('zakonomat').directive('znNovel', function (MRBackend, userService) {
+angular.module('zakonomat').directive('znNovel', function (MRBackend, userService, facebook) {
 	return {
 		replace: false,
 		restrict: 'E',
@@ -13,7 +13,39 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 			MRBackend.getModel('novelVote').then(function (voteModel) {
 
 				scope.voteOnNovel = function (novel, how) {
-					voteModel.create({subject: scope.novel._id, value: how});
+                    var shareOnFacebook = function () {
+                        if (userService.profile.settings.fb_publish) {
+                            var howText;
+                            var desc;
+                            if (how) {
+                                howText = 'pro';
+                                desc = ' souhlasí s návrhem ';
+                            } else {
+                                howText = 'proti';
+                                desc = ' nesouhlasí s návrhem ';
+
+                            }
+                            var params = {
+                                message: userService.profile.fb.first_name + ' hlasoval/a ' + howText + ' návrh ' + novel.title,
+                                name: novel.title,
+                                description: userService.getFullName() + desc,
+                                link: RPCbackendURL + 'navrh?_id=' + novel._id,
+                                picture: RPCbackendURL + 'img/zakonomat-web-maly-bily.png'//TODO should be unique for a novel
+                            };
+
+
+                            FB.api('/me/feed', 'post', params, function (response) {
+                                if (!response || response.error) {
+                                    console.error('Error occured');
+                                } else {
+                                    //TODO push post id into the DB and save
+                                    console.log("Published to user's stream");
+                                }
+                            });
+                        }
+
+                    };
+                    voteModel.create({subject: scope.novel._id, value: how}).then(shareOnFacebook);
 				};
 				//current vote LQ
 

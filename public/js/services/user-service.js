@@ -40,6 +40,10 @@ app.service('userService',
 
         };
 
+        this.getFullName = function () {
+            return self.profile.fb.first_name + ' ' + self.profile.fb.last_name;
+        };
+
 		this.logout = function () {
 			facebook.logout().then(function () {
 				delete self.fbAcc;

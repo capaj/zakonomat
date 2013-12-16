@@ -1,18 +1,14 @@
 zn-novel{
-  .author-link{
-    float: right;
-  }
   .panel-heading{
     background-color: green;
     .novel-heading{
       width: 70%;
     }
-    .author{
-      width: 29.5%;
-      float: right;
-    }
-  }
 
+  }
+  .novel-votes-statistic{
+    text-align: center;
+  }
   .page-header{
     h1{
       small{
@@ -23,7 +19,7 @@ zn-novel{
 
   .panel-footer{
     overflow: hidden;
-    .novel-votes-statistic{
+    .novel-author{
       float: left;
       width: 49.9%;
     }
@@ -36,14 +32,20 @@ zn-novel{
       float: right;
       text-align: right;
       width: 49.9%;
+      .btn-group{
+        width: 100%;
+        .btn{
+          width: 50%;
+        }
+      }
       h4{
         text-align: center;
       }
       .btn-yay{
-        .button-variant(rgba(255, 255, 255, 1), #00D91A, rgb(167, 167, 167));
+        .button-variant(rgba(255, 255, 255, 1), rgba(0, 217, 26, 0.65), rgb(167, 167, 167));
       }
       .btn-nay{
-        .button-variant(rgba(255, 255, 255, 1), #d90022, rgb(167, 167, 167));
+        .button-variant(rgba(255, 255, 255, 1), rgba(217, 0, 34, 0.65), rgb(167, 167, 167));
       }
     }
   }

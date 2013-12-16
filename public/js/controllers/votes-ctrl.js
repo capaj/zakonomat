@@ -1,15 +1,27 @@
 app.controller('votesCtrl', function ($scope, $location) {
-    var liveQuery = $scope.MR.liveQuery;
+    var nVLQ = $scope.MR.novelVote.liveQuery;
+    var nLQ = $scope.MR.novel.liveQuery;
     var search = $location.search();
 
-    $scope.LQ = liveQuery().find(search).populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
-	$scope.votesLQ = liveQuery().count().exec();
+    $scope.LQ = nVLQ().find(search).populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
+	$scope.votesLQ = nVLQ().find(search).count().exec();
 
-////        1: {populate:['subject', 'title'], applyArgs: true}
-////        2: {populate:['owner', 'fb', 'username'], applyArgs: true}
 
-    $scope.LQ.promise.then(function (LQ) {
-        console.log(LQ);
+    if (search.subject) {
+        $scope.subjectLQ = nLQ().findOne().where('_id').equals(search.subject).exec();
+    }
+
+    $scope.$on('$routeUpdate', function(){
+        var search = $location.search();
+
+        $scope.LQ = nVLQ().find(search).populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
+        $scope.votesLQ = nVLQ().find(search).count().exec();
+
+        if (search.subject) {
+            $scope.subjectLQ = nLQ().findOne().where('_id').equals(search.subject).exec();
+        } else {
+            $scope.subjectLQ = null;
+        }
     });
 
 

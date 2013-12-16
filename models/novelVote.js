@@ -6,6 +6,7 @@ module.exports = function (MR, userMRM, novelMRM) {
         subject: { type: Schema.Types.ObjectId, ref: 'novel', required: true },
         creation_date: { type: Date, default: Date.now },
         value: Boolean,
+        fb_post_id: String, //when user shares the voting, this will be filled with facebook post id
         owner: { type: Schema.Types.ObjectId, ref: 'user', required: true }
     }, {
         permissions: {
@@ -46,7 +47,7 @@ module.exports = function (MR, userMRM, novelMRM) {
 		if (vote.value === true) {
 			doc.vote_count.positive += 1;
 		} else {
-			doc.vote_count.negative  += 1;
+			doc.vote_count.negative += 1;
 		}
 
 		doc.save();

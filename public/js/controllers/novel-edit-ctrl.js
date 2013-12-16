@@ -8,5 +8,10 @@ app.controller('novelEditCtrl', function ($scope, $location) {
 		});
 	};
 
+    $scope.clearErr = function () {
+        $scope.lastError = '';
+
+    }
+
 
 });

@@ -3,7 +3,7 @@
     <button class="btn btn-danger pull-right" ng-click="deleteCurrentQuery()">hledat jiného</button>
 
 
-    <div>
+    <div class="jumbotron">
         <img ng-src="{{ user().fb.picture.data.url }}" ng-show="user().fb">
         <h2>uživatel {{ user().fb.first_name + ' ' + user().fb.last_name }}<input type="text" ng-model="userSearch" ng-hide="user().fb"></h2>
         <p class="user-details">
@@ -17,8 +17,14 @@
         </p>
 
         <br/>
-        <h4>jeho hlasy: </h4>
-        <zn-vote ng-repeat="vote in votesLQ.docs" vote="vote"></zn-vote>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>jeho hlasy: </h4></div>
+            <div class="panel-body">
+                <zn-vote ng-repeat="vote in votesLQ.docs" vote="vote"></zn-vote>
+            </div>
+        </div>
+
+
     </div>
 
 </div>
