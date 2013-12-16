@@ -1,4 +1,4 @@
-<div mr-controller="userDetailCtrl" mr-backend="znmt" mr-models="user,novelVote">
+<div mr-controller="userDetailCtrl" mr-backend="znmt" mr-models="user,novelVote,novel">
 
     <button class="btn btn-danger pull-right" ng-click="deleteCurrentQuery()">hledat jiného</button>
 
@@ -23,6 +23,20 @@
                 <zn-vote ng-repeat="vote in votesLQ.docs" vote="vote"></zn-vote>
             </div>
         </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>jeho návrhy: </h4></div>
+            <div class="panel-body">
+                <zn-novel ng-repeat="novel in novelLQ.docs" vote="novel"></zn-novel>
+            </div>
+        </div>
+
+        <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading"><h4>jeho komentáře: </h4></div>-->
+            <!--<div class="panel-body">-->
+                <!--<zn-novel ng-repeat="vote in votesLQ.docs" vote="vote"></zn-novel>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
     </div>
