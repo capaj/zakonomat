@@ -3,7 +3,7 @@ app.controller('profileCtrl', function ($scope, userService, $log) {
     var voteLQ = $scope.MR.novelVote.liveQuery;
 
     userService.loginPromise.then(function (me) {
-        $scope.uLQ = userLQ().findOne().where('fb.id').equals(me.id).exec();
+        $scope.uLQ = userLQ().findOne().where('fb.id').equals(me.fb.id).exec();
         $scope.uLQ.promise.then(function (LQ) {
 
             $scope.profile = function() {

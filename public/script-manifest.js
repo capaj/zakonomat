@@ -39,9 +39,11 @@ var productionFiles = {
 		bc + '**/lang/cs.js',
 		bc + '**/angular-moment.min.js',
         bc + '**/angularLocalStorage.min.js',
+        bc + '**/ng-tools-0.0.3.min.js',
         bc + '**/angular-animate.min.js',
         bc + '**/angular-route.min.js',
-        'public/built/<%= pkg.name %>-<%= pkg.version %>.min.js'
+        'public/built/<%= pkg.name %>-<%= pkg.version %>.min.js',
+        'public/built/<%= pkg.name %>-templates-<%= pkg.version %>.js'
     ]
 };
 
@@ -60,10 +62,12 @@ var devFiles = {
 		bc + '**/lang/cs.js',
 		bc + '**/angular-moment.js',
         bc + '**/angularLocalStorage.js',
+        bc + '**/ng-tools-0.0.3.min.js',
         bc + '**/angular-animate.js',
         bc + '**/angular-route.js',
         'public/js/bootstrap/tooltip.js',
-        moduleFile
+        moduleFile,
+        'public/built/<%= pkg.name %>-templates-<%= pkg.version %>.js'
     ],
     4:  appFiles //all the concatenated files loaded asynchronously
 };

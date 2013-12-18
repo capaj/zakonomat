@@ -36,6 +36,10 @@ module.exports = function(grunt) {
                 files: 'public/index_build_template.html',
                 tasks: ['replace:' + env]
             },
+            templates: {
+                files: './public/templates/**/*.html',
+                tasks: ['ngtemplates']
+            },
             manifest: {
                 files: 'public/script-manifest.js',
                 tasks: ['smg']
@@ -138,11 +142,12 @@ module.exports = function(grunt) {
 				options:{
 					module: 'ngTemplates',
 					prefix: '/',
-					standalone: true
+                    htmlmin:  { collapseWhitespace: true},
+                    standalone: true
 				},
 				cwd: 'public',
-				src: ['templates/directives/**.html'],
-				dest: 'public/built/ng-templates.js'
+				src: ['templates/**/*.html'],
+				dest: 'public/built/<%= pkg.name %>-templates-<%= pkg.version %>.js'
 			}
 		},
         nodemon: {
@@ -179,6 +184,7 @@ module.exports = function(grunt) {
         compile = compile.concat(['concat', 'ngAnnotate', 'uglify'])
     }
     compile.push('smg');
+    compile.push('ngtemplates');
     // compile task end
 
 	grunt.registerTask('test', [

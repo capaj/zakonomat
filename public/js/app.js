@@ -8,6 +8,8 @@ window.app = angular.module('zakonomat',
 		'ngSanitize',
         'RPC',
         'textAngular',
+        'ngTemplates',
+        'ng-tools',
 		'Moonridge'
         // included, but by default not loaded, if you need it, just add it to script manifest
         // 'angular-gestures'
