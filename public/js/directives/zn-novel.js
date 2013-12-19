@@ -10,8 +10,22 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 			novel: '='
 		},
 		link: function (scope, el, attr) {
-			MRBackend.getModel('novelVote').then(function (voteModel) {
+			var isAnon = !userService.profile._id;
+            scope.isAnon = isAnon;
+            MRBackend.getModel('novelVote').then(function (voteModel) {
+                scope.votesSum = function () {
+                    if (!scope.novel) {
+                        return 0;
+                    }
+                    return scope.novel.vote_count.positive + scope.novel.vote_count.negative;
+                }
+                if (isAnon) {
+                    scope.fbLogin = function () {
+                        facebook.login();
+                    };
 
+                    return; //two methods after this are only for registered users
+                }
 				scope.voteOnNovel = function (novel, how) {
                     var shareOnFacebook = function () {
                         if (userService.profile.settings.fb_publish) {
@@ -54,18 +68,14 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 						if (scope.currentVoteLQ) {
 							scope.currentVoteLQ.stop();
 						}
-						var currUserCiteria = {subject: scope.novel._id, owner: userService.profile._id};
-						scope.currentVoteLQ = voteModel.liveQuery().findOne(currUserCiteria).populate('subject', 'title').exec();
+                        if (!isAnon) {
+                            var currUserCiteria = {subject: scope.novel._id, owner: userService.profile._id};
+                            scope.currentVoteLQ = voteModel.liveQuery().findOne(currUserCiteria).populate('subject', 'title').exec();
+                        }
 
 					}
 				});
 
-				scope.votesSum = function () {
-					if (!scope.novel) {
-						return 0;
-					}
-					return scope.novel.vote_count.positive + scope.novel.vote_count.negative;
-				}
 			});
 		}
 	}

@@ -30,7 +30,7 @@
             </a><br/>
         </div>
 
-        <div class="novel-vote-cast" ng-hide="currentVoteLQ.doc">
+        <div class="novel-vote-cast" ng-hide="currentVoteLQ.doc || isAnon">
 
             <div class="btn-group btn-group-lg btn-group-lg">
                 <buttton ng-click="voteOnNovel(novel, true)" class="btn btn-yay"><i
@@ -40,6 +40,10 @@
 
             </div>
 
+        </div>
+
+        <div class="novel-register-to-vote" ng-show="isAnon">
+                <button class="btn btn-large btn-primary" ng-click="fbLogin()">Pro hlasování je nutné se přihlásit</button>
         </div>
         <div class="novel-vote-casted" ng-show="currentVoteLQ.doc">
             <zn-vote vote="currentVoteLQ.doc"></zn-vote>
