@@ -12,9 +12,9 @@ angular.module('zakonomat').directive('znVote', function (MRBackend, userService
 		link: function (scope, el, attr) {
 			MRBackend.getModel('novelVote').then(function (voteModel) {
 				scope.ready = true;
-                var userId = userService.profile._id;
                 scope.$watch('vote', function (nV, oV) {
                     if (nV) {
+                        var userId = userService.profile._id;
                         if (userId === scope.vote.owner || userId === scope.vote.owner._id ) {  //so that oit works even when populated
                             scope.remove = function () {
                                 voteModel.remove(scope.vote);

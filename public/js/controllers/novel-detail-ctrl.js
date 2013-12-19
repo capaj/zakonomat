@@ -3,7 +3,8 @@ app.controller('novelDetailCtrl', function ($scope, $location, dialogService) {
 	$scope.sort = 'vote_count.positive';
 	var id = $location.search()._id;
 	if (id) {
-		$scope.LQ = novelLQ().find({_id: id}).exec();
+		$scope.LQ = novelLQ().findOne({_id: id}).populate('owner','fb.username fb.picture.data.url').exec();
+
 	}
 
 });

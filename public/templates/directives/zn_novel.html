@@ -3,7 +3,6 @@
         <div class="novel-heading">
             <h3><span ng-bind="novel.title"></span></h3>
         </div>
-
     </div>
     <div class="panel-body">
         <div ng-bind-html="novel.content"></div>
@@ -26,7 +25,8 @@
     <div class="panel-footer">
         <div class="novel-author">
             <a href="/uzivatel?username={{ novel.owner.fb.username }}" class="author-link">
-                <h5>Autor: {{ novel.owner.fb.username }}</h5>
+
+                <h5><img ng-src="{{ novel.owner.fb.picture.data.url }}"> Autor: {{ novel.owner.fb.username }}</h5>
             </a><br/>
         </div>
 

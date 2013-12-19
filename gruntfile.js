@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                 tasks: ['replace:' + env]
             },
             templates: {
-                files: './public/templates/**/*.html',
+                files: 'public/templates/**/*.html',
                 tasks: ['ngtemplates']
             },
             manifest: {
