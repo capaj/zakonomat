@@ -10,9 +10,9 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 			novel: '='
 		},
 		link: function (scope, el, attr) {
-			var isAnon = !userService.profile._id;
-            scope.isAnon = isAnon;
             MRBackend.getModel('novelVote').then(function (voteModel) {
+                var isAnon = !userService.profile._id;
+                scope.isAnon = isAnon;
                 scope.votesSum = function () {
                     if (!scope.novel) {
                         return 0;

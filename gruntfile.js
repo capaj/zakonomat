@@ -176,6 +176,7 @@ module.exports = function(grunt) {
     };
     //compile task customization
     var compile = ['less', 'replace'];
+    compile.push('ngtemplates');
 
     compile = compile.map(function (step) {
         return step + ':' + env;
@@ -184,7 +185,6 @@ module.exports = function(grunt) {
         compile = compile.concat(['concat', 'ngAnnotate', 'uglify'])
     }
     compile.push('smg');
-    compile.push('ngtemplates');
     // compile task end
 
 	grunt.registerTask('test', [
@@ -201,7 +201,7 @@ module.exports = function(grunt) {
         grunt.registerTask('default', ['compile', 'watch']);
     }
     if (env == 'production') {
-        grunt.registerTask('default', ['compile', 'nodemon']);
+        grunt.registerTask('default', ['compile']);
         gCfg.watch.JSSources.tasks = ['compile'];
     }
     grunt.initConfig(gCfg);

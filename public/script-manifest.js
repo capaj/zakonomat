@@ -33,7 +33,7 @@ var productionFiles = {
     2: [bc + '**/angular.min.js'],
     3: [
 		bc + '**/ng-tools-0.0.3.min.js',
-        'public/js/angular/angular-sanitize.min.js',
+        'public/js/angular/angular-sanitize.js',
         bc + '**/angular-touch.min.js',
         bc + '**/textAngular.min.js',
 		bc + '**/lang/cs.js',
@@ -42,9 +42,9 @@ var productionFiles = {
         bc + '**/ng-tools-0.0.3.min.js',
         bc + '**/angular-animate.min.js',
         bc + '**/angular-route.min.js',
-        'public/built/<%= pkg.name %>-<%= pkg.version %>.min.js',
         'public/built/<%= pkg.name %>-templates-<%= pkg.version %>.js'
-    ]
+    ],
+    4: ['public/built/<%= pkg.name %>-<%= pkg.version %>.min.js']
 };
 
 var devFiles = {
