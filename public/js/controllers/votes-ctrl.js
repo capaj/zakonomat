@@ -3,8 +3,12 @@ app.controller('votesCtrl', function ($scope, $location) {
     var nLQ = $scope.MR.novel.liveQuery;
     var search = $location.search();
 
-    $scope.LQ = nVLQ().find(search).populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
-	$scope.votesLQ = nVLQ().find(search).count().exec();
+    function votesQueryC() {
+        return nVLQ().find(search).sort('-creation_date').populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url');
+    }
+
+    $scope.votesLQ = votesQueryC().exec();
+	$scope.voteCountLQ = nVLQ().find(search).count().exec();
 
 
     if (search.subject) {
@@ -12,10 +16,10 @@ app.controller('votesCtrl', function ($scope, $location) {
     }
 
     $scope.$on('$routeUpdate', function(){
-        var search = $location.search();
+        search = $location.search();
 
-        $scope.LQ = nVLQ().find(search).populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
-        $scope.votesLQ = nVLQ().find(search).count().exec();
+        $scope.votesLQ = votesQueryC().exec();
+        $scope.voteCountLQ = nVLQ().find(search).count().exec();
 
         if (search.subject) {
             $scope.subjectLQ = nLQ().findOne().where('_id').equals(search.subject).exec();
