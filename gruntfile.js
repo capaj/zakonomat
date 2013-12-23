@@ -176,7 +176,6 @@ module.exports = function(grunt) {
     };
     //compile task customization
     var compile = ['less', 'replace'];
-    compile.push('ngtemplates');
 
     compile = compile.map(function (step) {
         return step + ':' + env;
@@ -184,6 +183,8 @@ module.exports = function(grunt) {
     if (env == 'production') {
         compile = compile.concat(['concat', 'ngAnnotate', 'uglify'])
     }
+    compile.push('ngtemplates');
+
     compile.push('smg');
     // compile task end
 

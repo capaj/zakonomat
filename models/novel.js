@@ -10,8 +10,8 @@ module.exports = function (MR) {
         pull_req: {type: String},    //github pull request associated
         paragraph_text: {type: String},    //URL paragrafove zneni zakona(pdf)
         current_law_link: {type: String},    //link to zakonyprolidi.cz
-        approved: Boolean,
-        approved_date: Date,
+        approved: {type: Boolean, default: false},  //should get approved after 10k positive votes
+        approved_date: Date,    //TODO make a check for this
         ended_date: Date,
         comment_count: { type: Number, default: 0, min: 0 },
 		vote_count: voteCountPartial	// we could have this only as liveQuery on the client, but if we would, it
