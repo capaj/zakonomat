@@ -26,8 +26,21 @@ app.controller('profileCtrl', function ($scope, userService, $log) {
     }, function (err) {
         $log.error(err);
     });
+    $scope.dirty = false;
 
+    $scope.markDirty = function () {
+        $scope.dirty = true;
+    };
+    $scope.$on("$locationChangeStart", function (event, next, current) {
+        if ($scope.dirty) {
+            $scope.MR.user.update($scope.uLQ.doc).then(function () {
+                console.log("Profile updated");
+            });
+        }
 
-	$scope.logout = userService.logout;
+    });
+
+    $scope.logout = userService.logout;
+
 
 });

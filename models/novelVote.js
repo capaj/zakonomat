@@ -7,7 +7,6 @@ module.exports = function (MR, userMRM, novelMRM) {
         creation_date: { type: Date, default: Date.now },
         value: Boolean,
         fb_post_id: String, //when user shares the voting, this will be filled with facebook post id
-        owner: { type: Schema.Types.ObjectId, ref: 'user', required: true }
     }, {
         permissions: {
             C: 10,
@@ -24,7 +23,7 @@ module.exports = function (MR, userMRM, novelMRM) {
                             existingVote.remove(function (err) {
                                 next();
                             });
-                            // this should not happen with official client, since the client app should guard this
+                            // this should not happen with official client, since the client app should guard this with it's logic
                         } else {
                             next();
 

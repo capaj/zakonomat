@@ -3,7 +3,6 @@ var voteCountPartial = require('./vote-count');
 
 module.exports = function (MR) {
     return MR.model('novel', {
-        owner: { type: Schema.Types.ObjectId, ref: 'user' },
         summary: {type: String},    //plain text
         content: String,    //HTML
         title: {type: String, required: true, unique: true},

@@ -42,6 +42,7 @@ module.exports = function (userModel) {
                                             privilige_level: 10
                                         }).then(function (user) {
                                                 console.log("Created a user: " + user);
+
                                                 authSucces(user);
                                             }, function (err) {
                                                 CB(err, false);	//failed
