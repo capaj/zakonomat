@@ -3,5 +3,39 @@
     <div class="page-header">
         <h2>Hlasy <span ng-show="subjectLQ">pro {{ subjectLQ.doc.title }}</span><small class="pull-right">celkem: {{ voteCountLQ.count }}</small></h2>
     </div>
-    <zn-vote ng-repeat="vote in votesLQ.docs" vote="vote"></zn-vote>
+    <section>
+        <div id="secondaryCounts">
+            Celkem pozitivních hlasů: {{ positiveNVLQ.count }} <br/>
+            Celkem negativních hlasů: {{ negativeNVLQ.count }} <br/>
+        </div>
+        <div ng-click="showGraphs(!graphsShown)" id="graphsSwitch">Zobrazit grafy
+            <i class="fa fa-chevron-down" ng-hide="graphsShown"></i>
+            <i class="fa fa-chevron-up" ng-show="graphsShown"></i>
+        </div>
+        <div ng-show="graphsShown">
+            <nvd3-pie-chart
+                    data="novelVoteCounts"
+                    id="votesChart"
+                    margin="{left:0,top:0,bottom:0,right:0}"
+                    x="xFunction()"
+                    y="yFunction()"
+                    showLabels="true"
+                    pieLabelsOutside="false"
+                    showValues="true"
+                    tooltips="true"
+                    height="300"
+                    color="colorFunction()"
+                    labelType="percent"
+                    objectEquality="true"
+                    pieLabelsOutside="true"
+                    >
+                <svg></svg>
+            </nvd3-pie-chart>
+        </div>
+
+    </section>
+    <div class="well">
+        <zn-vote ng-repeat="vote in votesLQ.docs" vote="vote"></zn-vote>
+
+    </div>
 </div>

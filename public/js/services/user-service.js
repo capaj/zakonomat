@@ -13,7 +13,9 @@ app.service('userService',
                         if (me.name) {
                             self.fbAcc = me;
                             userModelPromise.then(function (userModel) {
-                                var LQ = userModel.liveQuery().findOne().where('fb.id').equals(me.id).exec();
+                                var LQ = userModel.liveQuery().findOne().where('fb.id').equals(me.id);
+
+                                LQ = LQ.exec();
                                 LQ.promise.then(function (LQ) {
                                     self.profile = LQ.doc;
                                     if (LQ.doc) {

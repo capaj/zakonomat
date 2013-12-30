@@ -4,12 +4,12 @@
 
 
     <div class="jumbotron">
-        <img ng-src="{{ user().fb.picture.data.url }}" ng-show="user().fb">
-        <h2>uživatel {{ user().fb.first_name + ' ' + user().fb.last_name }}<input type="text" ng-model="userSearch" ng-hide="user().fb"></h2>
+        <img ng-src="{{ aUserLQ.doc.fb.picture.data.url }}" ng-show="aUserLQ.doc.fb">
+        <h2>uživatel {{ aUserLQ.doc.fb.first_name + ' ' + aUserLQ.doc.fb.last_name }}<input type="text" ng-model="userSearch" ng-hide="aUserLQ.doc.fb"></h2>
         <p class="user-details">
-            Email: <span ng-bind="user().fb.email"></span> <br/>
-            Datum nar.: <span ng-bind="user().fb.birthday"></span> <br/>
-            Registrace: <span ng-bind="user().creation_date"></span> <br/>
+            Email: <span ng-bind="aUserLQ.doc.fb.email"></span> <br/>
+            Datum nar.: <span ng-bind="aUserLQ.doc.fb.birthday"></span> <br/>
+            Registrace: <span ng-bind="aUserLQ.doc.creation_date"></span> <br/>
             Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span> <br/>
             Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span> <br/>
             Hlasů proti: <span ng-bind="negativeVoteCountLQ.count"></span>
@@ -27,7 +27,7 @@
         <div class="panel panel-default">
             <div class="panel-heading"><h4>jeho návrhy: </h4></div>
             <div class="panel-body">
-                <zn-novel ng-repeat="novel in novelLQ.docs" vote="novel"></zn-novel>
+                <zn-novel ng-repeat="novel in novelsLQ.docs" novel="novel"></zn-novel>
             </div>
         </div>
 

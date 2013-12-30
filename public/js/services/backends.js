@@ -12,16 +12,16 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window) {
         });
 
         var MRB = $MR('znmt', dfd.promise);
-        //TODO make dialogs with assigned controllers work again and uncomment this one
-//        var errDlg = dialogService.create('error_modal', 'error-modal',
-//            {
-//                msg: 'Připojení k serveru není k dispozici, omlouváme se, ale doporučujeme vám obnovit stránku, pokud potíže přetrvají, neváhejte se obrátit na náš twitter nebo facebook pro podporu.',
-//                btnTitle: 'Zkusit nahrát znova',
-//                reload: function () {
-//                    location.reload(false);
-//                }
-//            });
-        var errDlg = dialogService.create('error_modal', '');
+
+        var errDlg = dialogService.create('error_modal', 'error-modal',
+            {
+                msg: 'Připojení k serveru není k dispozici, omlouváme se, ale doporučujeme vám obnovit stránku.',
+                btnTitle: 'Nahrát aplikaci znovu',
+                reload: function () {
+                    location.reload(false);
+                }
+            });
+
         MRB.connectPromise.then(function (socket) {
             //you can hook up more events here
 

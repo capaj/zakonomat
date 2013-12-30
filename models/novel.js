@@ -17,3 +17,5 @@ module.exports = function (MR) {
 		// would be hard to sort the collection by these properties
     });
 };
+
+//TODO on remove remove all votes which subject is this

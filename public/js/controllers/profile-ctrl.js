@@ -22,7 +22,6 @@ app.controller('profileCtrl', function ($scope, userService, $log) {
 		});
 
 
-
     }, function (err) {
         $log.error(err);
     });
@@ -42,5 +41,5 @@ app.controller('profileCtrl', function ($scope, userService, $log) {
 
     $scope.logout = userService.logout;
 
-
+    //TODO add method to delete an account for good
 });

@@ -1,21 +1,24 @@
 app.controller('userDetailCtrl', function ($scope, $location) {
     var userLQ = $scope.MR.user.liveQuery;
     var voteLQ = $scope.MR.novelVote.liveQuery;
-    var aLQ;
-	$scope.user = function() {
-		if (!aLQ.docs) {
-			return '';
-		}
-		return aLQ.docs[0];
-	};
-	var getUser = $scope.user;
+    var novelLQ = $scope.MR.novel.liveQuery;
+
+
+
 	if ($location.search().username) {
-        aLQ = userLQ().where('fb.username').equals($location.search().username).exec();
-		$scope.votesLQ = voteLQ().where('owner').equals(getUser()._id).populate('subject', 'title').exec();
+        $scope.aUserLQ = userLQ().findOne().where('fb.username').equals($location.search().username).exec();
 
 	}
-	aLQ.promise.then(function (LQ) {
+    $scope.aUserLQ.promise.then(function (LQ) {
         console.log(LQ);
+        var userId = LQ.doc._id;
+
+        $scope.votesLQ = voteLQ().where('owner').equals(userId).populate('subject', 'title').exec();
+        $scope.novelsLQ = novelLQ().where('owner').equals(userId).exec();
+
+        $scope.voteCountLQ = voteLQ().find({owner: userId}).count().exec();
+        $scope.positiveVoteCountLQ = voteLQ().find({owner: userId, value: true}).count().exec();
+        $scope.negativeVoteCountLQ = voteLQ().find({owner: userId, value: false}).count().exec();
 
     });
 
@@ -29,8 +32,10 @@ app.controller('userDetailCtrl', function ($scope, $location) {
     });
 
 	$scope.deleteCurrentQuery = function () {
-		aLQ.stop();
-		delete aLQ.docs;
+        $scope.aUserLQ.stop();
+		delete $scope.aUserLQ;
+		delete $scope.votesLQ;
+		delete $scope.novelsLQ;
 	};
 
 

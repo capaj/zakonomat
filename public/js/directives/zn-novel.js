@@ -1,7 +1,7 @@
 //expects this kind of query:
 //  liveQuery().populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
 
-angular.module('zakonomat').directive('znNovel', function (MRBackend, userService, facebook) {
+angular.module('zakonomat').directive('znNovel', function (MRBackend, userService, facebook, $q) {
 	return {
 		replace: false,
 		restrict: 'E',
@@ -10,8 +10,10 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 			novel: '='
 		},
 		link: function (scope, el, attr) {
-            MRBackend.getModel('novelVote').then(function (voteModel) {
-                var isAnon = !userService.profile._id;
+            $q.all({voteModel: MRBackend.getModel('novelVote'), profile: userService.loginPromise}).then(function (resolved) {
+                var profile = resolved.profile;
+                var voteModel = resolved.voteModel;
+                var isAnon = !profile._id;
                 scope.isAnon = isAnon;
                 scope.votesSum = function () {
                     if (!scope.novel) {
@@ -62,6 +64,10 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                     voteModel.create({subject: scope.novel._id, value: how}).then(shareOnFacebook);
 				};
 				//current vote LQ
+
+                scope.expandOverallVotes = function (show) {
+                    scope.overallVotesExpanded = show;
+                };
 
 				scope.$watch('novel', function (nV, oV) {
 					if (nV) {

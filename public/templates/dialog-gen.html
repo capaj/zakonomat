@@ -3,10 +3,10 @@
          ng-repeat="dialog in dialogService.allDialogs()" id="dialog.name" single-dialog dialogId="dialog.id">
         <div ng-switch on="dialog.controller" class="modal-dialog" ng-class="{topmostDialog: dialog.isLastOpened(dialog)}">
             <div ng-switch-when="undefined" class="modal-content">
-                <div ng-include src="dialog.template"></div>
+                <div nt-include-in-scope src="dialog.template"></div>
             </div>
             <div ng-switch-default class="modal-content">
-                <div include-in-scope src="dialog.template" ng-controller="dialog.controller"></div>
+                <div nt-include-in-scope src="dialog.template" ng-controller="dialog.controller"></div>
             </div>
         </div>
     </div>

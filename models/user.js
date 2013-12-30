@@ -66,6 +66,6 @@ module.exports = function (MR) {
 	userMRM.model.on('create', function (user) {
 		console.log("created user: " + user);
 	});
-
+    //TODO on remove remove all votes which have owner just removed user
     return userMRM;
 };

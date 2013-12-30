@@ -28,11 +28,16 @@ var productionFiles = {
     1: [
 		'public/js/preload/*.min.js',
 		bc + 'array-sugar/array-sugar.js',
-		bc + '**/moment.min.js', bc + '**/jquery.min.js'
+        bc + '**/d3.js',
+        bc + '**/moment.min.js', bc + '**/jquery.min.js'
 	],
-    2: [bc + '**/angular.min.js'],
+    2: [
+        bc + '**/angular.min.js',
+        bc + '**/nv.d3.min.js'
+    ],
     3: [
-		bc + '**/ng-tools-0.0.3.min.js',
+        bc + '**/angularjs-nvd3-directives.js',
+        bc + '**/ng-tools.min.js',
         'public/js/angular/angular-sanitize.js',
         bc + '**/angular-touch.min.js',
         bc + '**/textAngular.min.js',
@@ -51,11 +56,16 @@ var devFiles = {
     1: [
 		'public/js/preload/*.js',
 		bc + 'array-sugar/array-sugar.js',
-		bc + '**/moment.js', bc + '**/jquery.min.js'
+        bc + '**/d3.min.js',
+        bc + '**/moment.js', bc + '**/jquery.min.js'
 	],
-    2: [bc + '**/angular.js'],
+    2: [
+        bc + '**/angular.js',
+        bc + '**/nv.d3.js'
+    ],
     3: [
-		bc + '**/ng-tools-0.0.3.js',
+        bc + '**/angularjs-nvd3-directives.js',
+        bc + '**/ng-tools.js',
 		'public/js/angular/angular-sanitize.js',
         bc + '**/textAngular.js',
 		bc + '**/angular-touch.js',

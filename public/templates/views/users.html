@@ -1,3 +1,6 @@
 <div mr-controller="usersCtrl" mr-backend="znmt" mr-model="user">
+    <div class="page-header">
+        <h2>Uživatelé <small class="pull-right">celkem: {{ usersCountLQ.count }}</small></h2>
+    </div>
     <zn-user user="user" ng-repeat="user in LQ.docs"></zn-user>
 </div>

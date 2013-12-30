@@ -10,6 +10,7 @@ angular.module('zakonomat').directive('znVote', function (MRBackend, userService
 			vote: '='
 		},
 		link: function (scope, el, attr) {
+            //TODO add populateSubject and populateOwner attributes
 			MRBackend.getModel('novelVote').then(function (voteModel) {
 				scope.ready = true;
                 scope.$watch('vote', function (nV, oV) {

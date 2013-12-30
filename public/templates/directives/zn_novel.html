@@ -12,21 +12,39 @@
         <li class="list-group-item">
             <div class="novel-votes-statistic">
                 <div class="row">
-                    <div class="col-md-4"> <a href="/hlasy?subject={{ novel._id }}">Celkem hlasů: <span ng-bind="novel.vote_count.sum"></span></a></div>
-                    <div class="col-md-4"><a href="/hlasy?subject={{ novel._id }}&value=true">Pro: <span ng-bind="novel.vote_count.positive"></span></a></div>
-                    <div class="col-md-4"><a href="/hlasy?subject={{ novel._id }}&value=false">Proti: <span ng-bind="novel.vote_count.negative"></span></a></div>
+                    <div class="col-md-4">
+                        <a href="/hlasy?subject={{ novel._id }}">Celkem hlasů: <span ng-bind="novel.vote_count.sum"></span></a>
+                        <i class="fa fa-chevron-down" ng-click="expandOverallVotes(true)" ng-hide="overallVotesExpanded"></i>
+                        <i class="fa fa-chevron-up" ng-click="expandOverallVotes(false)" ng-show="overallVotesExpanded"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/hlasy?subject={{ novel._id }}&value=true">Pro: <span ng-bind="novel.vote_count.positive"></span></a>
+                        <i class="fa fa-chevron-down" ng-click="expandPositiveVotes(true)" ng-hide="positiveVotesExpanded"></i>
+                        <i class="fa fa-chevron-up" ng-click="expandPositiveVotes(false)" ng-show="positiveVotesExpanded"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/hlasy?subject={{ novel._id }}&value=false">Proti: <span ng-bind="novel.vote_count.negative"></span></a>
+                        <i class="fa fa-chevron-down" ng-click="expandNegativeVotes(true)" ng-hide="negativeVotesExpanded"></i>
+                        <i class="fa fa-chevron-up" ng-click="expandNegativeVotes(false)" ng-show="negativeVotesExpanded"></i>
+                    </div>
                 </div>
 
             </div>
 
         </li>
+        <li class="list-group-item" ng-show="overallVotesExpanded">aaa</li>
+        <li class="list-group-item" ng-show="positiveVotesExpanded">bbb</li>
+        <li class="list-group-item" ng-show="negativeVotesExpanded">ccc</li>
+
+
     </ul>
 
     <div class="panel-footer">
         <div class="novel-author">
+            <h5>Autor:</h5>
             <a href="/uzivatel?username={{ novel.owner.fb.username }}" class="author-link">
 
-                <h5><img ng-src="{{ novel.owner.fb.picture.data.url }}"> Autor: {{ novel.owner.fb.username }}</h5>
+                <img ng-src="{{ novel.owner.fb.picture.data.url }}">  {{ novel.owner.fb.username }}
             </a><br/>
         </div>
 
@@ -46,6 +64,7 @@
                 <button class="btn btn-large btn-primary" ng-click="fbLogin()">Pro hlasování je nutné se přihlásit</button>
         </div>
         <div class="novel-vote-casted" ng-show="currentVoteLQ.doc">
+            <h5>Váš hlas</h5>
             <zn-vote vote="currentVoteLQ.doc"></zn-vote>
         </div>
     </div>
