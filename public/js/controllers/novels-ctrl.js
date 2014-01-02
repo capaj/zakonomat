@@ -15,6 +15,7 @@ app.controller('novelsCtrl', function ($scope, $location) {
         return novel.vote_count.positive - novel.vote_count.negative;
     };
 
+    //TODO make this into a directive
     var width = document.body.clientWidth;
     if (width < 1500) {
         $scope.sideW = 1;
