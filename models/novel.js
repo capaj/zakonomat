@@ -1,8 +1,9 @@
 var Schema = require('mongoose').Schema;
 var voteCountPartial = require('./vote-count');
+var novelVoteMRM = require('./novelVote');
 
 module.exports = function (MR) {
-    return MR.model('novel', {
+    var novelModel = MR.model('novel', {
         summary: {type: String},    //plain text
         content: String,    //HTML
         title: {type: String, required: true, unique: true},
@@ -16,6 +17,19 @@ module.exports = function (MR) {
 		vote_count: voteCountPartial	// we could have this only as liveQuery on the client, but if we would, it
 		// would be hard to sort the collection by these properties
     });
+
+    novelModel.model.on('remove', function (novel) {
+        var model = novelVoteMRM.model;
+        model.find({subject: novel.subject}).exec().then(function (votes) {
+            votes.forEach(function (vote) {
+                model.remove(vote);
+            });
+        }).end();
+    });
+
+    return novelModel;
 };
+
+
 
 //TODO on remove remove all votes which subject is this

@@ -8,4 +8,14 @@ app.controller('novelsCtrl', function ($scope, $location) {
         console.log(LQ);
     });
 
+    $scope.votesDifference = function (novel) {
+        if (!novel) {
+            return 0;
+        }
+        return novel.vote_count.positive - novel.vote_count.negative;
+    };
+
+    $scope.sideW = 3;
+    $scope.contentW = 6;
+
 });

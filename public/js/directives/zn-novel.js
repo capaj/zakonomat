@@ -13,6 +13,7 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
             $q.all({voteModel: MRBackend.getModel('novelVote'), profile: userService.loginPromise}).then(function (resolved) {
                 var profile = resolved.profile;
                 var voteModel = resolved.voteModel;
+                var VMLQ = voteModel.liveQuery;
                 var isAnon = !profile._id;
                 scope.isAnon = isAnon;
                 scope.votesSum = function () {
@@ -20,7 +21,8 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                         return 0;
                     }
                     return scope.novel.vote_count.positive + scope.novel.vote_count.negative;
-                }
+                };
+
                 if (isAnon) {
                     scope.fbLogin = function () {
                         facebook.login();
@@ -28,6 +30,10 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 
                     return; //two methods after this are only for registered users
                 }
+                scope.delete = function () {
+                    //TODO delete method for novel
+                }
+
 				scope.voteOnNovel = function (novel, how) {
                     var shareOnFacebook = function () {
                         if (userService.profile.settings.fb_publish) {
@@ -66,7 +72,16 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 				//current vote LQ
 
                 scope.expandOverallVotes = function (show) {
+                    if (show === false) {
+                        scope.showedVotes.stop();
+                        scope.showedVotes = null;
+                    } else {
+                        scope.showedVotes = VMLQ().find({subject: scope.novel._id}).populate('owner','fb.username fb.picture.data.url').exec();
+                    }
                     scope.overallVotesExpanded = show;
+                    if (!scope.showedVotes) {
+
+                    }
                 };
 
 				scope.$watch('novel', function (nV, oV) {
@@ -76,9 +91,8 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 						}
                         if (!isAnon) {
                             var currUserCiteria = {subject: scope.novel._id, owner: userService.profile._id};
-                            scope.currentVoteLQ = voteModel.liveQuery().findOne(currUserCiteria).populate('subject', 'title').exec();
+                            scope.currentVoteLQ = VMLQ().findOne(currUserCiteria).populate('subject', 'title').exec();
                         }
-
 					}
 				});
 
