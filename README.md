@@ -11,3 +11,7 @@ In order to authenticate with facebook, apps url must contain zakonomat in its u
 
 It won't work just on localhost. TODO Login could be faked...
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/capaj/zakonomat/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
