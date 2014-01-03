@@ -6,7 +6,7 @@ module.exports = function (MR, userMRM, novelMRM) {
         subject: { type: Schema.Types.ObjectId, ref: 'novel', required: true },
         creation_date: { type: Date, default: Date.now },
         value: Boolean,
-        fb_post_id: String, //when user shares the voting, this will be filled with facebook post id
+        fb_post_id: String //when user shares the voting, this will be filled with facebook post id
     }, {
         permissions: {
             C: 10,
@@ -56,8 +56,6 @@ module.exports = function (MR, userMRM, novelMRM) {
 		var incrementFor = function (doc) {
 			if (doc) {
 				incrementVoteCounts(doc, vote);
-			} else {
-				throw new Error('Unable to find owner/subject documents');  //these should always be found
 			}
 		};
 		novelMRM.model.findOne({_id: vote.subject}).exec()
@@ -83,10 +81,7 @@ module.exports = function (MR, userMRM, novelMRM) {
 		var decrementFor = function (doc) {
 			if (doc) {
 				decrementVoteCounts(doc, vote);
-			} else {
-				throw new Error('Unable to find owner/subject documents');  //these should always be found
 			}
-
 		};
 		novelMRM.model.findOne({_id: vote.subject}).exec()
 			.then(decrementFor).end();

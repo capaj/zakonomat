@@ -1,6 +1,6 @@
 var Schema = require('mongoose').Schema;
 var voteCountPartial = require('./vote-count');
-var novelVoteMRM = require('./novelVote');
+var mongoose = require('mongoose');
 
 module.exports = function (MR) {
     var novelModel = MR.model('novel', {
@@ -19,10 +19,13 @@ module.exports = function (MR) {
     });
 
     novelModel.model.on('remove', function (novel) {
-        var model = novelVoteMRM.model;
-        model.find({subject: novel.subject}).exec().then(function (votes) {
+        var model = mongoose.model('novelVote');
+        var id = novel._id.toString();
+        model.find({subject: id}).exec().then(function (votes) {
             votes.forEach(function (vote) {
-                model.remove(vote);
+                vote.remove(function (obj) {
+                    console.log("Succesfully removed a vote " + vote._id + " because subject was removed.");
+                });
             });
         }).end();
     });

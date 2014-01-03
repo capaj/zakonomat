@@ -1,5 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
+        <i class="fa fa-times-circle fa-2x pull-right" ng-click="remove()" ng-hide="!remove"></i>
         <div class="novel-heading">
             <h3><span ng-bind="novel.title"></span></h3>
         </div>
@@ -32,7 +33,7 @@
             </div>
 
         </li>
-        <li class="list-group-item" ng-show="showedVotes">
+        <li class="list-group-item showed-votes" ng-show="showedVotes">
             <a href="/uzivatel?username={{ vote.owner.fb.username }}" class="voter-icon" ng-repeat="vote in showedVotes.docs"
                     title="{{ vote.creation_date | amCalendar}}">
                 <img ng-src="{{ vote.owner.fb.picture.data.url }}">
@@ -44,9 +45,8 @@
     <div class="panel-footer">
         <div class="novel-author">
             <h5>Autor:</h5>
-            <a href="/uzivatel?username={{ novel.owner.fb.username }}" class="author-link">
-
-                <img ng-src="{{ novel.owner.fb.picture.data.url }}">  {{ novel.owner.fb.username }}
+            <a href="/uzivatel?username={{ owner.fb.username }}" class="author-link">
+                <img ng-src="{{ owner.fb.picture.data.url }}">  {{ owner.fb.username }}
             </a><br/>
         </div>
 

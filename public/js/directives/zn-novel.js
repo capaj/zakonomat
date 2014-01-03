@@ -2,7 +2,8 @@
 //  liveQuery().populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
 
 angular.module('zakonomat').directive('znNovel', function (MRBackend, userService, facebook, $q) {
-	return {
+	var getModels = MRBackend.getModels;
+    return {
 		replace: false,
 		restrict: 'E',
 		templateUrl: '/templates/directives/zn_novel.html',
@@ -10,9 +11,15 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 			novel: '='
 		},
 		link: function (scope, el, attr) {
-            $q.all({voteModel: MRBackend.getModel('novelVote'), profile: userService.loginPromise}).then(function (resolved) {
+
+            $q.all({
+                models: getModels(['novelVote', 'user', 'novel']),
+                profile: userService.loginPromise
+            }).then(function (resolved) {
                 var profile = resolved.profile;
-                var voteModel = resolved.voteModel;
+                var models = resolved.models;
+                var voteModel = models.novelVote;
+                var userModel = models.user;
                 var VMLQ = voteModel.liveQuery;
                 var isAnon = !profile._id;
                 scope.isAnon = isAnon;
@@ -29,10 +36,18 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                     };
 
                     return; //two methods after this are only for registered users
+                } else {
+                    userModel.query().findOne({_id: scope.novel.owner}).select('fb.username fb.picture.data.url').exec().then(function (owner) {
+                        scope.owner = owner;
+                    });
                 }
-                scope.delete = function () {
-                    //TODO delete method for novel
+
+                if (profile._id === scope.novel.owner) {
+                    scope.remove = function () {
+                        models.novel.remove(scope.novel);
+                    };
                 }
+
 
 				scope.voteOnNovel = function (novel, how) {
                     var shareOnFacebook = function () {
@@ -70,19 +85,27 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                     voteModel.create({subject: scope.novel._id, value: how}).then(shareOnFacebook);
 				};
 				//current vote LQ
+                var expanded;
 
-                scope.expandOverallVotes = function (show) {
-                    if (show === false) {
-                        scope.showedVotes.stop();
-                        scope.showedVotes = null;
-                    } else {
-                        scope.showedVotes = VMLQ().find({subject: scope.novel._id}).populate('owner','fb.username fb.picture.data.url').exec();
-                    }
-                    scope.overallVotesExpanded = show;
-                    if (!scope.showedVotes) {
+                function createVotesShowMethod(findParam, scopeSwitchName) {
+                    return function (show) {
+                        if (show === false) {
+                            scope.showedVotes && scope.showedVotes.stop();
+                            scope.showedVotes = null;
+                        } else {
+                            if (expanded) {
+                                scope[expanded] = false;
+                            }
+                            expanded = scopeSwitchName;
+                            scope.showedVotes = VMLQ().find(findParam).populate('owner','fb.username fb.picture.data.url').exec();
+                        }
+                        scope[scopeSwitchName] = show;
+                    };
+                }
+                scope.expandOverallVotes = createVotesShowMethod({subject: scope.novel._id}, 'overallVotesExpanded');
+                scope.expandPositiveVotes = createVotesShowMethod({subject: scope.novel._id, value: true}, 'positiveVotesExpanded');
+                scope.expandNegativeVotes = createVotesShowMethod({subject: scope.novel._id, value: false}, 'negativeVotesExpanded');
 
-                    }
-                };
 
 				scope.$watch('novel', function (nV, oV) {
 					if (nV) {

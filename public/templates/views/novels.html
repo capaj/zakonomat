@@ -1,34 +1,31 @@
 <div mr-controller="novelsCtrl" mr-backend="znmt" mr-models="novel,novelVote" ng-show="MR">
 
     <div class="row">
-        <div class="col-lg-{{ sideW }}"></div>
-        <div class="col-lg-{{ contentW }}">
+        <div class="container">
             <div class="page-header">
                 <h1>Návrhy na změny zákonů<small class="pull-right">celkem: {{ ncLQ.count }}</small></h1>
             </div>
         </div>
-        <div class="col-lg-{{ sideW }}"></div>
     </div>
 
     <div class="row row-novel" ng-repeat="novel in LQ.docs"
          ng-class="{positive: votesDifference(novel) > 0, negative: votesDifference(novel) < 0, neutral: votesDifference(novel) == 0}">
-        <div class="col-lg-{{ sideW }}"></div>
-        <div class="col-lg-{{ contentW }}">
+        <div class="container">
 
             <zn-novel novel="novel"></zn-novel>
 
         </div>
-        <div class="col-lg-{{ sideW }}"></div>
+
     </div>
 
-    <div class="row">
-        <div class="col-lg-{{ sideW }}"></div>
-        <div class="col-lg-{{ contentW }}">
+    <div class="row add-link">
+
+        <div class="container">
             <a href="/novyNavrh" class="new-novel-link">
                 <i class="glyphicon glyphicon-plus-sign glyph-big"></i><span> přidat návrh změny zákona</span>
             </a>
         </div>
-        <div class="col-lg-{{ sideW }}"></div>
+
     </div>
 
 </div>
