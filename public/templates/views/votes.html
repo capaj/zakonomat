@@ -36,6 +36,9 @@
     </section>
     <div class="well">
         <zn-vote ng-repeat="vote in votesLQ.docs" vote="vote"></zn-vote>
-
+    </div>
+    <div class="pagination-wrap">
+        <pagination total-items="voteCountLQ.count" page="pagination.page" items-per-page="pagination.limit"
+                    on-select-page="pagination.onSelect(page)" boundary-links="true"></pagination>
     </div>
 </div>

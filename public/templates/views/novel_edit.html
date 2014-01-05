@@ -1,14 +1,20 @@
 <div mr-controller="novelEditCtrl" mr-backend="znmt" mr-models="novel" class="container">
-    <h2>Váš návrh</h2>
 
+    <div class="page-header">
+        <h2>Váš návrh</h2>
+    </div>
     <form>
         <input type="text" ng-model="novel.title" placeholder="Titulek" class="form-control">
         <input type="url" name="input" ng-model="novel.current_law_link" placeholder="link na aktuální znění" class="form-control">
         <div>
+            <h4>Shrnutí</h4>
+            <textarea id="novelSummary" ng-model="novel.summary"></textarea>
+            <h4>Text návrhu</h4>
             <text-angular ng-model="novel.content"/>
         </div>
-        <div class="form-control">
+        <div class="button-group actions">
             <button ng-click="create()" class="btn btn-primary">Přidat návrh</button>
+            <button ng-click="cancel()" class="btn btn-warning pull-right">Zrušit</button>
         </div>
         <div class="alert alert-danger alert-dismissable" ng-show="lastError">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

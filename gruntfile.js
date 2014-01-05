@@ -84,6 +84,8 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
+                    'public/js/angular/angular-sanitize.min.js': 'public/js/angular/angular-sanitize.js',
+                    'public/js/angular-bootstrap/pagination.min.js': 'public/js/angular-bootstrap/pagination.js',
                     'public/built/<%= pkg.name %>-<%= pkg.version %>.min.js': annJSFile
                 }
             }

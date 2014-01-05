@@ -3,17 +3,39 @@ app.controller('votesCtrl', function ($scope, $location, debounce) {
     var nLQ = $scope.MR.novel.liveQuery;
     var search = $location.search();
 
-    function runQueries() {
-        $scope.votesLQ = nVLQ().find(search).sort('-creation_date').populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
-        $scope.voteCountLQ = nVLQ().find(search).count().exec();
 
-        if (search.subject) {
-            $scope.subjectLQ = nLQ().findOne().where('_id').equals(search.subject).exec();
+    function runQueries() {
+        var voteSearch = angular.copy(search);
+        delete voteSearch.pagination;
+
+        $scope.votesLQ = nVLQ().find(voteSearch).sort('-creation_date')
+            .populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url')
+            .limit($scope.pagination.limit).skip($scope.pagination.skip)
+            .exec();
+        $scope.voteCountLQ = nVLQ().find(voteSearch).count().exec();
+
+        if (voteSearch.subject) {
+            $scope.subjectLQ = nLQ().findOne().where('_id').equals(voteSearch.subject).exec();
         } else {
             $scope.subjectLQ = null;
         }
     }
 
+    $scope.pagination = {   //default values
+        page: 1,
+        limit: 50,
+        skip: 0,
+        onSelect: function (page) {
+            var pagin = $scope.pagination;
+            pagin.page = page;
+            pagin.skip = (page - 1) * pagin.limit;
+            $location.search('pagination', JSON.stringify(pagin));  //triggers routeUpdate event
+        }
+    };
+    if (search.pagination) {
+        var pagination = JSON.parse(search.pagination);
+        angular.extend($scope.pagination, pagination);
+    }
     runQueries();
 
     $scope.$on('$routeUpdate', runQueries);

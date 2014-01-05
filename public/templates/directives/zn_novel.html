@@ -2,10 +2,14 @@
     <div class="panel-heading">
         <i class="fa fa-times-circle fa-2x pull-right" ng-click="remove()" ng-hide="!remove"></i>
         <div class="novel-heading">
-            <h3><span ng-bind="novel.title"></span></h3>
+            <a href="/navrh?_id={{ novel._id }}"><h3><span ng-bind="novel.title"></span></h3></a>
         </div>
     </div>
-    <div class="panel-body">
+    <div class="panel-body" ng-show="show == 'all' || show == 'summary'">
+        <div ng-bind-html="novel.summary"></div>
+    </div>
+
+    <div class="panel-body" ng-show="show == 'all' || show == 'content'">
         <div ng-bind-html="novel.content"></div>
     </div>
     <ul class="list-group">

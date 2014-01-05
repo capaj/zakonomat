@@ -38,7 +38,8 @@ var productionFiles = {
     3: [
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.min.js',
-        'public/js/angular/angular-sanitize.js',
+        'public/js/angular/angular-sanitize.min.js',
+        'public/js/angular-bootstrap/pagination.min.js',
         bc + '**/angular-touch.min.js',
         bc + '**/textAngular.min.js',
 		bc + '**/lang/cs.js',
@@ -67,6 +68,7 @@ var devFiles = {
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.js',
 		'public/js/angular/angular-sanitize.js',
+        'public/js/angular-bootstrap/pagination.js',
         bc + '**/textAngular.js',
 		bc + '**/angular-touch.js',
 		bc + '**/lang/cs.js',

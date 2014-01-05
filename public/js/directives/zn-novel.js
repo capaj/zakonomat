@@ -8,7 +8,8 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 		restrict: 'E',
 		templateUrl: '/templates/directives/zn_novel.html',
 		scope: {
-			novel: '='
+			novel: '=',
+            show: '@'       //can be 'all', 'summary', 'content'
 		},
 		link: function (scope, el, attr) {
 
@@ -47,7 +48,6 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                         models.novel.remove(scope.novel);
                     };
                 }
-
 
 				scope.voteOnNovel = function (novel, how) {
                     var shareOnFacebook = function () {
@@ -118,6 +118,10 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                         }
 					}
 				});
+
+                if (!scope.show) {
+                    scope.show = 'summary';
+                }
 
 			});
 		}

@@ -71,9 +71,9 @@ var server = app.listen(app.get('port'), function () {
 		io.set('authorization', require('./server/authorization')(domain.user.model));
 
         if (env === 'production') {
-            io.enable('browser client minification');  // send minified client
+
             io.enable('browser client etag');          // apply etag caching logic based on version number
-            io.enable('browser client gzip');          // gzip the file
+
 //            io.set('log level', 1);                    // reduce logging    // TODO set to 1 for real production
 
             io.set('transports', [

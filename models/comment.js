@@ -1,7 +1,6 @@
 var Schema = require('mongoose').Schema;
 var voteCountPartial = require('./vote-count');
 
-
 module.exports = function (MR) {
 
     return MR.model('comment', {
