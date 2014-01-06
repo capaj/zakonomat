@@ -17,21 +17,27 @@
         <li class="list-group-item">
             <div class="novel-votes-statistic">
                 <div class="row">
-                    <div class="col-md-4" ng-class="{active: overallVotesExpanded}">
+                    <div class="col-md-3" ng-class="{active: commentsExpanded}">
+                        <a href="/komentare?subject={{ novel._id }}&value=false">Komentáře: <span ng-bind="commentsLQ.count"></span></a>
+                        <i class="fa fa-chevron-down" ng-click="expandComments(true)" ng-hide="commentsExpanded"></i>
+                        <i class="fa fa-chevron-up" ng-click="expandComments(false)" ng-show="commentsExpanded"></i>
+                    </div>
+                    <div class="col-md-3" ng-class="{active: overallVotesExpanded}">
                         <a href="/hlasy?subject={{ novel._id }}">Celkem hlasů: <span ng-bind="novel.vote_count.sum"></span></a>
                         <i class="fa fa-chevron-down" ng-click="expandOverallVotes(true)" ng-hide="overallVotesExpanded"></i>
                         <i class="fa fa-chevron-up" ng-click="expandOverallVotes(false)" ng-show="overallVotesExpanded"></i>
                     </div>
-                    <div class="col-md-4" ng-class="{active: positiveVotesExpanded}">
+                    <div class="col-md-3" ng-class="{active: positiveVotesExpanded}">
                         <a href="/hlasy?subject={{ novel._id }}&value=true">Pro: <span ng-bind="novel.vote_count.positive"></span></a>
                         <i class="fa fa-chevron-down" ng-click="expandPositiveVotes(true)" ng-hide="positiveVotesExpanded"></i>
                         <i class="fa fa-chevron-up" ng-click="expandPositiveVotes(false)" ng-show="positiveVotesExpanded"></i>
                     </div>
-                    <div class="col-md-4" ng-class="{active: negativeVotesExpanded}">
+                    <div class="col-md-3" ng-class="{active: negativeVotesExpanded}">
                         <a href="/hlasy?subject={{ novel._id }}&value=false">Proti: <span ng-bind="novel.vote_count.negative"></span></a>
                         <i class="fa fa-chevron-down" ng-click="expandNegativeVotes(true)" ng-hide="negativeVotesExpanded"></i>
                         <i class="fa fa-chevron-up" ng-click="expandNegativeVotes(false)" ng-show="negativeVotesExpanded"></i>
                     </div>
+
                 </div>
 
             </div>

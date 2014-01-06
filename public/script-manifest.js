@@ -2,6 +2,7 @@ var bc = 'public/lib/';
 var moduleFile = 'public/js/app.js';
 
 var appFiles = [
+    bc + '**/angular-animate.js',
     'public/js/routes.js',
     //animations
     'public/js/bootstrap/tooltip.js',
@@ -38,6 +39,7 @@ var productionFiles = {
     3: [
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.min.js',
+        bc + '**/angular-animate.min.js',
         'public/js/angular/angular-sanitize.min.js',
         'public/js/angular-bootstrap/pagination.min.js',
         bc + '**/angular-touch.min.js',
@@ -46,7 +48,6 @@ var productionFiles = {
 		bc + '**/angular-moment.min.js',
         bc + '**/angularLocalStorage.min.js',
         bc + '**/ng-tools-0.0.3.min.js',
-        bc + '**/angular-animate.min.js',
         bc + '**/angular-route.min.js',
         'public/built/<%= pkg.name %>-templates-<%= pkg.version %>.js'
     ],
@@ -67,7 +68,7 @@ var devFiles = {
     3: [
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.js',
-		'public/js/angular/angular-sanitize.js',
+        'public/js/angular/angular-sanitize.js',
         'public/js/angular-bootstrap/pagination.js',
         bc + '**/textAngular.js',
 		bc + '**/angular-touch.js',
@@ -75,7 +76,6 @@ var devFiles = {
 		bc + '**/angular-moment.js',
         bc + '**/angularLocalStorage.js',
         bc + '**/ng-tools-0.0.3.min.js',
-        bc + '**/angular-animate.js',
         bc + '**/angular-route.js',
         'public/js/bootstrap/tooltip.js',
         moduleFile,

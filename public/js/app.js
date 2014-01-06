@@ -1,6 +1,7 @@
 window.app = angular.module('zakonomat',
     [
         'ngRoute',
+        'ngAnimate',
         'ngTouch',
         'angularMoment',
         'angularLocalStorage',

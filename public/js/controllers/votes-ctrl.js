@@ -5,14 +5,21 @@ app.controller('votesCtrl', function ($scope, $location, debounce) {
 
 
     function runQueries() {
+        search = $location.search();
         var voteSearch = angular.copy(search);
         delete voteSearch.pagination;
 
-        $scope.votesLQ = nVLQ().find(voteSearch).sort('-creation_date')
+        var voteSearchQueryBase = function () {
+            return nVLQ().find(voteSearch);
+        };
+        $scope.positiveNVLQ = voteSearchQueryBase().find({value: true}).count().exec();
+        $scope.negativeNVLQ = voteSearchQueryBase().find({value: false}).count().exec();
+
+        $scope.votesLQ = voteSearchQueryBase().sort('-creation_date')
             .populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url')
             .limit($scope.pagination.limit).skip($scope.pagination.skip)
             .exec();
-        $scope.voteCountLQ = nVLQ().find(voteSearch).count().exec();
+        $scope.voteCountLQ = voteSearchQueryBase().count().exec();
 
         if (voteSearch.subject) {
             $scope.subjectLQ = nLQ().findOne().where('_id').equals(voteSearch.subject).exec();
@@ -39,9 +46,6 @@ app.controller('votesCtrl', function ($scope, $location, debounce) {
     runQueries();
 
     $scope.$on('$routeUpdate', runQueries);
-
-    $scope.positiveNVLQ = nVLQ().find({value: true}).count().exec();
-    $scope.negativeNVLQ = nVLQ().find({value: false}).count().exec();
 
     $scope.showGraphs = function (shown) {
         $scope.graphsShown = shown;

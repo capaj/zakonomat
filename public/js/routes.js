@@ -21,7 +21,8 @@
         { route:'/uzivatele', resolve: {templateUrl:tV + 'users.html', reloadOnSearch: false}},
 		{ route:'/uzivatel', resolve: {templateUrl:tV + 'user_detail.html', reloadOnSearch: false}},
 		{ route:'/hlasy', resolve: {templateUrl:tV + 'votes.html', reloadOnSearch: false}},
-        { route:'/hlas', resolve: {templateUrl:tV + 'vote_detail.html', reloadOnSearch: false}}
+        { route:'/hlas', resolve: {templateUrl:tV + 'vote_detail.html', reloadOnSearch: false}},
+        { route:'/komentare', resolve: {templateUrl:tV + 'comments.html', reloadOnSearch: false}}
 
     ];
 

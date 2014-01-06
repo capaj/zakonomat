@@ -6,4 +6,9 @@
     <div class="alert alert-danger" ng-show="nonexistentNovelId">
         Návrh {{ nonexistentNovelId }} neexistuje. Možná byl smazán nebo nikdy neexistoval.
     </div>
+
+    <div class="well well-lg">
+        <h3>Komentáře k návrhu</h3>
+        <zn-comment mr-repeat="comment in commentsLQ" comment="comment"></zn-comment>
+    </div>
 </div>
