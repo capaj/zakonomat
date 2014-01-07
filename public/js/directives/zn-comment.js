@@ -11,13 +11,6 @@ angular.module('zakonomat').directive('znComment', function (MRBackend) {
         },
         link: function (scope, el, attr) {
 
-            scope.$watch('comment.creation_date', function (newValue) {
-                if (newValue) {
-                    scope.created = formatDate(newValue);
-                }
-            });
-
-
         }
     }
 });
