@@ -2,5 +2,7 @@
     <div class="page-header">
         <h2>Uživatelé <small class="pull-right">celkem: {{ usersCountLQ.count }}</small></h2>
     </div>
-    <zn-user user="user" ng-repeat="user in LQ.docs"></zn-user>
+    <div mr-repeat="user in LQ">
+        <zn-user user="user"></zn-user>
+    </div>
 </div>

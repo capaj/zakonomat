@@ -7,6 +7,7 @@ app.service('userService',
         facebook.onLogin.register(function (token) {
             if (token === 'ANON') {
                 self.profile = {};
+                dfd.resolve(self.profile);
             } else {
                 facebook.api('/me?fields=id,name,first_name,birthday,last_name,gender,link,installed,verified,picture,location,hometown')
                     .then( function (me) {

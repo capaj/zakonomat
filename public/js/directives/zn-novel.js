@@ -12,7 +12,6 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
             show: '@'       //can be 'all', 'summary', 'content'
 		},
 		link: function (scope, el, attr) {
-
             $q.all({
                 models: getModels(['novelVote', 'user', 'novel']),
                 profile: userService.loginPromise
@@ -31,60 +30,12 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                     return scope.novel.vote_count.positive + scope.novel.vote_count.negative;
                 };
 
-                if (isAnon) {
-                    scope.fbLogin = function () {
-                        facebook.login();
-                    };
+                userModel.query().findOne({_id: scope.novel.owner}).select('fb.username fb.picture.data.url').exec().then(function (owner) {
+                    scope.owner = owner;
 
-                    return; //two methods after this are only for registered users
-                } else {
-                    userModel.query().findOne({_id: scope.novel.owner}).select('fb.username fb.picture.data.url').exec().then(function (owner) {
-                        scope.owner = owner;
-                    });
-                }
+                });
 
-                if (profile._id === scope.novel.owner) {
-                    scope.remove = function () {
-                        models.novel.remove(scope.novel);
-                    };
-                }
-
-				scope.voteOnNovel = function (novel, how) {
-                    var shareOnFacebook = function () {
-                        if (userService.profile.settings.fb_publish) {
-                            var howText;
-                            var desc;
-                            if (how) {
-                                howText = 'pro';
-                                desc = ' souhlasí s návrhem ';
-                            } else {
-                                howText = 'proti';
-                                desc = ' nesouhlasí s návrhem ';
-
-                            }
-                            var params = {
-                                message: userService.profile.fb.first_name + ' hlasoval/a ' + howText + ' návrh ' + novel.title,
-                                name: novel.title,
-                                description: userService.getFullName() + desc,
-                                link: RPCbackendURL + 'navrh?_id=' + novel._id,
-                                picture: RPCbackendURL + 'img/zakonomat-web-maly-bily.png'//TODO should be unique for a novel
-                            };
-
-
-                            FB.api('/me/feed', 'post', params, function (response) {
-                                if (!response || response.error) {
-                                    console.error('Error occured');
-                                } else {
-                                    //TODO push post id into the DB and save
-                                    console.log("Published to user's stream");
-                                }
-                            });
-                        }
-
-                    };
-                    voteModel.create({subject: scope.novel._id, value: how}).then(shareOnFacebook);
-				};
-				//current vote LQ
+                //current vote LQ
                 var expanded;
 
                 function createVotesShowMethod(findParam, scopeSwitchName) {
@@ -106,22 +57,72 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                 scope.expandPositiveVotes = createVotesShowMethod({subject: scope.novel._id, value: true}, 'positiveVotesExpanded');
                 scope.expandNegativeVotes = createVotesShowMethod({subject: scope.novel._id, value: false}, 'negativeVotesExpanded');
 
-
-				scope.$watch('novel', function (nV, oV) {
-					if (nV) {
-						if (scope.currentVoteLQ) {
-							scope.currentVoteLQ.stop();
-						}
+                scope.$watch('novel', function (nV, oV) {
+                    if (nV) {
+                        if (scope.currentVoteLQ) {
+                            scope.currentVoteLQ.stop();
+                        }
                         if (!isAnon) {
                             var currUserCiteria = {subject: scope.novel._id, owner: userService.profile._id};
                             scope.currentVoteLQ = VMLQ().findOne(currUserCiteria).populate('subject', 'title').exec();
                         }
-					}
-				});
+                    }
+                });
 
                 if (!scope.show) {
                     scope.show = 'summary';
                 }
+
+                if (isAnon) {
+                    scope.fbLogin = function () {
+                        facebook.login();
+                    };
+
+                } else {
+                    if (profile._id === scope.novel.owner) {
+                        scope.remove = function () {
+                            models.novel.remove(scope.novel);
+                        };
+                    }
+
+                    scope.voteOnNovel = function (novel, how) {
+                        var shareOnFacebook = function () {
+                            if (userService.profile.settings.fb_publish) {
+                                var howText;
+                                var desc;
+                                if (how) {
+                                    howText = 'pro';
+                                    desc = ' souhlasí s návrhem ';
+                                } else {
+                                    howText = 'proti';
+                                    desc = ' nesouhlasí s návrhem ';
+
+                                }
+                                var params = {
+                                    message: userService.profile.fb.first_name + ' hlasoval/a ' + howText + ' návrh ' + novel.title,
+                                    name: novel.title,
+                                    description: userService.getFullName() + desc,
+                                    link: RPCbackendURL + 'navrh?_id=' + novel._id,
+                                    picture: RPCbackendURL + 'img/zakonomat-web-maly-bily.png'//TODO should be unique for a novel
+                                };
+
+
+                                FB.api('/me/feed', 'post', params, function (response) {
+                                    if (!response || response.error) {
+                                        console.error('Error occured');
+                                    } else {
+                                        //TODO push post id into the DB and save
+                                        console.log("Published to user's stream");
+                                    }
+                                });
+                            }
+
+                        };
+                        voteModel.create({subject: scope.novel._id, value: how}).then(shareOnFacebook);
+                    };
+
+                }
+
 
 			});
 		}

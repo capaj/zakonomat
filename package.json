@@ -1,7 +1,7 @@
 {
     "name": "zakonomat.cz",
     "description": "a platform for general legislative initiative",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "private": false,
     "author": "Jiri Spac",
     "repository": {
@@ -28,7 +28,7 @@
         "mongoose": "latest",
         "request": "latest",
         "async": "latest",
-        "when": "latest",
+        "bluebird": "latest",
         "prerender-node": "latest",
         "mean-logger": "latest",
         "forever": "latest",

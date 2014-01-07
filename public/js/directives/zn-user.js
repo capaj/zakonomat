@@ -1,5 +1,8 @@
 angular.module('zakonomat').directive('znUser', function (MRBackend) {
-	return {
+    var formatDate = function (dt) {
+        return moment(dt).format('LL');
+    };
+    return {
 		replace: false,
 		restrict: 'E',
 		templateUrl: '/templates/directives/zn_user.html',
@@ -15,9 +18,12 @@ angular.module('zakonomat').directive('znUser', function (MRBackend) {
                 scope.negativeVoteCountLQ = voteLQ().find({owner: userId, value: false}).count().exec();
 			});
 
-			scope.formatDate = function (dt) {
-				return moment(dt).format('LL');
-			}
+            scope.$watch('user.creation_date', function (newValue) {
+                if (newValue) {
+                    scope.registeredDate = formatDate(newValue);
+                }
+            });
+
 
 		}
 	}

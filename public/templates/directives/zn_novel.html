@@ -73,7 +73,9 @@
         </div>
 
         <div class="novel-register-to-vote" ng-show="isAnon">
-                <button class="btn btn-large btn-primary" ng-click="fbLogin()">Pro hlasování je nutné se přihlásit</button>
+                <button class="btn btn-large btn-primary pull-right fb-login" ng-click="fbLogin()">
+                    Pro hlasování je nutné se přihlásit
+                </button>
         </div>
         <div class="novel-vote-casted" ng-show="currentVoteLQ.doc">
             <h5>Váš hlas</h5>

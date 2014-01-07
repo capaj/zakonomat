@@ -1,6 +1,6 @@
 var Schema = require('mongoose').Schema;
 var request = require('request');
-var when = require('when');
+var Promise = require('bluebird');
 var voteCountPartial = require('./vote-count');
 
 
@@ -49,7 +49,7 @@ module.exports = function (MR) {
     }, {
 		statics: {
 			fetchAcc: function (token) {
-				var deferred = when.defer();
+				var deferred = Promise.defer();
 				request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,email,first_name,last_name,username,birthday,gender,installed,verified,picture,currency,location,hometown', function (error, response, body) {
 					if (!error && response.statusCode == 200) {
 						var fbAccDetails = JSON.parse(body);

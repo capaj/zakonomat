@@ -33,7 +33,7 @@ var productionFiles = {
         bc + '**/moment.min.js', bc + '**/jquery.min.js'
 	],
     2: [
-        bc + '**/angular.min.js',
+        bc + 'angular/angular.min.js',
         bc + '**/nv.d3.min.js'
     ],
     3: [
@@ -62,7 +62,7 @@ var devFiles = {
         bc + '**/moment.js', bc + '**/jquery.min.js'
 	],
     2: [
-        bc + '**/angular.js',
+        bc + 'angular/angular.js',
         bc + '**/nv.d3.js'
     ],
     3: [

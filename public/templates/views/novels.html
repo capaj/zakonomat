@@ -8,14 +8,12 @@
         </div>
     </div>
 
-    <div class="row row-novel" ng-repeat="novel in LQ.docs"
-         ng-class="{positive: votesDifference(novel) > 0, negative: votesDifference(novel) < 0, neutral: votesDifference(novel) == 0}">
-        <div class="container">
-
-            <zn-novel novel="novel"></zn-novel>
-
+    <div mr-repeat="novel in LQ">
+        <div class="row row-novel" ng-class="{positive: votesDifference(novel) > 0, negative: votesDifference(novel) < 0, neutral: votesDifference(novel) === 0}">
+            <div class="container">
+                <zn-novel novel="novel"></zn-novel>
+            </div>
         </div>
-
     </div>
 
     <div class="row add-link">

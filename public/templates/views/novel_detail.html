@@ -1,4 +1,4 @@
-<div mr-controller="novelDetailCtrl" mr-backend="znmt" mr-models="novel" class="container">
+<div mr-controller="novelDetailCtrl" mr-backend="znmt" mr-models="novel,comment" class="container">
     <div class="page-header">
         <h2>Detail návrhu</h2>
     </div>
@@ -7,8 +7,25 @@
         Návrh {{ nonexistentNovelId }} neexistuje. Možná byl smazán nebo nikdy neexistoval.
     </div>
 
-    <div class="well well-lg">
+    <div class="hero-unit" ng-hide="nonexistentNovelId">
         <h3>Komentáře k návrhu</h3>
-        <zn-comment mr-repeat="comment in commentsLQ" comment="comment"></zn-comment>
+        <button class="btn-small btn-primary" ng-click="showNewCommentInput()" ng-hide="newComment">
+            <i class="glyphicon glyphicon-plus-sign"></i><span>přidat komentář</span>
+        </button>
+        <div ng-show="newComment" class="row">
+            <div class="col-md-9">
+                <textarea name="newComment" ng-model="newComment.text"></textarea>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-small btn-success" ng-click="createComment()">Vytvořit</button>
+                <button class="btn btn-small btn-warning" ng-click="cancelComment()">Zrušit</button>
+            </div>
+
+
+        </div>
+        <div mr-repeat="comment in commentsLQ">
+            <zn-comment comment="comment"></zn-comment>
+
+        </div>
     </div>
 </div>

@@ -33,7 +33,7 @@ module.exports = function(grunt) {
                 tasks: ['less:' + env]
             },
             replace: {
-                files: 'public/index_build_template.html',
+                files: ['package.json', 'public/index_build_template.html'],
                 tasks: ['replace:' + env]
             },
             templates: {

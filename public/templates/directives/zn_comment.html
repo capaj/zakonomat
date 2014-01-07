@@ -1,2 +1,18 @@
-<div></div>
+<div class="row well well-sm">
+    <div class="col-md-1">
+        <i class="fa fa-arrow-down" ng-click="upvote()"></i>
+        <span class="vote-count">{{ comment.vote_count.sum }}</span>
+        <i class="fa fa-arrow-up" ng-click="downvote()"></i>
+    </div>
+
+    <div class="col-md-9">
+        {{ comment.text }}
+    </div>
+    <div class="col-md-2">
+        <a ng-href="/uzivatel?username={{ comment.owner.fb.username }}" class="author-link">
+            <img ng-src="{{ comment.owner.fb.picture.data.url }}" class="profile-picture">  {{ comment.owner.fb.username }}
+        </a>
+    </div>
+
+</div>
 <!--todo create-->
