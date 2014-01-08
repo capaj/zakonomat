@@ -93,11 +93,7 @@
 
 //        RPCbackendURL = 'http://dem2.cz/';
         $script.ready('scriptManifestReady', function(){
-            $script([
-                RPCbackendURL + '<--moonridgelib js-->'    //moonridge-angular-client-rpcbundle.js
-            ], function () {
-                angular.bootstrap(document, ['zakonomat']);
-            });
+            angular.bootstrap(document, ['zakonomat']);
         });
     </script>
     <script src="http://localhost:35729/livereload.js"></script>

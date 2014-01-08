@@ -3,6 +3,7 @@ var moduleFile = 'public/js/app.js';
 
 var appFiles = [
     bc + '**/angular-animate.js',
+    'node_modules/moonridge/built/moonridge-angular-client-rpcbundle-annotated.js',
     'public/js/routes.js',
     //animations
     'public/js/bootstrap/tooltip.js',
@@ -39,7 +40,6 @@ var productionFiles = {
     3: [
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.min.js',
-        bc + '**/angular-animate.min.js',
         'public/js/angular/angular-sanitize.min.js',
         'public/js/angular-bootstrap/pagination.min.js',
         bc + '**/angular-touch.min.js',
