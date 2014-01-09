@@ -1,4 +1,6 @@
 var Schema = require('mongoose').Schema;
+var voteCount = require('./vote-count');
+var mongoose = require('mongoose');
 
 module.exports = function (MR) {
 
@@ -8,7 +10,7 @@ module.exports = function (MR) {
         value: Boolean
     }, {
         permissions: {
-            C: 10,
+            C: 1,
             R: 0,
             U: 50,
             D: 50
@@ -34,5 +36,41 @@ module.exports = function (MR) {
 
 
     });
+
+    var commentModel = mongoose.model('comment');
+    var voteModel = commentVote.model;
+
+    /**
+     *
+     * @param {Mongoose.Document} doc is any model which keeps counts on votes
+     * @param {Mongoose.Document} vote
+     */
+
+    voteModel.on('create', function (vote) {
+        var incrementFor = function (doc) {
+            if (doc) {
+                voteCount.incrementVoteCounts(doc, vote);
+            }
+        };
+        commentModel.findOne({_id: vote.subject}).exec()
+            .then(incrementFor).end();
+    });
+
+    /**
+     *
+     * @param {Mongoose.Document} doc is any model which keeps counts on votes
+     * @param {Mongoose.Document} vote
+     */
+
+    voteModel.on('remove', function (vote) {
+        var decrementFor = function (doc) {
+            if (doc) {
+                voteCount.decrementVoteCounts(doc, vote);
+            }
+        };
+        commentModel.findOne({_id: vote.subject}).exec()
+            .then(decrementFor).end();
+    });
+
     return commentVote;
 };

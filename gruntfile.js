@@ -44,6 +44,10 @@ module.exports = function(grunt) {
                 files: 'public/script-manifest.js',
                 tasks: ['smg']
             },
+            moonridgeLib: {
+                files: 'node_modules/moonridge/built/moonridge-angular-client-rpcbundle-annotated.js',
+                tasks: ['copy']
+            },
             JSfileAddedDeleted: {
                 files: appScripts,
                 tasks: ['smg'],
@@ -116,6 +120,12 @@ module.exports = function(grunt) {
                 ])
             }
         },
+        copy: {
+            rpcBundle:{
+                src: ['node_modules/moonridge/built/moonridge-angular-client-rpcbundle-annotated.js'],
+                dest: 'public/lib/moonridge-angular-client-rpcbundle-annotated.js'
+            }
+        },
         less: {
             dev: {
                 src:  './public/less/bootstrap.less',
@@ -177,8 +187,8 @@ module.exports = function(grunt) {
     if (env == 'production') {
         compile = compile.concat(['concat', 'ngAnnotate', 'uglify'])
     }
+    compile.unshift('copy');
     compile.push('ngtemplates');
-
     compile.push('smg');
     // compile task end
 

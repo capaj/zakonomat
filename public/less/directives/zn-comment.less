@@ -1,5 +1,68 @@
 zn-comment{
+  .well{
+    margin-bottom: 10px;
+
+  }
+  .comment-body{
+    width: 94.99%;
+    &:hover{
+      .comment-date:nth-child(2){
+        right: 17px;
+        top: -36px;
+      }
+    }
+  }
+  .comment-voting{
+    border-radius: 5ox;
+    width: 5%;
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    &.positive{
+      background-color: @positive-bg-color;
+    }
+
+    &.negative{
+      background-color: @negative-bg-color;
+    }
+
+    &.neutral{
+      background-color: @neutral-bg-color;
+    }
+
+    .fa-arrow-up.voted{
+      color: green;
+    }
+    .fa-arrow-down.voted{
+      color: red;
+    }
+
+  }
+  .comment-reply-btn{
+
+  }
+  .comment-date{
+    position: absolute;
+    right: 17px;
+    top: -9px;
+    background-color: #c0c0c0;
+  }
+  .comment-text{
+    display: block;
+    min-height: 42px;
+  }
   .profile-picture{
-    max-height: 30px;
+    height: 24px;
+    position: relative;
+  }
+  .comment-replies{
+    width: 95.9%;
+  }
+  .comment-info{
+    float: right;
+  }
+
+  .replies{
+    width: 100%;
   }
 }

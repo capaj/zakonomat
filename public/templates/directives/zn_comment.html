@@ -1,20 +1,36 @@
 <div class="row well well-sm">
-    <div class="col-md-1">
-        <i class="fa fa-arrow-down" ng-click="upvote()"></i>
-        <span class="vote-count">{{ comment.vote_count.sum }}</span>
-        <i class="fa fa-arrow-up" ng-click="downvote()"></i>
-    </div>
+    <div class="col-md-1 comment-voting"
+         ng-class="{neutral: comment.vote_count.karma == 0, positive: comment.vote_count.karma > 0, negative: comment.vote_count.karma < 0}">
 
-    <div class="col-md-9">
-        {{ comment.text }}
+        <i class="fa fa-arrow-up" ng-click="vote(true)" ng-class="{voted: userVote.value === true}"></i><br/>
+        <span class="vote-count">{{ comment.vote_count.karma }}</span><br/>
+        <i class="fa fa-arrow-down" ng-click="vote(false)" ng-class="{voted: userVote.value === false}"></i>
     </div>
-    <div class="col-md-2">
-        <a ng-href="/uzivatel?username={{ comment.owner.fb.username }}" class="author-link" title="{{ comment.owner.fb.username }}">
-            <img ng-src="{{ comment.owner.fb.picture.data.url }}" class="profile-picture">
-        </a>
-        <span class="pull-right" am-time-ago="comment.creation_date"></span>
-        <button class="btn btn-sm btn-primary pull-right">Odpovědět</button>
+    <div class="col-md-11 comment-body">
+        <span ng-bind="comment.text" class="comment-text"></span>
+        <div class="row">
+            <div mr-repeat="comment in repliesLQ" no-stopping="true">
+                <zn-comment comment="comment"></zn-comment>
+            </div>
+        </div>
+        <div class="comment-date">
+            <a ng-href="/uzivatel?username={{ comment.owner.fb.username }}" class="author-link" title="{{ comment.owner.fb.username }}">
+                <img ng-src="{{ comment.owner.fb.picture.data.url }}" class="profile-picture">
+            </a>
+            <span am-time-ago="comment.creation_date"></span>
+        </div>
+
+        <button class="btn btn-sm btn-primary comment-reply-btn" ng-click="newReply = {}" ng-hide="newReply">Odpovědět</button>
+        <div ng-show="newReply" class="row">
+            <div class="col-md-10">
+                <textarea name="newReply" ng-model="newReply.text"></textarea>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-small btn-success" ng-click="createReply()">Vytvořit</button>
+                <button class="btn btn-small btn-warning" ng-click="cancelReply()">Zrušit</button>
+            </div>
+
+        </div>
     </div>
 
 </div>
-<!--todo create-->

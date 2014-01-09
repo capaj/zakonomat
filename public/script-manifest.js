@@ -3,7 +3,7 @@ var moduleFile = 'public/js/app.js';
 
 var appFiles = [
     bc + '**/angular-animate.js',
-    'node_modules/moonridge/built/moonridge-angular-client-rpcbundle-annotated.js',
+    'public/lib/moonridge-angular-client-rpcbundle-annotated.js',
     'public/js/routes.js',
     //animations
     'public/js/bootstrap/tooltip.js',
@@ -23,8 +23,8 @@ var appFiles = [
     '!public/js/**/_*.*'
 ];
 
-var forConcat = appFiles.slice(0);
-forConcat.unshift(moduleFile);
+var forConcat = appFiles.slice(0);  //copying
+forConcat.unshift(moduleFile);  // insert at the top
 
 var productionFiles = {
     1: [

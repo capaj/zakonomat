@@ -1,4 +1,5 @@
 var Schema = require('mongoose').Schema;
+var voteCount = require('./vote-count');
 
 module.exports = function (MR, userMRM, novelMRM) {
 
@@ -36,51 +37,20 @@ module.exports = function (MR, userMRM, novelMRM) {
 
     });
 
-	/**
-	 *
-	 * @param {Mongoose.Document} doc is any model which keeps counts on votes
-	 * @param {Mongoose.Document} vote
-	 */
-	var incrementVoteCounts = function (doc, vote) {
-		doc.vote_count.sum += 1;
-		if (vote.value === true) {
-			doc.vote_count.positive += 1;
-		} else {
-			doc.vote_count.negative += 1;
-		}
-
-		doc.save();
-	};
-
 	novelVoteMR.model.on('create', function (vote) {
 		var incrementFor = function (doc) {
 			if (doc) {
-				incrementVoteCounts(doc, vote);
+				voteCount.incrementVoteCounts(doc, vote);
 			}
 		};
 		novelMRM.model.findOne({_id: vote.subject}).exec()
 			.then(incrementFor).end();
 	});
 
-	/**
-	 *
-	 * @param {Mongoose.Document} doc is any model which keeps counts on votes
-	 * @param {Mongoose.Document} vote
-	 */
-	var decrementVoteCounts = function (doc, vote) {
-		doc.vote_count.sum -= 1;
-		if (vote.value === true) {
-			doc.vote_count.positive -= 1;
-		} else {
-			doc.vote_count.negative  -= 1;
-		}
-		doc.save();
-	};
-
 	novelVoteMR.model.on('remove', function (vote) {
 		var decrementFor = function (doc) {
 			if (doc) {
-				decrementVoteCounts(doc, vote);
+				voteCount.decrementVoteCounts(doc, vote);
 			}
 		};
 		novelMRM.model.findOne({_id: vote.subject}).exec()

@@ -14,17 +14,28 @@ module.exports = function (MR) {
         approved_date: Date,    //TODO make a check for this
         ended_date: Date,
         comment_count: { type: Number, default: 0, min: 0 },
-		vote_count: voteCountPartial	// we could have this only as liveQuery on the client, but if we would, it
+		vote_count: voteCountPartial.schema	// we could have this only as liveQuery on the client, but if we would, it
 		// would be hard to sort the collection by these properties
     });
 
+
     novelModel.model.on('remove', function (novel) {
-        var model = mongoose.model('novelVote');
         var id = novel._id.toString();
-        model.find({subject: id}).exec().then(function (votes) {
+        var nVModel = mongoose.model('novelVote');
+
+        nVModel.find({subject: id}).exec().then(function (votes) {
             votes.forEach(function (vote) {
-                vote.remove(function (obj) {
+                vote.remove(function () {
                     console.log("Succesfully removed a vote " + vote._id + " because subject was removed.");
+                });
+            });
+        }).end();
+        var commentModel = mongoose.model('comment');
+
+        commentModel.find({root: id}).exec().then(function (comments) {
+            comments.forEach(function (comment) {
+                comment.remove(function () {
+                    console.log("Succesfully removed a comment " + comment._id + " because root was removed.");
                 });
             });
         }).end();

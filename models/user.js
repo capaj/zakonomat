@@ -1,7 +1,7 @@
 var Schema = require('mongoose').Schema;
 var request = require('request');
 var Promise = require('bluebird');
-var voteCountPartial = require('./vote-count');
+//var voteCountPartial = require('./vote-count');
 
 
 module.exports = function (MR) {

@@ -9,7 +9,7 @@ app.controller('novelDetailCtrl', function ($scope, $location, dialogService) {
             if (!angular.isObject(LQ.doc)) {
                 $scope.nonexistentNovelId = id;
             } else {
-                $scope.commentsLQ = commentModel.liveQuery().find({reply_on: id}).sort('-vote_count.sum')
+                $scope.commentsLQ = commentModel.liveQuery().find({root: id, reply_on: null}).sort('-vote_count.sum')
                     .populate('owner', 'fb.username fb.picture.data.url').exec();
 
             }
@@ -20,7 +20,7 @@ app.controller('novelDetailCtrl', function ($scope, $location, dialogService) {
         };
 
         $scope.createComment = function () {
-            $scope.newComment.reply_on = id;
+            $scope.newComment.root = id;
             commentModel.create($scope.newComment).then(function () {
                 $scope.newComment = null;
             });

@@ -7,6 +7,7 @@ module.exports = function loadModels(MR) {
 		user: userMRM,
 		novel: novelMRM,
 		novelVote: require('./novelVote')(MR, userMRM, novelMRM),
-		comment: require('./comment')(MR)
+		comment: require('./comment')(MR),
+        commentVote: require('./commentVote')(MR)
 	};
 };
