@@ -38,6 +38,7 @@ var productionFiles = {
         bc + '**/nv.d3.min.js'
     ],
     3: [
+        bc + '**/angular-moment.min.js',
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.min.js',
         'public/js/angular/angular-sanitize.min.js',
@@ -45,7 +46,6 @@ var productionFiles = {
         bc + '**/angular-touch.min.js',
         bc + '**/textAngular.min.js',
 		bc + '**/lang/cs.js',
-		bc + '**/angular-moment.min.js',
         bc + '**/angularLocalStorage.min.js',
         bc + '**/ng-tools-0.0.3.min.js',
         bc + '**/angular-route.min.js',
@@ -66,6 +66,7 @@ var devFiles = {
         bc + '**/nv.d3.js'
     ],
     3: [
+        bc + '**/angular-moment.js',
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.js',
         'public/js/angular/angular-sanitize.js',
@@ -73,7 +74,6 @@ var devFiles = {
         bc + '**/textAngular.js',
 		bc + '**/angular-touch.js',
 		bc + '**/lang/cs.js',
-		bc + '**/angular-moment.js',
         bc + '**/angularLocalStorage.js',
         bc + '**/ng-tools-0.0.3.min.js',
         bc + '**/angular-route.js',

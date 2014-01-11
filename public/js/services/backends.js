@@ -4,14 +4,23 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window) {
 }).factory('MRBackend', function MRBackend($rootScope, $q, $log, facebook, $location, $MR, dialogService) {
 
         var dfd = $q.defer();
+
+        var MRB = $MR('znmt', dfd.promise);
+
         facebook.onLogin.register(function (token) {
+            if (facebook.aToken === 'ANON') {
+                if (MRB.socket) { // means that user is connected already as anonymous
+
+                    document.location.reload(true); //a bit of a hack, will have to reconnect with the new token here
+//                    MRB.socket.disconnect();
+//                    MRB = $MR('znmt', dfd.promise);
+                }
+            }
 
 //            dfd.resolve({url: 'http://dem2.cz:8076', hs: { query: "aToken=" + token } } );
             dfd.resolve({url: 'http://localhost:8076', hs: { query: "aToken=" + token } } );
 
         });
-
-        var MRB = $MR('znmt', dfd.promise);
 
         var errDlg = dialogService.create('error_modal', 'error-modal',
             {
@@ -30,6 +39,7 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window) {
 //            socket.on('reconnect_failed', errDlg.open);
             socket.on('disconnect', function () {
                 errDlg.open();
+                console.log("socket disconnected");
             });
         });
 

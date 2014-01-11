@@ -185,6 +185,7 @@ module.exports = function(grunt) {
         return step + ':' + env;
     });
     if (env == 'production') {
+//        compile = compile.concat(['concat']);
         compile = compile.concat(['concat', 'ngAnnotate', 'uglify'])
     }
     compile.unshift('copy');

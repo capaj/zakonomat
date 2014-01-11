@@ -28,8 +28,9 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
             if (response.status === "unknown") {
                 //connect anonymous user, Facebook is not authorized
                 console.log("connect anonymous user, Facebook is not authorized");
-                facebook.aToken = "ANON";   //anonymous user
-                onLogin.fire(facebook.aToken);
+                var at = 'ANON';
+                onLogin.fire(at);
+                facebook.aToken = at;   //anonymous user
 
             }
         }, true);
@@ -37,8 +38,8 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
         // listen for and handle auth.statusChange events
         FB.Event.subscribe('auth.statusChange', function (res) {
             if (res.status === 'connected') {
+                onLogin.fire(res.authResponse.accessToken);
                 facebook.aToken = res.authResponse.accessToken;
-                onLogin.fire(facebook.aToken);
 
             } else if (res.status === 'not_authorized') {
 
