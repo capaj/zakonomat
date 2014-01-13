@@ -9,7 +9,7 @@ app.controller('novelDetailCtrl', function ($scope, $location, dialogService) {
             if (!angular.isObject(LQ.doc)) {
                 $scope.nonexistentNovelId = id;
             } else {
-                $scope.commentsLQ = commentModel.liveQuery().find({root: id, reply_on: null}).sort('vote_count.karma')
+                $scope.commentsLQ = commentModel.liveQuery().find({root: id, reply_on: null}).sort('-vote_count.karma')
                     .populate('owner', 'fb.username fb.picture.data.url').exec();
 
                 $scope.showNewCommentInput = function () {
