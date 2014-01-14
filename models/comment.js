@@ -10,6 +10,13 @@ module.exports = function (MR) {
         vote_count: voteCountPartial.schema,
         text: String,
         deleted: {type: Boolean, default: false}
+    },{
+        permissions: {
+            C: 1,
+            R: 0,
+            U: 50,
+            D: 50
+        }
     });
 
     var nModel = mongoose.model('novel');
