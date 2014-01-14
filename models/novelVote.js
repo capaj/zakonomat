@@ -10,7 +10,7 @@ module.exports = function (MR, userMRM, novelMRM) {
         fb_post_id: String //when user shares the voting, this will be filled with facebook post id
     }, {
         permissions: {
-            C: 10,
+            C: 1,
             R: 0,
             U: 50,
             D: 50

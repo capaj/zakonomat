@@ -39,14 +39,14 @@ module.exports = function (userModel) {
                                         userModel.create({
                                             fb: FBdata,
                                             access_token: aToken,
-                                            privilige_level: 10
+                                            privilige_level: 1
                                         }).then(function (user) {
-                                                console.log("Created a user: " + user);
+                                            console.log("Created a user: " + user);
 
-                                                authSucces(user);
-                                            }, function (err) {
-                                                CB(err, false);	//failed
-                                            });
+                                            authSucces(user);
+                                        }, function (err) {
+                                            CB(err, false);	//failed
+                                        });
                                     }
                                 });
                         }, function (err) {

@@ -16,6 +16,13 @@ module.exports = function (MR) {
         comment_count: { type: Number, default: 0, min: 0 },
 		vote_count: voteCountPartial.schema	// we could have this only as liveQuery on the client, but if we would, it
 		// would be hard to sort the collection by these properties
+    }, {
+        permissions: {
+            C: 10,
+            R: 0,
+            U: 50,
+            D: 50
+        }
     });
 
 
