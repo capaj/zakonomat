@@ -13,7 +13,7 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 		},
 		link: function (scope, el, attr) {
             $q.all({
-                models: getModels(['novelVote', 'user', 'novel']),
+                models: getModels(['novelVote', 'user', 'novel', 'comment']),
                 profile: userService.loginPromise
             }).then(function (resolved) {
                 var profile = resolved.profile;

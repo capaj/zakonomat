@@ -9,7 +9,7 @@
         <p class="user-details">
             Email: <span ng-bind="aUserLQ.doc.fb.email"></span> <br/>
             Datum nar.: <span ng-bind="aUserLQ.doc.fb.birthday"></span> <br/>
-            Registrace: <span ng-bind="aUserLQ.doc.creation_date"></span> <br/>
+            Registrace: <span ng-bind="formatDate(aUserLQ.doc.creation_date)"></span> <br/>
             Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span> <br/>
             Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span> <br/>
             Hlasů proti: <span ng-bind="negativeVoteCountLQ.count"></span>

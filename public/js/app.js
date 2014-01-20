@@ -26,7 +26,12 @@ window.app = angular.module('zakonomat',
         });
         $routeProvider.otherwise({redirectTo:'/404'});
     }
-).run(function ($MR, facebook, $q, $location, storage) {
+).run(
+    function ($rootScope) {
+        $rootScope.formatDate = function (dt) {
+            return moment(dt).format('LL');
+        };
 
+	}
+);
 
-	});
