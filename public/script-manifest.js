@@ -31,7 +31,9 @@ var productionFiles = {
 		'public/js/preload/*.min.js',
 		bc + 'array-sugar/array-sugar.js',
         bc + '**/d3.js',
-        bc + '**/moment.min.js', bc + '**/jquery.min.js'
+        bc + '**/moment.min.js',
+        bc + '**/jquery.min.js',
+        bc + 'showdown/compressed/showdown.js'
 	],
     2: [
         bc + 'angular/angular.min.js',
@@ -47,7 +49,6 @@ var productionFiles = {
         bc + '**/textAngular.min.js',
 		bc + '**/lang/cs.js',
         bc + '**/angularLocalStorage.min.js',
-        bc + '**/ng-tools-0.0.3.min.js',
         bc + '**/angular-route.min.js',
         'public/built/<%= pkg.name %>-templates-<%= pkg.version %>.js'
     ],
@@ -59,8 +60,9 @@ var devFiles = {
 		'public/js/preload/*.js',
 		bc + 'array-sugar/array-sugar.js',
         bc + '**/d3.min.js',
-        bc + '**/moment.js', bc + '**/jquery.min.js'
-	],
+        bc + '**/moment.js', bc + '**/jquery.min.js',
+        bc + 'showdown/compressed/showdown.js'
+    ],
     2: [
         bc + 'angular/angular.js',
         bc + '**/nv.d3.js'
@@ -75,7 +77,6 @@ var devFiles = {
 		bc + '**/angular-touch.js',
 		bc + '**/lang/cs.js',
         bc + '**/angularLocalStorage.js',
-        bc + '**/ng-tools-0.0.3.min.js',
         bc + '**/angular-route.js',
         'public/js/bootstrap/tooltip.js',
         moduleFile,

@@ -10,7 +10,7 @@ window.app = angular.module('zakonomat',
         'RPC',
         'textAngular',
         'ngTemplates',
-        'ng-tools',
+        'ngTools',
 		'Moonridge',
         'nvd3ChartDirectives',
         'ui.bootstrap.pagination'
