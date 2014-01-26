@@ -10,7 +10,7 @@
     </div>
 
     <div class="panel-body" ng-show="show == 'all' || show == 'content'">
-        <div ng-bind-html="novel.content"></div>
+        <markdown ng-model="novelContent"></markdown>
     </div>
     <ul class="list-group">
         <li class="list-group-item"><a target="_blank" ng-href="{{ novel.current_law_link }}">Nynější znění zákona</a><br/></li>

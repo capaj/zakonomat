@@ -1,7 +1,7 @@
 //expects this kind of query:
 //  liveQuery().populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
 
-angular.module('zakonomat').directive('znNovel', function (MRBackend, userService, facebook, $q) {
+angular.module('zakonomat').directive('znNovel', function (MRBackend, userService, facebook, $q, gistService) {
 	var getModels = MRBackend.getModels;
     return {
 		replace: false,
@@ -71,6 +71,13 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 
                 if (!scope.show) {
                     scope.show = 'summary';
+                }
+
+                if (scope.show !== 'summary') {
+                    gistService.getFirstFileContent(scope.novel.gist_id).then(function (content) {
+                        scope.novelContent = content;
+                        //TODO add also a gist_rev
+                    });
                 }
 
                 if (isAnon) {

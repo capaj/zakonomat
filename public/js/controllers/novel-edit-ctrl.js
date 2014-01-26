@@ -1,15 +1,19 @@
-app.controller('novelEditCtrl', function ($scope, $location) {
+app.controller('novelEditCtrl', function ($scope, $location, gistService) {
 	$scope.novel = {};
-	$scope.create = function () {
+
+    var onFail = function (err) {
+        $scope.lastError = err;
+    };
+
+    $scope.create = function () {
         if ($scope.novel.summary.length >= 500) {
             $scope.lastError = 'Krátký popis nesmí přesáhnout 500 znaků.';
         } else {
             $scope.clearErr();
+
             $scope.MR.novel.create($scope.novel).then(function () {
                 $location.path('/navrhy');
-            }, function (err) {
-                $scope.lastError = err;
-            });
+            }, onFail);
         }
 
 	};
@@ -23,6 +27,12 @@ app.controller('novelEditCtrl', function ($scope, $location) {
         $location.path('/navrhy');
     };
 
-
+    $scope.$watch('novel.gist_id', function (nV) {
+        if (nV) {
+            gistService.getFirstFileContent(nV).then(function (content) {
+                $scope.novelContent = content;
+            }, onFail);
+        }
+    });
 
 });

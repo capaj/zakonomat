@@ -9,8 +9,10 @@
         <div>
             <h4>Shrnutí</h4>
             <textarea id="novelSummary" ng-model="novel.summary"></textarea>
-            <h4>Text návrhu</h4>
-            <text-angular ng-model="novel.content"/>
+            <h4>Gist ID textu návrhu</h4>
+            <input type="number" ng-model="novel.gist_id">
+            <h4>Náhled</h4>
+            <markdown ng-model="novelContent"></markdown>
         </div>
         <div class="button-group actions">
             <button ng-click="create()" class="btn btn-primary">Přidat návrh</button>
