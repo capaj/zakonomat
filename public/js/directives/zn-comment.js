@@ -11,15 +11,29 @@ angular.module('zakonomat').directive('znComment', function (MRBackend, userServ
                 scope.repliesLQ = models.comment.liveQuery().find({reply_on: scope.comment._id}).sort('vote_count.karma')
                     .populate('owner', 'fb.username fb.picture.data.url').exec();
 
-
                 userService.loginPromise.then(function (profile) {
                     if (profile._id) {
                         models.commentVote.query().findOne({owner: profile._id, subject: scope.comment._id}).exec().then(function (commentVote) {
                             scope.userVote = commentVote;
                         });
+
+                        /**
+                         * @returns {boolean}
+                         */
+                        scope.canRemove = function () {
+                            if (scope.repliesLQ.docs.length === 0) {
+                                if (scope.comment.owner.fb.username === profile.fb.username) {  //we don't have owner Id populated
+                                    return true;
+                                }
+                            }
+                            return false;
+                        };
+
+                        scope.removeComment = function () {
+                            models.comment.remove(scope.comment);
+                        }
                     }
                 });
-
 
 
                 scope.vote = function (how) {
@@ -56,6 +70,8 @@ angular.module('zakonomat').directive('znComment', function (MRBackend, userServ
                 scope.cancelReply = function () {
                     scope.newReply = null;
                 };
+
+
             });
 
         }

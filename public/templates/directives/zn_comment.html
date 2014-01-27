@@ -2,25 +2,29 @@
     <div class="col-md-1 comment-voting"
          ng-class="{neutral: comment.vote_count.karma == 0, positive: comment.vote_count.karma > 0, negative: comment.vote_count.karma < 0}">
 
-        <i class="fa fa-arrow-up" ng-click="vote(true)" ng-class="{voted: userVote.value === true}"></i><br/>
-        <span class="vote-count">{{ comment.vote_count.karma }}</span><br/>
+        <i class="fa fa-arrow-up" ng-click="vote(true)" ng-class="{voted: userVote.value === true}"></i>
+        <br/>
         <i class="fa fa-arrow-down" ng-click="vote(false)" ng-class="{voted: userVote.value === false}"></i>
     </div>
     <div class="col-md-11 comment-body">
-        <span ng-bind="comment.text" class="comment-text"></span>
+        <markdown ng-model="comment.text" class="comment-text"></markdown>
         <div class="row">
             <div mr-repeat="comment in repliesLQ" no-stopping="true">
                 <zn-comment comment="comment"></zn-comment>
             </div>
         </div>
+        <div class="karma-count">
+            <span>{{ comment.vote_count.karma }}</span>
+        </div>
         <div class="comment-date">
             <a ng-href="/uzivatel?username={{ comment.owner.fb.username }}" class="author-link" title="{{ comment.owner.fb.username }}">
                 <img ng-src="{{ comment.owner.fb.picture.data.url }}" class="profile-picture">
             </a>
-            <span am-time-ago="comment.creation_date"></span>
+            {{ comment.owner.fb.username }} <span am-time-ago="comment.creation_date"></span>
+            <button class="btn btn-sm btn-primary btn-xs" ng-click="newReply = {}" ng-hide="newReply">Odpovědět</button>
+            <button class="btn btn-sm btn-danger btn-xs" ng-click="removeComment()" ng-show="canRemove()">Smazat</button>
         </div>
 
-        <button class="btn btn-sm btn-primary comment-reply-btn" ng-click="newReply = {}" ng-hide="newReply">Odpovědět</button>
         <div ng-show="newReply" class="row">
             <div class="col-md-10">
                 <textarea name="newReply" ng-model="newReply.text"></textarea>
@@ -31,6 +35,15 @@
             </div>
 
         </div>
+        <div ng-show="newReply.text">
+            <h5>Náhled</h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <markdown ng-model="newReply.text"></markdown>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>

@@ -1,4 +1,4 @@
-app.controller('novelsCtrl', function ($scope, $location) {
+app.controller('novelsCtrl', function ($scope, userService) {
     var novelsLQ = $scope.MR.novel.liveQuery;
 	$scope.sort = 'vote_count.positive';
 
@@ -14,5 +14,11 @@ app.controller('novelsCtrl', function ($scope, $location) {
         }
         return novel.vote_count.positive - novel.vote_count.negative;
     };
+
+    userService.loginPromise.then(function (profile) {
+        if (profile.privilige_level > 15) {
+            $scope.canCreateNovels = true;
+        }
+    });
 
 });

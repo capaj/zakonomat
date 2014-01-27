@@ -1,10 +1,18 @@
 zn-comment{
+  display: block;
+  &.collapsed{
+    height: 27px;
+    overflow: hidden;
+  }
   .well{
     margin-bottom: 10px;
 
   }
   .comment-body{
-    width: 94.99%;
+    width: 97.4%;
+    @media (max-width: 992px) {
+      padding-top: 10px;
+    }
     &:hover{
       .comment-date:nth-child(2){
         right: 17px;
@@ -13,8 +21,10 @@ zn-comment{
     }
   }
   .comment-voting{
-    border-radius: 5ox;
-    width: 5%;
+    border-radius: 5px;
+    @media (min-width: 992px) {
+      width: 2%;
+    }
     padding-left: 0px;
     padding-right: 0px;
     text-align: center;
@@ -38,21 +48,40 @@ zn-comment{
     }
 
   }
-  .comment-reply-btn{
+  .btn-xs{
     padding: 2px 17px;
     font-size: 10px;
     line-height: 1.4;
     border-radius: 2px;
   }
+
+  .comment-meta-info{
+    top: 2px;
+    @media (min-width: 992px) {
+      top: -9px;
+    }
+  }
+
   .comment-date{
     position: absolute;
     right: 17px;
-    top: -9px;
+    .comment-meta-info();
     background-color: #c0c0c0;
   }
+  .karma-count{
+    position: absolute;
+    .comment-meta-info();
+    background-color: #c0c0c0;
+    padding: 0px 10px;
+    span{
+      font-weight: 700;
+    }
+  }
+
   .comment-text{
     display: block;
-    min-height: 42px;
+    margin-top: 12px;
+    min-height: 20px;
   }
   .profile-picture{
     height: 24px;

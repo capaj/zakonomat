@@ -21,8 +21,16 @@
                 <button class="btn btn-small btn-warning" ng-click="cancelComment()">Zrušit</button>
             </div>
 
-
         </div>
+        <div ng-show="newComment.text">
+            <h5>Náhled</h5>
+            <div class="row well well-sm">
+                <div class="col-md-12">
+                    <markdown ng-model="newComment.text"></markdown>
+                </div>
+            </div>
+        </div>
+
         <div mr-repeat="comment in commentsLQ">
             <zn-comment comment="comment"></zn-comment>
 

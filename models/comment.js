@@ -1,7 +1,11 @@
 var Schema = require('mongoose').Schema;
 var voteCountPartial = require('./vote-count');
 var mongoose = require('mongoose');
+var Promise = require('bluebird');
+
 module.exports = function (MR) {
+    var nModel = mongoose.model('novel');
+    var commentVoteModel;
 
     var commentMR = MR.model('comment', {
         reply_on: { type: Schema.Types.ObjectId, ref: 'comment' },
@@ -16,16 +20,43 @@ module.exports = function (MR) {
             R: 0,
             U: 50,
             D: 50
+        },
+        pres:{
+            onPreremove: function (next, comment) {
+                commentMR.model.find({reply_on: comment._id}).exec().then(function (replies) {
+                    if (replies.length === 0) {
+                        commentVoteModel = mongoose.model('commentVote');
+                        commentVoteModel.find({subject: comment._id}).exec().then(function (commentVotes) {
+                            var promises = [];
+                            commentVotes.forEach(function (vote) {
+                                var pr = Promise.defer();
+                                promises.push(pr.promise);
+                                vote.remove(function (err) {
+                                    if (err) {
+                                        console.error(err);
+                                        pr.reject();
+                                    }
+                                    pr.resolve();
+                                });
+                            });
+                            Promise.all(promises).then(function () {
+                                next();
+                            })
+                        });
+                    }
+                });
+            }
         }
     });
 
-    var nModel = mongoose.model('novel');
+
 
     commentMR.model.on('create', function (comment) {
         nModel.findOne({_id: comment.root}).exec().then(function (novel) {
             novel.comment_count += 1;
             novel.save()
         }).end();
+
     });
 
     commentMR.model.on('remove', function (comment) {
@@ -33,6 +64,8 @@ module.exports = function (MR) {
             novel.comment_count -= 1;
             novel.save()
         }).end();
+
+
     });
 
     return commentMR;

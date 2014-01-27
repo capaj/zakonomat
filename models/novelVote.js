@@ -34,7 +34,6 @@ module.exports = function (MR, userMRM, novelMRM) {
             }
         }
 
-
     });
 
 	novelVoteMR.model.on('create', function (vote) {
