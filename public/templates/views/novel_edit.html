@@ -7,10 +7,12 @@
         <input type="text" ng-model="novel.title" placeholder="Titulek" class="form-control">
         <input type="url" name="input" ng-model="novel.current_law_link" placeholder="link na aktuální znění" class="form-control">
         <div>
-            <h4>Shrnutí</h4>
-            <textarea id="novelSummary" ng-model="novel.summary"></textarea>
             <h4>Gist ID textu návrhu</h4>
-            <input type="number" ng-model="novel.gist_id">
+            <input type="number" ng-model="novel.gist_id"> Pokud jste ještě nevytvořil/a gist, můžete tak učinit <a
+                href="https://gist.github.com/">zde</a>.
+            <h4>Shrnutí</h4>
+            <span ng-bind="gistDescription"></span>
+
             <h4>Náhled</h4>
             <markdown ng-model="novelContent"></markdown>
         </div>

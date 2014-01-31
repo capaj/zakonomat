@@ -16,7 +16,7 @@ app.controller('novelsCtrl', function ($scope, userService) {
     };
 
     userService.loginPromise.then(function (profile) {
-        if (profile.privilige_level > 15) {
+        if (profile.privilige_level >= 10) {
             $scope.canCreateNovels = true;
         }
     });

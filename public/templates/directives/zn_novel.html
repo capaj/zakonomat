@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="panel-body" ng-show="show == 'all' || show == 'summary'">
-        <div ng-bind-html="novel.summary"></div>
+        <p ng-bind="gistDescription"></p>
     </div>
 
     <div class="panel-body" ng-show="show == 'all' || show == 'content'">
@@ -56,7 +56,7 @@
         <div class="novel-author">
             <h5>Autor:</h5>
             <a href="/uzivatel?username={{ owner.fb.username }}" class="author-link">
-                <img ng-src="{{ owner.fb.picture.data.url }}">  {{ owner.fb.username }}
+                <img ng-src="{{ owner.fb.picture.data.url }}"> {{ owner.fb.username }}
             </a><br/>
         </div>
 
@@ -73,9 +73,9 @@
         </div>
 
         <div class="novel-register-to-vote" ng-show="isAnon">
-                <button class="btn btn-large btn-primary pull-right fb-login" ng-click="fbLogin()">
-                    Pro hlasování je nutné se přihlásit
-                </button>
+            <button class="btn btn-large btn-primary pull-right fb-login" ng-click="fbLogin()">
+                Pro hlasování je nutné se přihlásit
+            </button>
         </div>
         <div class="novel-vote-casted" ng-show="currentVoteLQ.doc">
             <h5>Váš hlas</h5>

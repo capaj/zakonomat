@@ -29,8 +29,10 @@ app.controller('novelEditCtrl', function ($scope, $location, gistService) {
 
     $scope.$watch('novel.gist_id', function (nV) {
         if (nV) {
-            gistService.getFirstFileContent(nV).then(function (content) {
-                $scope.novelContent = content;
+            gistService.getGist(nV).then(function (gist) {
+                $scope.novelContent = gist.files[Object.keys(gist.files)[0]].content;
+                $scope.gistDescription = gist.description;
+
             }, onFail);
         }
     });

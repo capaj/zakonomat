@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 
 module.exports = function (MR) {
     var novelModel = MR.model('novel', {
-        summary: {type: String},    //plain text, maximum length 600 characters
         gist_id: {type: Number, required: true, unique: true},    //github gist id
         gist_rev: {type: Number},    //submitted gist revision
         title: {type: String, required: true, unique: true},

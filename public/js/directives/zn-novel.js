@@ -73,12 +73,13 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                     scope.show = 'summary';
                 }
 
-                if (scope.show !== 'summary') {
-                    gistService.getFirstFileContent(scope.novel.gist_id).then(function (content) {
-                        scope.novelContent = content;
-                        //TODO add also a gist_rev
-                    });
-                }
+                gistService.getGist(scope.novel.gist_id).then(function (gist) {
+                    scope.novelContent = gist.files[Object.keys(gist.files)[0]].content;
+                    scope.gistDescription = gist.description;
+                    //TODO add also a gist_rev
+
+                });
+
 
                 if (isAnon) {
                     scope.fbLogin = function () {

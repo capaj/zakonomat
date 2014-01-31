@@ -13,6 +13,21 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
     var onLogin = new SingleEvent();
     var onLogout = new SingleEvent();
 
+    //just FB api wrapped in promise
+    var api = function () {
+        var dfd = $q.defer();
+        Array.prototype.push.call(arguments, function (res) {
+            if (res.error) {
+                dfd.reject(res);
+            } else {
+                dfd.resolve(res);
+            }
+            $rootScope.$apply();
+        });
+        FB.api.apply(this, arguments);
+        return dfd.promise;
+    };
+
     $window.fbAsyncInit = function () {
         FB.init({
             appId: '152010184924545', // Dem2.cz App ID
@@ -55,20 +70,7 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
 
     };
 
-	//just FB api wrapped in promise
-    var api = function () {
-        var dfd = $q.defer();
-		Array.prototype.push.call(arguments, function (res) {
-			if (res.error) {
-				dfd.reject(res);
-			} else {
-				dfd.resolve(res);
-			}
-			$rootScope.$apply();
-		});
-        FB.api.apply(this, arguments);
-        return dfd.promise;
-    };
+
 //	var promisify = function (fn) {
 //		return function () {
 //			var dfd = $q.defer();
@@ -101,7 +103,7 @@ app.factory('facebook', function ($window, $rootScope, SingleEvent, $q) {
 
         }, {scope: 'publish_actions,publish_stream,email,user_birthday'});
 
-	return loginDfd.promise;
+	    return loginDfd.promise;
 	};
 
 	var facebook = {onLogin: onLogin, onLogout: onLogout, api: api, login: login, logout: logout};
