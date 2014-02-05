@@ -8,7 +8,7 @@
         <input type="url" name="input" ng-model="novel.current_law_link" placeholder="link na aktuální znění" class="form-control">
         <div>
             <h4>Gist ID textu návrhu</h4>
-            <input type="number" ng-model="novel.gist_id"> Pokud jste ještě nevytvořil/a gist, můžete tak učinit <a
+            <input class="no-spinner" type="number" ng-model="novel.gist_id"> Pokud jste ještě nevytvořil/a gist, můžete tak učinit <a
                 href="https://gist.github.com/">zde</a>.
             <h4>Shrnutí</h4>
             <span ng-bind="gistDescription"></span>

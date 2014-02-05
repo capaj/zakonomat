@@ -47,6 +47,12 @@ module.exports = function (MR) {
 			fb_publish: {type:Boolean, default:true}
 		}
     }, {
+        permissions: {
+            C: 50,
+            R: 0,
+            U: 50,
+            D: 50
+        },
 		statics: {
 			fetchAcc: function (token) {
 				var deferred = Promise.defer();

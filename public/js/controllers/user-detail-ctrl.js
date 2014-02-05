@@ -1,8 +1,13 @@
-app.controller('userDetailCtrl', function ($scope, $location) {
+app.controller('userDetailCtrl', function ($scope, $location, userService) {
     var userLQ = $scope.MR.user.liveQuery;
     var voteLQ = $scope.MR.novelVote.liveQuery;
     var novelLQ = $scope.MR.novel.liveQuery;
 
+    userService.loginPromise.then(function (me) {
+        if (me.privilige_level >= 50) {
+            $scope.isAdmin = true;
+        }
+    });
 
 
 	if ($location.search().username) {

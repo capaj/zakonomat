@@ -3,24 +3,16 @@ app.controller('profileCtrl', function ($scope, userService, $log) {
     var voteLQ = $scope.MR.novelVote.liveQuery;
 
     userService.loginPromise.then(function (me) {
-        $scope.uLQ = userLQ().findOne().where('fb.id').equals(me.fb.id).exec();
-        $scope.uLQ.promise.then(function (LQ) {
 
-            $scope.profile = function() {
-                return LQ.doc;
-            };
-			var getProfile = $scope.profile;
-            $scope.voteCountLQ = voteLQ().find({owner: getProfile()._id}).count().exec();
-            $scope.positiveVoteCountLQ = voteLQ().find({owner: getProfile()._id, value: true}).count().exec();
-            $scope.negativeVoteCountLQ = voteLQ().find({owner: getProfile()._id, value: false}).count().exec();
+        $scope.profile = me;
+        $scope.voteCountLQ = voteLQ().find({owner: me._id}).count().exec();
+        $scope.positiveVoteCountLQ = voteLQ().find({owner: me._id, value: true}).count().exec();
+        $scope.negativeVoteCountLQ = voteLQ().find({owner: me._id, value: false}).count().exec();
 
-            $scope.getFullName = function () {
-                return getProfile().fb.first_name + ' ' + getProfile().fb.last_name;
-            };
-            $scope.votesLQ = voteLQ().where('owner').equals(getProfile()._id).populate('subject', 'title').exec();
-
-		});
-
+        $scope.getFullName = function () {
+            return me.fb.first_name + ' ' + me.fb.last_name;
+        };
+        $scope.votesLQ = voteLQ().where('owner').equals(me._id).populate('subject', 'title').exec();
 
     }, function (err) {
         $log.error(err);
@@ -32,7 +24,7 @@ app.controller('profileCtrl', function ($scope, userService, $log) {
     };
     $scope.$on("$locationChangeStart", function (event, next, current) {
         if ($scope.dirty) {
-            $scope.MR.user.update($scope.uLQ.doc).then(function () {
+            $scope.MR.user.update($scope.profile).then(function () {
                 console.log("Profile updated");
             });
         }

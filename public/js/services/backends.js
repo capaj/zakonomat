@@ -8,6 +8,10 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window, $log) {
         var MRB = $MR('znmt', dfd.promise);
 
         facebook.onLogin.register(function (token) {
+            var connectAsGuest = function () {
+                dfd.resolve({url: 'http://localhost:8076', hs: { query: "aToken=ANON" } } );
+            };
+
             if (facebook.aToken === 'ANON') {
                 if (MRB.socket) { // means that user is connected already as anonymous
 
@@ -15,11 +19,12 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window, $log) {
 //                    MRB.socket.disconnect();
 //                    MRB = $MR('znmt', dfd.promise);
                 }
+            }else if (token === 'ANON') {
+                connectAsGuest();
+
             }
 
-            var connectAsGuest = function () {
-                dfd.resolve({url: 'http://localhost:8076', hs: { query: "aToken=ANON" } } );
-            };
+
             var requiredFields = 'id,email,name,first_name,birthday,last_name,gender,link,installed,verified,picture,location,hometown';
 
             facebook.api('/me?fields=' + requiredFields)
