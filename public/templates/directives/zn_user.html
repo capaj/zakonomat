@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <p class="user-details">
                 Email: <span ng-bind="user.fb.email"></span> <br/>
-                Datum nar.: <span ng-bind="user.fb.birthday"></span> <br/>
+                <span ng-show="user.fb.birthday">Datum nar.: <span ng-bind="user.fb.birthday"></span> <br/></span>
                 Registrace: <span ng-bind="registeredDate"></span>
             </p>
         </div>

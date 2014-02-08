@@ -18,9 +18,7 @@
             <div class="novel-votes-statistic">
                 <div class="row">
                     <div class="col-md-3" ng-class="{active: commentsExpanded}">
-                        <a href="/komentare?subject={{ novel._id }}&value=false">Komentáře: <span ng-bind="novel.comment_count"></span></a>
-                        <i class="fa fa-chevron-down" ng-click="expandComments(true)" ng-hide="commentsExpanded"></i>
-                        <i class="fa fa-chevron-up" ng-click="expandComments(false)" ng-show="commentsExpanded"></i>
+                        <a href="/komentare?root={{ novel._id }}&value=false">Komentáře: <span ng-bind="novel.comment_count"></span></a>
                     </div>
                     <div class="col-md-3" ng-class="{active: overallVotesExpanded}">
                         <a href="/hlasy?subject={{ novel._id }}">Celkem hlasů: <span ng-bind="novel.vote_count.sum"></span></a>

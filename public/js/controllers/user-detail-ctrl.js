@@ -1,7 +1,9 @@
 app.controller('userDetailCtrl', function ($scope, $location, userService) {
-    var userLQ = $scope.MR.user.liveQuery;
-    var voteLQ = $scope.MR.novelVote.liveQuery;
-    var novelLQ = $scope.MR.novel.liveQuery;
+    var mr = $scope.MR;
+    var userLQ = mr.user.liveQuery;
+    var voteLQ = mr.novelVote.liveQuery;
+    var novelLQ = mr.novel.liveQuery;
+    var commentLQ = mr.comment.liveQuery;
 
     userService.loginPromise.then(function (me) {
         if (me.privilige_level >= 50) {
@@ -20,6 +22,8 @@ app.controller('userDetailCtrl', function ($scope, $location, userService) {
 
         $scope.votesLQ = voteLQ().where('owner').equals(userId).populate('subject', 'title').exec();
         $scope.novelsLQ = novelLQ().where('owner').equals(userId).exec();
+        $scope.commentsLQ = commentLQ().where('owner').equals(userId)
+            .populate('owner', 'fb.username fb.picture.data.url').exec();
 
         $scope.voteCountLQ = voteLQ().find({owner: userId}).count().exec();
         $scope.positiveVoteCountLQ = voteLQ().find({owner: userId, value: true}).count().exec();

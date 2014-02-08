@@ -14,9 +14,9 @@
     "json3": "~3.2.4",
     "es5-shim": "~2.3",
     "showdown": "~0.3",
-    "ng-tools": "~0.1",
+    "ng-tools": "0.1.2",
     "script.js": "latest",
-    "jquery": "~2.0",
+    "jquery": "~2.1",
     "angular-gestures": "~0.1.1"
   },
   "devDependencies": {

@@ -14,7 +14,7 @@ module.exports = function (MR) {
             gender: {type: String, required: true},
             username: {type: String, required: true},   //FB username for constructing FB links and for fetching the user via routeparams on userDetail
             verified: {type: Boolean, required: true},
-            birthday: {type: String, required: true},
+            birthday: {type: String, required: true, permissions:{R: 30, W: 50}},
             email: {type: String, required: true},
             picture: {
                 data:{

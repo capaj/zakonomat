@@ -13,7 +13,6 @@
   min-height: @navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
   margin-bottom: @navbar-margin-bottom;
   border: 1px solid transparent;
-
   // Prevent floats from breaking the navbar
   .clearfix();
 
@@ -537,6 +536,9 @@
       &:focus {
         color: @navbar-inverse-link-hover-color;
         background-color: @navbar-inverse-link-hover-bg;
+      }
+      &.current:hover{
+        background-color: @znmt-primary;
       }
     }
     > .active > a {

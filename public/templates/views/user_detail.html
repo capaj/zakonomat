@@ -1,7 +1,6 @@
-<div mr-controller="userDetailCtrl" mr-backend="znmt" mr-models="user,novelVote,novel" class="container">
+<div mr-controller="userDetailCtrl" mr-backend="znmt" mr-models="user,novelVote,novel,comment" class="container">
 
     <button class="btn btn-danger pull-right" ng-click="deleteCurrentQuery()">hledat jiného</button>
-
 
     <div class="jumbotron">
         <div class="row">
@@ -44,14 +43,12 @@
             </div>
         </div>
 
-        <!--<div class="panel panel-default">-->
-            <!--<div class="panel-heading"><h4>jeho komentáře: </h4></div>-->
-            <!--<div class="panel-body">-->
-                <!--<zn-novel ng-repeat="vote in votesLQ.docs" vote="vote"></zn-novel>-->
-            <!--</div>-->
-        <!--</div>-->
-
-
     </div>
 
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>jeho komentáře: </h4></div>
+        <div class="panel-body">
+            <zn-comment ng-repeat="comment in commentsLQ.docs" comment="comment"></zn-comment>
+        </div>
+    </div>
 </div>

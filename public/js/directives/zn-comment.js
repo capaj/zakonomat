@@ -8,7 +8,7 @@ angular.module('zakonomat').directive('znComment', function (MRBackend, userServ
         },
         link: function (scope, el, attr) {
             MRBackend.getModels(['commentVote', 'comment']).then(function (models) {
-                scope.repliesLQ = models.comment.liveQuery().find({reply_on: scope.comment._id}).sort('vote_count.karma')
+                scope.repliesLQ = models.comment.liveQuery().find({reply_on: scope.comment._id}).sort('-vote_count.karma')
                     .populate('owner', 'fb.username fb.picture.data.url').exec();
 
                 userService.loginPromise.then(function (profile) {

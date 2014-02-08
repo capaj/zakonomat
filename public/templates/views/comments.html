@@ -1,13 +1,5 @@
-<div mr-controller="novelDetailCtrl" mr-backend="znmt" mr-models="novel,comment" class="container">
-    <div class="page-header">
-        <h2>Detail návrhu</h2>
-    </div>
-    <zn-novel novel="LQ.doc" show="all" ng-if="LQ.doc"></zn-novel>
-    <div class="alert alert-danger" ng-show="nonexistentNovelId">
-        Návrh {{ nonexistentNovelId }} neexistuje. Možná byl smazán nebo nikdy neexistoval.
-    </div>
-
-    <a name="comments"></a><div class="hero-unit" ng-hide="nonexistentNovelId">
+<div mr-controller="commentsCtrl" mr-backend="znmt" mr-models="novel,comment" class="container">
+    <div class="hero-unit" ng-hide="nonexistentNovelId">
         <h3>Komentáře k návrhu</h3>
         <button class="btn-sm btn-primary" ng-click="showNewCommentInput()" ng-hide="newComment">
             <i class="glyphicon glyphicon-plus-sign"></i><span>přidat komentář</span>
@@ -24,6 +16,7 @@
         </div>
         <div ng-show="newComment.text">
             <h5>Náhled</h5>
+
             <div class="row well well-sm">
                 <div class="col-md-12">
                     <markdown ng-model="newComment.text"></markdown>

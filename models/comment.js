@@ -61,8 +61,11 @@ module.exports = function (MR) {
 
     commentMR.model.on('remove', function (comment) {
         nModel.findOne({_id: comment.root}).exec().then(function (novel) {
-            novel.comment_count -= 1;
-            novel.save()
+            if (novel) {
+                novel.comment_count -= 1;
+                novel.save();
+            }
+
         }).end();
 
 

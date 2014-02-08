@@ -6,15 +6,13 @@ app.controller('novelEditCtrl', function ($scope, $location, gistService) {
     };
 
     $scope.create = function () {
-        if ($scope.novel.summary.length >= 500) {
-            $scope.lastError = 'Krátký popis nesmí přesáhnout 500 znaků.';
-        } else {
-            $scope.clearErr();
 
-            $scope.MR.novel.create($scope.novel).then(function () {
-                $location.path('/navrhy');
-            }, onFail);
-        }
+        $scope.clearErr();
+
+        $scope.MR.novel.create($scope.novel).then(function () {
+            $location.path('/navrhy');
+        }, onFail);
+
 
 	};
 
