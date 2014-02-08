@@ -1,7 +1,4 @@
-app.factory('RPCBackend', function RPCBackend ($rpc, $window, $log) {
-    $rpc.connect($window.RPCbackendURL);
-    return $rpc;
-}).factory('MRBackend', function MRBackend($rootScope, $q, $log, facebook, $location, $MR, dialogService, loaderSvc) {
+app.factory('MRBackend', function MRBackend($rootScope, $q, $log, facebook, $location, $MR, dialogService, loaderSvc) {
 
         var dfd = $q.defer();
 
@@ -9,7 +6,7 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window, $log) {
 
         facebook.onLogin.register(function (token) {
             var connectAsGuest = function () {
-                dfd.resolve({url: 'http://localhost:8076', hs: { query: "aToken=ANON" } } );
+                dfd.resolve({url: RPCbackendURL, hs: { query: "aToken=ANON" } } );
             };
 
             if (facebook.aToken === 'ANON') {
@@ -53,7 +50,7 @@ app.factory('RPCBackend', function RPCBackend ($rpc, $window, $log) {
                             return;
                         }
                     }
-                    dfd.resolve({url: 'http://localhost:8076', hs: { query: "aToken=" + token } } );
+                    dfd.resolve({url: RPCbackendURL, hs: { query: "aToken=" + token } } );
 
                 });
 //            dfd.resolve({url: 'http://dem2.cz:8076', hs: { query: "aToken=" + token } } );

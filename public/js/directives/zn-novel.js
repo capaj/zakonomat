@@ -110,8 +110,8 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                                     message: userService.profile.fb.first_name + ' hlasoval/a ' + howText + ' návrh ' + novel.title,
                                     name: novel.title,
                                     description: userService.getFullName() + desc,
-                                    link: RPCbackendURL + 'navrh?_id=' + novel._id,
-                                    picture: RPCbackendURL + 'img/zakonomat-web-maly-bily.png'//TODO should be unique for a novel
+                                    link: window.location.hostname + '/navrh?_id=' + novel._id,
+                                    picture: window.location.hostname + '/img/zakonomat-web-maly-bily.png'//TODO should be unique for a novel
                                 };
 
 
