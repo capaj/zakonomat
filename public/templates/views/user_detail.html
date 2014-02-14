@@ -22,7 +22,7 @@
             <div class="col-md-5">
                 <div ng-if="isAdmin">
                     <label title="You can change it for other, because you have admin privileges">Privilege level:
-                        <input type="number" ng-model="aUserLQ.doc.privilige_level"></label>
+                        <input type="number" ng-model="aUserLQ.doc.privilige_level" ng-blur="saveUser()"></label>
                 </div>
             </div>
         </div>

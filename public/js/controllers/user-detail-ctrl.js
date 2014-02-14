@@ -1,4 +1,4 @@
-app.controller('userDetailCtrl', function ($scope, $location, userService) {
+app.controller('userDetailCtrl', function ($scope, $location, userService, $log) {
     var mr = $scope.MR;
     var userLQ = mr.user.liveQuery;
     var voteLQ = mr.novelVote.liveQuery;
@@ -8,9 +8,15 @@ app.controller('userDetailCtrl', function ($scope, $location, userService) {
     userService.loginPromise.then(function (me) {
         if (me.privilige_level >= 50) {
             $scope.isAdmin = true;
+
+            $scope.saveUser = function () {
+                mr.user.update($scope.aUserLQ.doc).then(function () {
+                    $log.log('user ' + $scope.aUserLQ.doc.fb.username + 'was updated.');
+                });
+
+            }
         }
     });
-
 
 	if ($location.search().username) {
         $scope.aUserLQ = userLQ().findOne().where('fb.username').equals($location.search().username).exec();

@@ -13,6 +13,7 @@
         { route:'/podporujinas', resolve: {templateUrl: tS + 'supporting_us.html'}},
         { route:'/financovani', resolve: {templateUrl: tV + 'financing.html'}},
         { route:'/board', resolve: {templateUrl: tS + 'board.html'}},
+        { route:'/staze', resolve: {templateUrl: tS + 'staze.html'}},
         { route:'/faq', resolve: {templateUrl: tS + 'faq.html'}},
         { route:'/registrace', resolve: {templateUrl: tS + 'register.html'}},
         { route:'/profil', resolve: {templateUrl: tV + 'profile.html', reloadOnSearch: false}},
