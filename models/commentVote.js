@@ -15,25 +15,10 @@ module.exports = function (MR) {
             U: 50,
             D: 50
         },
-        pres:{
-            onPrecreate: function (next, vote) {
-                commentVote.model.findOne({subject: vote.subject, owner:vote.owner}).exec()
-                    .then(function (existingVote) {
-                        if (existingVote) {
-                            // if vote already exists, then the previous must be removed
-                            existingVote.remove(function (err) {
-                                next();
-                            });
-                            // this should not happen with official client, since the client app should guard this with it's logic
-                        } else {
-                            next();
-
-                        }
-
-                    });
-            }
+        schemaInit: function (schema) {
+            // makes sure only one vote per ownerXsubject exists
+            schema.index({ owner: 1, subject: 1 }, { unique: true, dropDups: true });
         }
-
 
     });
 

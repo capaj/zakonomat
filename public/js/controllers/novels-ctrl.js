@@ -1,5 +1,5 @@
-app.controller('novelsCtrl', function ($scope, userService) {
-    var novelsLQ = $scope.MR.novel.liveQuery;
+app.controller('novelsCtrl', function ($scope, models, userService) {
+    var novelsLQ = models.novel.liveQuery;
 	$scope.sort = 'vote_count.positive';
 
 	$scope.LQ = novelsLQ().limit(20).exec();

@@ -109,7 +109,7 @@ module.exports = function(grunt) {
                     }
                 ])
             },
-            dev: {
+            development: {
                 src: 'public/index_build_template.html',
                 dest: 'public/index.html',
                 replacements: mainReplacement.concat([
@@ -127,7 +127,7 @@ module.exports = function(grunt) {
             }
         },
         less: {
-            dev: {
+            development: {
                 src:  './public/less/bootstrap.less',
                 dest: './public/built/<%= pkg.name %>-<%= pkg.version %>.css'
             },
@@ -203,7 +203,7 @@ module.exports = function(grunt) {
     //Default task(s).
     grunt.registerTask('compile', compile);
 
-    if (env == 'dev') {
+    if (env == 'development') {
         grunt.registerTask('default', ['compile', 'watch']);
     }
     if (env == 'production') {

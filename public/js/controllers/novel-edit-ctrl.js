@@ -1,4 +1,4 @@
-app.controller('novelEditCtrl', function ($scope, $location, gistService) {
+app.controller('novelEditCtrl', function ($scope, models, $location, gistService) {
 	$scope.novel = {};
 
     var onFail = function (err) {
@@ -9,7 +9,7 @@ app.controller('novelEditCtrl', function ($scope, $location, gistService) {
 
         $scope.clearErr();
 
-        $scope.MR.novel.create($scope.novel).then(function () {
+        models.novel.create($scope.novel).then(function () {
             $location.path('/navrhy');
         }, onFail);
 

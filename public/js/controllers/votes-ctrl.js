@@ -1,6 +1,6 @@
-app.controller('votesCtrl', function ($scope, $location, debounce) {
-    var nVLQ = $scope.MR.novelVote.liveQuery;
-    var nLQ = $scope.MR.novel.liveQuery;
+app.controller('votesCtrl', function ($scope, $location, debounce, models) {
+    var nVLQ = models.novelVote.liveQuery;
+    var nLQ = models.novel.liveQuery;
     var search = $location.search();
 
 

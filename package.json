@@ -1,7 +1,7 @@
 {
     "name": "zakonomat.cz",
     "description": "a platform for general legislative initiative",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "private": false,
     "author": "Jiri Spac",
     "repository": {
@@ -17,12 +17,12 @@
         "test": "node node_modules/grunt-cli/bin/grunt test",
         "postinstall": "bower install"
     },
-    "env": "dev",
+    "env": "development",
     "port": 8076,
     "dependencies": {
         "array-sugar": "latest",
         "express": "latest",
-        "moonridge": "latest",
+        "moonridge": "0.4.5",
         "socket.io": "0.9.16",
         "socket.io-rpc": "latest",
         "mongoose": "latest",

@@ -1,6 +1,6 @@
-app.controller('profileCtrl', function ($scope, userService, $log) {
-    var userLQ = $scope.MR.user.liveQuery;
-    var voteLQ = $scope.MR.novelVote.liveQuery;
+app.controller('profileCtrl', function ($scope, models, userService, $log) {
+    var userLQ = models.user.liveQuery;
+    var voteLQ = models.novelVote.liveQuery;
 
     userService.loginPromise.then(function (me) {
 
@@ -24,7 +24,7 @@ app.controller('profileCtrl', function ($scope, userService, $log) {
     };
     $scope.$on("$locationChangeStart", function (event, next, current) {
         if ($scope.dirty) {
-            $scope.MR.user.update($scope.profile).then(function () {
+            models.user.update($scope.profile).then(function () {
                 console.log("Profile updated");
             });
         }

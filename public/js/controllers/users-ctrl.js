@@ -1,5 +1,5 @@
-app.controller('usersCtrl', function ($scope, $location) {
-    var liveQuery = $scope.MR.liveQuery;
+app.controller('usersCtrl', function ($scope, $location, user) {
+    var liveQuery = user.liveQuery;
     var limit = $location.search().limit || 50;
 
     $scope.LQ = liveQuery().limit(limit).exec();

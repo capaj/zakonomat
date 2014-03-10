@@ -1,16 +1,16 @@
-app.controller('userDetailCtrl', function ($scope, $location, userService, $log) {
-    var mr = $scope.MR;
-    var userLQ = mr.user.liveQuery;
-    var voteLQ = mr.novelVote.liveQuery;
-    var novelLQ = mr.novel.liveQuery;
-    var commentLQ = mr.comment.liveQuery;
+app.controller('userDetailCtrl', function ($scope, models, $location, userService, $log) {
+
+    var userLQ = models.user.liveQuery;
+    var voteLQ = models.novelVote.liveQuery;
+    var novelLQ = models.novel.liveQuery;
+    var commentLQ = models.comment.liveQuery;
 
     userService.loginPromise.then(function (me) {
         if (me.privilige_level >= 50) {
             $scope.isAdmin = true;
 
             $scope.saveUser = function () {
-                mr.user.update($scope.aUserLQ.doc).then(function () {
+                models.user.update($scope.aUserLQ.doc).then(function () {
                     $log.log('user ' + $scope.aUserLQ.doc.fb.username + 'was updated.');
                 });
 

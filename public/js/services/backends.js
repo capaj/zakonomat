@@ -2,7 +2,7 @@ app.factory('MRBackend', function MRBackend($rootScope, $q, $log, facebook, $loc
 
         var dfd = $q.defer();
 
-        var MRB = $MR('znmt', dfd.promise);
+        var MRB = $MR('znmt', dfd.promise, true);
 
         facebook.onLogin.register(function (token) {
             var connectAsGuest = function () {
@@ -21,10 +21,13 @@ app.factory('MRBackend', function MRBackend($rootScope, $q, $log, facebook, $loc
 
             }
 
+            // records that we need from FB
+            var requiredFields = 'id,email,name,first_name,last_name,gender,link,installed,verified,picture';
 
-            var requiredFields = 'id,email,name,first_name,birthday,last_name,gender,link,installed,verified,picture,location,hometown';
+            //records that we request
+            var fieldsToRequest = 'id,email,name,first_name,birthday,last_name,gender,link,installed,verified,picture,location,hometown';
 
-            facebook.api('/me?fields=' + requiredFields)
+            facebook.api('/me?fields=' + fieldsToRequest)
                 .then( function (me) {
                     if (!me.verified) {
                         dialogService.create('error_modal', 'error-modal',

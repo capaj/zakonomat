@@ -1,6 +1,6 @@
-app.controller('commentsCtrl', function ($scope, $location, dialogService) {
+app.controller('commentsCtrl', function ($scope, model, $location, dialogService) {
 
-    var commentModel = $scope.MR.comment;
+    var commentModel = model.comment;
     $scope.sort = 'vote_count.positive';
     var root = $location.search().root;
     if (root) {

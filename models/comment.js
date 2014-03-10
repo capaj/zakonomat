@@ -22,7 +22,7 @@ module.exports = function (MR) {
             D: 50
         },
         pres:{
-            onPreremove: function (next, comment) {
+            preRemove: function (next, comment) {
                 commentMR.model.find({reply_on: comment._id}).exec().then(function (replies) {
                     if (replies.length === 0) {
                         commentVoteModel = mongoose.model('commentVote');

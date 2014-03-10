@@ -1,6 +1,6 @@
-app.controller('novelDetailCtrl', function ($scope, $location, dialogService) {
-	var novelLQ = $scope.MR.novel.liveQuery;
-	var commentModel = $scope.MR.comment;
+app.controller('novelDetailCtrl', function ($scope, models, $location, dialogService) {
+	var novelLQ = models.novel.liveQuery;
+	var commentModel = models.comment;
 	$scope.sort = 'vote_count.positive';
 	var id = $location.search()._id;
 	if (id) {

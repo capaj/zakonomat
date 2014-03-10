@@ -86,7 +86,7 @@ var devFiles = {
 if (module.exports) {
     module.exports = {
         concat: forConcat,
-        dev: devFiles,
+        development: devFiles,
         production: productionFiles
     };
 }
