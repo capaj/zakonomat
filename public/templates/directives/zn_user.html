@@ -1,22 +1,31 @@
 <div class="user-container well well-sm">
-    <a href="/uzivatel?username={{ user.fb.username }}">
-        <h2>uživatel {{ user.fb.first_name + ' ' + user.fb.last_name }}</h2>
-    </a>
     <div class="row">
-        <div class="col-md-1">
-            <img ng-src="{{ user.fb.picture.data.url }}" ng-show="user.fb">
+        <div class="col-md-2">
+            <img class="fb-picture" ng-src="https://graph.facebook.com/{{ user.fb.id }}/picture?type=normal" ng-show="user.fb">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <a href="/uzivatel?username={{ user.fb.username }}">
+                <h2>{{ user.fb.first_name + ' ' + user.fb.last_name }}</h2>
+            </a>
             <p class="user-details">
-                Email: <span ng-bind="user.fb.email"></span> <br/>
-                <span ng-show="user.fb.birthday">Datum nar.: <span ng-bind="user.fb.birthday"></span> <br/></span>
-                Registrace: <span ng-bind="registeredDate"></span>
+                Registrace: <span ng-bind="registeredDate"></span><br/>
+                <a class="social-icon" href="//www.facebook.com/{{ user.fb.id }}"><img src="/img/icons/facebook.png" alt=""></a>
+
+            </p>
+
+        </div>
+        <div class="col-md-4">
+            <p class="user-activities">
+                <a href="/komentare?owner={{ user._id }}">Komentářů: <span ng-bind="commentCountLQ.count"></span></a>
             </p>
         </div>
-        <div class="col-md-5">
-            <a href="/hlasy?owner={{ user._id }}">Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span></a><br/>
-            <a href="/hlasy?owner={{ user._id }}&value=true">Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span></a> <br/>
-            <a href="/hlasy?owner={{ user._id }}&value=false">Hlasů proti: <span ng-bind="negativeVoteCountLQ.count"></span></a>
+        <div class="col-md-3">
+            <p class="user-activities">
+                <a href="/hlasy?owner={{ user._id }}">Hlasoval celkem: <span ng-bind="voteCountLQ.count"></span></a><br/>
+                <a href="/hlasy?owner={{ user._id }}&value=true">Hlasů pro: <span ng-bind="positiveVoteCountLQ.count"></span></a> <br/>
+                <a href="/hlasy?owner={{ user._id }}&value=false">Hlasů proti: <span ng-bind="negativeVoteCountLQ.count"></span></a>
+            </p>
+
         </div>
     </div>
 
