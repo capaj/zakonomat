@@ -1,8 +1,12 @@
 <div mr-controller="usersCtrl" mr-model="user" class="container">
     <div class="page-header">
-        <h2>Uživatelé <small class="pull-right">celkem: {{ usersCountLQ.count }}</small></h2>
+        <h2>Uživatelé <small class="pull-right">celkem: {{ userCountLQ.count }}</small></h2>
     </div>
     <div mr-repeat="user in LQ">
         <zn-user user="user"></zn-user>
+    </div>
+    <div class="pagination-wrap">
+        <pagination total-items="userCountLQ.count" page="pagination.page" items-per-page="pagination.limit"
+                    on-select-page="pagination.onSelect(page)" boundary-links="true"></pagination>
     </div>
 </div>

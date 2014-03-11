@@ -1,6 +1,7 @@
-<div mr-controller="commentsCtrl" mr-models="novel,comment" class="container">
+<div mr-controller="commentsCtrl" mr-models="novel,comment,user" class="container">
     <div class="hero-unit" ng-hide="nonexistentNovelId">
-        <h3>Komentáře k návrhu</h3>
+        <h3 ng-show="novel">Komentáře k návrhu {{novel.title}}</h3>
+        <h3 ng-show="user">Komentáře uživatele {{user.fb.first_name + ' ' + user.fb.last_name}}</h3>
         <button class="btn-sm btn-primary" ng-click="showNewCommentInput()" ng-hide="newComment">
             <i class="glyphicon glyphicon-plus-sign"></i><span>přidat komentář</span>
         </button>

@@ -20,12 +20,6 @@ ng-view{
   blockquote{
     padding-bottom: 0px;
   }
-  @media (min-width: 460px) {
-    .btn-primary{
-      font-size: 40px;
-      padding-top: 18px;
-    }
-  }
 
 }
 @media (min-width: 550px) {
@@ -55,16 +49,20 @@ ng-view{
   top: -6px;
 }
 
-.social-icon{
-  img{
-    height: 60px;
-  }
-  &.tumblr img{
-    height: 55px;
-    position: relative;
-    top: 2px;
+.social-icons{
+  height: 75px;
+  .icon{
+    img{
+      height: 60px;
+    }
+    &.tumblr img{
+      height: 55px;
+      position: relative;
+      top: 2px;
+    }
   }
 }
+
 
 @media (min-width: 768px) {
   .navbar {
@@ -73,6 +71,30 @@ ng-view{
 }
 
 
-footer{
-  padding-top: 100px;
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+body {
+  margin-top:60px;
+}
+
+/* Wrapper for page content to push down footer */
+ng-view {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+}
+
+/* Set the fixed height of the footer here */
+footer {
+  height: 120px;
+  background-color: @brand-info;
+
+  -webkit-box-shadow: 0px -1px 6px 0px rgba(0, 0, 0, 0.37);
+  -moz-box-shadow: 0px -1px 6px 0px rgba(0, 0, 0, 0.37);
+  box-shadow: 0px -1px 6px 0px rgba(0, 0, 0, 0.37);
 }
