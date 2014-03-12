@@ -12,7 +12,7 @@ module.exports = function (MR) {
         root: { type: Schema.Types.ObjectId, ref: 'novel', required: true },
         creation_date: { type: Date, default: Date.now },
         vote_count: voteCountPartial.schema,
-        text: String,
+        text: {type: String, required: true},
         deleted: {type: Boolean, default: false}
     },{
         permissions: {

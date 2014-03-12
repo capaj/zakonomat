@@ -17,7 +17,8 @@
                 <textarea name="newComment" ng-model="newComment.text"></textarea>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-small btn-success" ng-click="createComment()">Vytvořit</button>
+                <button class="btn btn-small btn-success" ng-click="createComment()"
+                        ng-disabled="!newComment.text">Vytvořit</button>
                 <button class="btn btn-small btn-warning" ng-click="cancelComment()">Zrušit</button>
             </div>
 

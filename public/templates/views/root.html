@@ -1,4 +1,4 @@
-<div class="root-view container" ng-controller="rootCtrl">
+<div class="root-view container" mr-controller="rootCtrl" mr-models="user,novelVote">
     <div class="jumbotron">
 
         <img src="/img/zakonomat-web-velky.png" alt="" class="jumbo-logo">
@@ -9,8 +9,9 @@
             Společně to prosadíme!
         </blockquote>
 
+        <p>Již se registrovalo <span class="big" ng-bind="userCountLQ.count"></span> občanů,
+            kteří rozdělili <span class="big" ng-bind="voteCountLQ.count"></span> hlasů.</p>
     </div>
-
 
     <div class="row social-icons">
         <div class="col-md-4">

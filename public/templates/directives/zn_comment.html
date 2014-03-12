@@ -30,7 +30,7 @@
                 <textarea name="newReply" ng-model="newReply.text"></textarea>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-small btn-success" ng-click="createReply()">Vytvořit</button>
+                <button class="btn btn-small btn-success" ng-click="createReply()" ng-disabled="!newReply.text">Vytvořit</button>
                 <button class="btn btn-small btn-warning" ng-click="cancelReply()">Zrušit</button>
             </div>
 
