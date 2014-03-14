@@ -1,9 +1,9 @@
 module.exports = function (userModel) {
     return function (handshake, CB) {
-        var socket = this;
+
         var aToken = handshake.query.aToken;
         var authSucces = function (user) {
-            socket.user = user;
+            handshake.user = user;
             console.log("Authenticated user: " + user.fb.username);
             CB(null, true);
         };
