@@ -1,6 +1,15 @@
 app.controller('usersCtrl', function ($scope, $location, user) {
     var liveQuery = user.liveQuery;
 
+    $scope.sortOpts = [
+        {name: "podle úrovně privilegií vzestupně", value: 'privilige_level'},
+        {name: "podle úrovně privilegií sestupně", value: '-privilige_level'},
+        {name: "podle data registrace vzestupně", value: 'creation_date'},
+        {name: "podle data registrace sestupně", value: '-creation_date'}
+    ];
+
+    $scope.sortOpt = $scope.sortOpts[0];
+
     var runQueries = function () {
         var limit = $location.search().limit || $scope.pagination.limit;
 
@@ -29,5 +38,6 @@ app.controller('usersCtrl', function ($scope, $location, user) {
 
     $scope.$on('$routeUpdate', runQueries);
     runQueries();
+
 
 });

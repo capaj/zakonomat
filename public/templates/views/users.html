@@ -1,6 +1,7 @@
 <div mr-controller="usersCtrl" mr-model="user" class="container">
     <div class="page-header">
         <h2>Uživatelé <small class="pull-right">celkem: {{ userCountLQ.count }}</small></h2>
+        <select class="pull-right" ng-model="sortOpt" ng-options="o.name for o in sortOpts" required></select>
     </div>
     <div mr-repeat="user in LQ">
         <zn-user user="user"></zn-user>
