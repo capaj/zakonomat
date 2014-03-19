@@ -72,6 +72,7 @@ var devFiles = {
         bc + '**/ng-tools.js',
         'public/js/angular/angular-sanitize.js',
         'public/js/angular-bootstrap/pagination.js',
+        'public/js/angular-bootstrap/progressbar.js',
 		bc + '**/angular-touch.js',
 		bc + '**/lang/cs.js',
         bc + '**/angularLocalStorage.js',

@@ -13,7 +13,12 @@
         <markdown ng-model="novelContent"></markdown>
     </div>
     <ul class="list-group">
-        <li class="list-group-item"><a target="_blank" ng-href="{{ novel.current_law_link }}">Nynější znění zákona</a><br/></li>
+        <li class="list-group-item no-padding">
+            <progress>
+                <bar value="getPositiveVotesPercentage()" type="success"><span>{{getPositiveVotesPercentage()}}% pro</span></bar>
+                <bar value="getNegativeVotesPercentage()" type="danger"><span>{{getNegativeVotesPercentage()}}% proti</span></bar>
+            </progress>
+        </li>
         <li class="list-group-item">
             <div class="novel-votes-statistic">
                 <div class="row">

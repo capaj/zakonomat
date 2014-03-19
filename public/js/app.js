@@ -6,12 +6,13 @@ window.app = angular.module('zakonomat',
         'angularMoment',
         'angularLocalStorage',
         'analytics',
-		'ngSanitize',
+        'ngSanitize',
         'RPC',
         'ngTemplates',
         'ngTools',
-		'Moonridge',
+        'Moonridge',
         'nvd3ChartDirectives',
+        'ui.bootstrap.progressbar',
         'ui.bootstrap.pagination'
         // included, but by default not loaded, if you need it, just add it to script manifest
         // 'angular-gestures'
