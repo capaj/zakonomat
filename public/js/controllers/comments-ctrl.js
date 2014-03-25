@@ -8,14 +8,14 @@ app.controller('commentsCtrl', function ($scope, models, $location, dialogServic
 
     if ($scope.root) {
         $scope.commentsLQ = commentModel.liveQuery().find({root: $scope.root, reply_on: null}).sort('-vote_count.karma')
-            .populate('owner', 'fb.username fb.picture.data.url').exec();
+            .populate('owner', 'fb.username fb.id').exec();
         models.novel.query().findOne({_id: $scope.root}).exec().then(function (n) {
             $scope.novel = n;
         });
 
     } else if($scope.owner) {
         $scope.commentsLQ = commentModel.liveQuery().find({owner: $scope.owner, reply_on: null}).sort('-vote_count.karma')
-            .populate('owner', 'fb.username fb.picture.data.url').exec();
+            .populate('owner', 'fb.username fb.id').exec();
         models.user.query().findOne({_id: $scope.owner}).exec().then(function (user) {
             $scope.user = user;
         });

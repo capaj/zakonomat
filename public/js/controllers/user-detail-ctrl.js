@@ -29,7 +29,7 @@ app.controller('userDetailCtrl', function ($scope, models, $location, userServic
         $scope.votesLQ = voteLQ().where('owner').equals(userId).populate('subject', 'title').exec();
         $scope.novelsLQ = novelLQ().where('owner').equals(userId).exec();
         $scope.commentsLQ = commentLQ().where('owner').equals(userId)
-            .populate('owner', 'fb.username fb.picture.data.url').exec();
+            .populate('owner', 'fb.username fb.id').exec();
 
         $scope.voteCountLQ = voteLQ().find({owner: userId}).count().exec();
         $scope.positiveVoteCountLQ = voteLQ().find({owner: userId, value: true}).count().exec();

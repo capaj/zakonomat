@@ -1,7 +1,7 @@
 {
     "name": "zakonomat.cz",
     "description": "a platform for general legislative initiative",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "private": false,
     "author": "Jiri Spac",
     "repository": {
@@ -30,7 +30,6 @@
         "async": "latest",
         "bluebird": "latest",
         "prerender-node": "latest",
-        "mean-logger": "latest",
         "forever": "latest",
         "grunt-ng-annotate": "latest",
         "grunt-contrib-uglify": "latest",
@@ -45,7 +44,8 @@
         "grunt": "latest",
 		"grunt-angular-templates": "latest",
 		"load-grunt-tasks": "latest",
-        "lodash": "latest"
+        "lodash": "latest",
+        "winston": "latest"
     },
     "devDependencies": {
         "grunt-karma": "latest",

@@ -16,7 +16,7 @@ app.controller('votesCtrl', function ($scope, $location, debounce, models) {
         $scope.negativeNVLQ = voteSearchQueryBase().find({value: false}).count().exec();
 
         $scope.votesLQ = voteSearchQueryBase().sort('-creation_date')
-            .populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url')
+            .populate('subject', 'title').populate('owner', 'fb.username fb.id')
             .limit($scope.pagination.limit).skip($scope.pagination.skip)
             .exec();
         $scope.voteCountLQ = voteSearchQueryBase().count().exec();

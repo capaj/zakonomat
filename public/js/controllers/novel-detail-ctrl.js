@@ -10,7 +10,7 @@ app.controller('novelDetailCtrl', function ($scope, models, $location, dialogSer
                 $scope.nonexistentNovelId = id;
             } else {
                 $scope.commentsLQ = commentModel.liveQuery().find({root: id, reply_on: null}).sort('-vote_count.karma')
-                    .populate('owner', 'fb.username fb.picture.data.url').exec();
+                    .populate('owner', 'fb.username fb.id').exec();
 
                 $scope.showNewCommentInput = function () {
                     $scope.newComment = {};

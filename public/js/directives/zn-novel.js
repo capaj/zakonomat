@@ -23,6 +23,11 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                 var VMLQ = voteModel.liveQuery;
                 var isAnon = !profile._id;
                 scope.isAnon = isAnon;
+
+                scope.tooltip = {
+                    "title": "Hello Tooltip<br />This is a multiline message!"
+                };
+
                 scope.votesSum = function () {
                     if (!scope.novel) {
                         return 0;
@@ -30,7 +35,7 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                     return scope.novel.vote_count.positive + scope.novel.vote_count.negative;
                 };
 
-                userModel.query().findOne({_id: scope.novel.owner}).select('fb.username fb.picture.data.url').exec().then(function (owner) {
+                userModel.query().findOne({_id: scope.novel.owner}).select('fb.username fb.id').exec().then(function (owner) {
                     scope.owner = owner;
 
                 });
@@ -48,7 +53,7 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
                                 scope[expanded] = false;
                             }
                             expanded = scopeSwitchName;
-                            scope.showedVotes = VMLQ().find(findParam).populate('owner','fb.username fb.picture.data.url').exec();
+                            scope.showedVotes = VMLQ().find(findParam).populate('owner','fb.username fb.id').exec();
                         }
                         scope[scopeSwitchName] = show;
                     };

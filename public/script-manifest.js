@@ -4,6 +4,7 @@ var moduleFile = 'public/js/app.js';
 var appFiles = [
     bc + '**/angular-animate.js',
     'public/lib/moonridge-angular-client-rpcbundle-annotated.js',
+    bc + 'angular-strap/dist/angular-strap.tpl.js',
     'public/js/routes.js',
     //animations
     'public/js/bootstrap/tooltip.js',
@@ -41,9 +42,12 @@ var productionFiles = {
     ],
     3: [
         bc + '**/angular-moment.min.js',
+        bc + 'angular-strap/dist/angular-strap.min.js',
+        bc + 'angular-strap/dist/angular-strap.tpl.min.js',
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.min.js',
         'public/js/angular/angular-sanitize.min.js',
+        'public/js/angular-bootstrap/progressbar.min.js',
         'public/js/angular-bootstrap/pagination.min.js',
         bc + '**/angular-touch.min.js',
 		bc + '**/lang/cs.js',
@@ -68,6 +72,7 @@ var devFiles = {
     ],
     3: [
         bc + '**/angular-moment.js',
+        bc + 'angular-strap/dist/angular-strap.js',
         bc + '**/angularjs-nvd3-directives.js',
         bc + '**/ng-tools.js',
         'public/js/angular/angular-sanitize.js',

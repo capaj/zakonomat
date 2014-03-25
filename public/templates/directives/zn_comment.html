@@ -18,7 +18,7 @@
         </div>
         <div class="comment-date">
             <a ng-href="/uzivatel?username={{ comment.owner.fb.username }}" class="author-link" title="{{ comment.owner.fb.username }}">
-                <img ng-src="{{ comment.owner.fb.picture.data.url }}" class="profile-picture">
+                <fb-user-picture type="square" id="comment.owner.fb.id"/>
             </a>
             {{ comment.owner.fb.username }} <span am-time-ago="comment.creation_date"></span>
             <button class="btn btn-sm btn-primary btn-xs" ng-click="newReply = {}" ng-hide="newReply">Odpovědět</button>

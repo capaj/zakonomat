@@ -4,8 +4,8 @@
 
     <div class="jumbotron">
         <div class="row">
-            <div class="col-md-1">
-                <img ng-src="{{ aUserLQ.doc.fb.picture.data.url }}" ng-show="aUserLQ.doc.fb">
+            <div class="col-md-2">
+                <fb-user-picture type="normal" id="aUserLQ.doc.fb.id"/>
             </div>
             <div class="col-md-6">
                 <h2>uživatel {{ aUserLQ.doc.fb.first_name + ' ' + aUserLQ.doc.fb.last_name }}<input type="text" ng-model="userSearch" ng-hide="aUserLQ.doc.fb"></h2>
@@ -19,7 +19,7 @@
 
                 </p>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div ng-if="isAdmin">
                     <label title="You can change it for other, because you have admin privileges">Privilege level:
                         <input type="number" ng-model="aUserLQ.doc.privilige_level" ng-blur="saveUser()"></label>

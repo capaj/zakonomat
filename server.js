@@ -4,7 +4,6 @@ http.Agent.maxSockets = 100;
 /**
  * Module dependencies.
  */
-var logger = require('mean-logger');
 
 var mongoose = require('mongoose');
 var pjson = require('./package.json');
@@ -68,7 +67,7 @@ var server = app.listen(app.get('port'), function () {
 
 	var io = require('socket.io').listen(server);
 	io.configure(function (){
-		io.set('authorization', require('./server/authorization')(domain.user.model));
+		io.set('authorization', require('./server/authorization')(domain.user.model, io));
 
         if (env === 'production') {
 

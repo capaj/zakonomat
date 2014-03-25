@@ -1,7 +1,7 @@
 <div class="user-container well well-sm">
     <div class="row">
         <div class="col-md-2">
-            <img class="fb-picture" ng-src="https://graph.facebook.com/{{ user.fb.id }}/picture?type=normal" ng-show="user.fb">
+            <fb-user-picture type="normal" id="user.fb.id"/>
         </div>
         <div class="col-md-3">
             <a href="/uzivatel?username={{ user.fb.username }}">

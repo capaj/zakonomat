@@ -49,7 +49,7 @@
         <li class="list-group-item showed-votes" ng-show="showedVotes">
             <a href="/uzivatel?username={{ vote.owner.fb.username }}" class="voter-icon" ng-repeat="vote in showedVotes.docs"
                     title="{{ vote.creation_date | amCalendar}}">
-                <img ng-src="{{ vote.owner.fb.picture.data.url }}">
+                <fb-user-picture type="square" id="vote.owner.fb.id"/>
             </a>
         </li>
 
@@ -59,7 +59,7 @@
         <div class="novel-author">
             <h5>Autor:</h5>
             <a href="/uzivatel?username={{ owner.fb.username }}" class="author-link">
-                <img ng-src="{{ owner.fb.picture.data.url }}"> {{ owner.fb.username }}
+                <fb-user-picture type="square" id="owner.fb.id"/> {{ owner.fb.username }}
             </a><br/>
         </div>
 
@@ -81,7 +81,7 @@
             </button>
         </div>
         <div class="novel-vote-casted" ng-show="currentVoteLQ.doc">
-            <h5>Váš hlas</h5>
+            <h5 data-placement="bottom-left" data-type="info" data-animation="am-fade-and-scale" bs-tooltip="tooltip">Váš hlas</h5>
             <zn-vote vote="currentVoteLQ.doc"></zn-vote>
         </div>
     </div>

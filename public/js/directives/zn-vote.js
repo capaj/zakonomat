@@ -1,5 +1,5 @@
 //expects this kind of query:
-//  liveQuery().populate('subject', 'title').populate('owner', 'fb.username fb.picture.data.url').exec();
+//  liveQuery().populate('subject', 'title').populate('owner', 'fb.username fb.id').exec();
 
 angular.module('zakonomat').directive('znVote', function (MRBackend, userService, $log) {
 	return {

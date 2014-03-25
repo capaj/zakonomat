@@ -7,6 +7,7 @@ var Promise = require('bluebird');
 module.exports = function (MR) {
 
     var userMRM = MR.userModel({
+        online: { type: Boolean, default: true},
         fb: {
             id: {type: String, required: true},
             first_name: {type: String, required: true},
@@ -16,12 +17,6 @@ module.exports = function (MR) {
             verified: {type: Boolean, required: true},
             birthday: {type: String, permissions:{R: 30, W: 50}},
             email: {type: String, required: true},
-            picture: {
-                data:{
-                    url: String,
-                    is_silhouette: String
-                }
-            },
 			location: {id: String, name: String},
 			hometown: {id: String, name: String}
         },
@@ -56,12 +51,12 @@ module.exports = function (MR) {
 		statics: {
 			fetchAcc: function (token) {
 				var deferred = Promise.defer();
-				request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,email,first_name,last_name,username,birthday,gender,installed,verified,picture,currency,location,hometown', function (error, response, body) {
+				request('https://graph.facebook.com/me?access_token=' + token + '&fields=id,email,first_name,last_name,username,birthday,gender,installed,verified,currency,location,hometown', function (error, response, body) {
 					if (!error && response.statusCode == 200) {
 						var fbAccDetails = JSON.parse(body);
 						deferred.resolve(fbAccDetails);
 					} else {
-						deferred.reject();
+						deferred.reject(error);
 					}
 				});
 				return deferred.promise;
