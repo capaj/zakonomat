@@ -1,40 +1,51 @@
-<div mr-controller="novelDetailCtrl" mr-models="novel,comment" class="container">
-    <div class="page-header">
+<div mr-controller="novelDetailCtrl" mr-models="novel,comment">
+    <div class="page-header container">
         <h2>Detail návrhu</h2>
     </div>
-    <zn-novel novel="LQ.doc" show="all" ng-if="LQ.doc"></zn-novel>
-    <div class="alert alert-danger" ng-show="nonexistentNovelId">
-        Návrh {{ nonexistentNovelId }} neexistuje. Možná byl smazán nebo nikdy neexistoval.
-    </div>
-
-    <a name="comments"></a><div class="hero-unit" ng-hide="nonexistentNovelId">
-        <h3>Komentáře k návrhu</h3>
-        <button class="btn-sm btn-primary" ng-click="showNewCommentInput()" ng-hide="newComment">
-            <i class="glyphicon glyphicon-plus-sign"></i><span>přidat komentář</span>
-        </button>
-        <div ng-show="newComment" class="row">
-            <div class="col-md-9">
-                <textarea name="newComment" ng-model="newComment.text"></textarea>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-small btn-success" ng-click="createComment()"
-                        ng-disabled="!newComment.text">Vytvořit</button>
-                <button class="btn btn-small btn-warning" ng-click="cancelComment()">Zrušit</button>
-            </div>
-
+    <div class="row row-novel" ng-if="LQ.doc"
+         ng-class="{positive: votesDifference() > 0, negative: votesDifference() < 0, neutral: votesDifference() === 0}">
+        <div class="container">
+            <zn-novel novel="LQ.doc" show="all"></zn-novel>
         </div>
-        <div ng-show="newComment.text">
-            <h5>Náhled</h5>
-            <div class="row well well-sm">
-                <div class="col-md-12">
-                    <markdown ng-model="newComment.text"></markdown>
+    </div>
+    <div class="container">
+        <div class="alert alert-danger" ng-show="nonexistentNovelId">
+            Návrh {{ nonexistentNovelId }} neexistuje. Možná byl smazán nebo nikdy neexistoval.
+        </div>
+
+        <a name="comments"></a>
+        <div class="hero-unit" ng-hide="nonexistentNovelId">
+            <h3>Komentáře k návrhu</h3>
+            <button class="btn-sm btn-primary" ng-click="showNewCommentInput()" ng-hide="newComment">
+                <i class="glyphicon glyphicon-plus-sign"></i><span>přidat komentář</span>
+            </button>
+            <div ng-show="newComment" class="row">
+                <div class="col-md-9">
+                    <textarea name="newComment" ng-model="newComment.text"></textarea>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-small btn-success" ng-click="createComment()"
+                            ng-disabled="!newComment.text">Vytvořit
+                    </button>
+                    <button class="btn btn-small btn-warning" ng-click="cancelComment()">Zrušit</button>
+                </div>
+
+            </div>
+            <div ng-show="newComment.text">
+                <h5>Náhled</h5>
+
+                <div class="row well well-sm">
+                    <div class="col-md-12">
+                        <markdown ng-model="newComment.text"></markdown>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div mr-repeat="comment in commentsLQ">
-            <zn-comment comment="comment"></zn-comment>
+            <div mr-repeat="comment in commentsLQ">
+                <zn-comment comment="comment"></zn-comment>
 
+            </div>
         </div>
     </div>
+
 </div>

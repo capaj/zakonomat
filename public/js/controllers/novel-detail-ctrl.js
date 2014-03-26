@@ -4,6 +4,8 @@ app.controller('novelDetailCtrl', function ($scope, models, $location, dialogSer
 	$scope.sort = 'vote_count.positive';
 	var id = $location.search()._id;
 	if (id) {
+
+
 		$scope.LQ = novelLQ().findOne({_id: id}).exec();
         $scope.LQ.promise.then(function (LQ) {
             if (!angular.isObject(LQ.doc)) {
@@ -28,7 +30,13 @@ app.controller('novelDetailCtrl', function ($scope, models, $location, dialogSer
             }
         });
 
-
+        $scope.votesDifference = function () {
+            var novel = $scope.LQ.doc;
+            if (!novel) {
+                return 0;
+            }
+            return novel.vote_count.positive - novel.vote_count.negative;
+        };
 	}
 
 });
