@@ -37,7 +37,6 @@ app.controller('userDetailCtrl', function ($scope, models, $location, userServic
 
     });
 
-
     $scope.$watch('findByName', function (nV, oV) {
 		if (nV) {
 			$location.search('username', nV);

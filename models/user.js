@@ -37,10 +37,10 @@ module.exports = function (MR) {
             type: Number, default: 10, min:0, max: 50,
             permissions:{R: 0, W: 50}
         },
-        novel_votes: [{ type: Schema.Types.ObjectId, ref: 'novelVote' }],
 		settings: {
-			fb_publish: {type:Boolean, default:true}
-		}
+			fb_publish: {type:Boolean, default:true},
+		    page_limit: {type: Number, min: 1, max: 300}
+        }
     }, {
         permissions: {
             C: 50,

@@ -138,12 +138,12 @@ angular.module('zakonomat').directive('znNovel', function (MRBackend, userServic
 
                 scope.getPositiveVotesPercentage = function () {
                     var onePercent = scope.novel.vote_count.sum / 100;
-                    return scope.novel.vote_count.positive / onePercent;
+                    return (scope.novel.vote_count.positive / onePercent).toFixed(2);
                 };
 
                 scope.getNegativeVotesPercentage = function () {
                     var onePercent = scope.novel.vote_count.sum / 100;
-                    return scope.novel.vote_count.negative / onePercent;
+                    return (scope.novel.vote_count.negative / onePercent).toFixed(2);
                 };
 
 

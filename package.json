@@ -22,7 +22,7 @@
     "dependencies": {
         "array-sugar": "latest",
         "express": "latest",
-        "moonridge": "0.4.8",
+        "moonridge": "latest",
         "socket.io": "0.9.16",
         "socket.io-rpc": "latest",
         "mongoose": "latest",

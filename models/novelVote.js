@@ -30,6 +30,7 @@ module.exports = function (MR, userMRM, novelMRM) {
 		};
 		novelMRM.model.findOne({_id: vote.subject}).exec()
 			.then(incrementFor).end();
+
 	});
 
 	novelVoteMR.model.on('remove', function (vote) {
@@ -41,19 +42,6 @@ module.exports = function (MR, userMRM, novelMRM) {
 		novelMRM.model.findOne({_id: vote.subject}).exec()
 			.then(decrementFor).end();
 	});
-
-//	novelVoteMR.model.on('preupdate', function (doc, evName, previous){
-//
-//		decrementVoteCounts(doc, doc);	// novelVote doc
-//		userMRM.model.findOne({_id: vote.owner}).exec()
-//			.then(function (obj) {
-//
-//			});	//user docs
-//
-//		incrementVoteCounts(doc);
-//
-//	});
-
 
 
 	return novelVoteMR;
