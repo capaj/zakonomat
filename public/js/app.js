@@ -5,7 +5,6 @@ window.app = angular.module('zakonomat',
         'ngTouch',
         'angularMoment',
         'angularLocalStorage',
-        'analytics',
         'ngSanitize',
         'mgcrea.ngStrap',
         'RPC',
@@ -14,7 +13,8 @@ window.app = angular.module('zakonomat',
         'Moonridge',
         'nvd3ChartDirectives',
         'ui.bootstrap.progressbar',
-        'ui.bootstrap.pagination'
+        'ui.bootstrap.pagination',
+        'angulartics', 'angulartics.google.analytics'
         // included, but by default not loaded, if you need it, just add it to script manifest
         // 'angular-gestures'
     ]

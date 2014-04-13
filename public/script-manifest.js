@@ -2,6 +2,8 @@ var bc = 'public/lib/';
 var moduleFile = 'public/js/app.js';
 
 var appFiles = [
+    bc + '**/angulartics.js',
+    bc + '**/angulartics-ga.js',
     bc + '**/angular-animate.js',
     'public/lib/moonridge-angular-client-rpcbundle-annotated.js',
     bc + 'angular-strap/dist/angular-strap.tpl.js',
